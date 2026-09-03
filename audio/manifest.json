@@ -1,0 +1,683 @@
+{
+  "w": {
+    "Sauvignon Blanc": "w_f34a98d.mp3",
+    "Shiraz Cabernet": "w_96ef968.mp3",
+    "Champagne": "w_89b49e9.mp3",
+    "whisky": "w_b8c96ec.mp3",
+    "cocktail": "w_a16762a.mp3",
+    "vintage": "w_7b23b67.mp3",
+    "Earl Grey": "w_e229ee6.mp3",
+    "Pu'er tea": "w_e8648a8.mp3",
+    "black coffee": "w_f96e2d8.mp3",
+    "decaffeinated coffee": "w_aa6b110.mp3",
+    "latte": "w_c18c813.mp3",
+    "Oolong tea": "w_163a381.mp3",
+    "duck breast": "w_716409d.mp3",
+    "beef steak": "w_c4e66fc.mp3",
+    "lobster": "w_3168e6a.mp3",
+    "pumpkin cream soup": "w_0393ded.mp3",
+    "congee": "w_5a1cc17.mp3",
+    "omelette": "w_d5eefa9.mp3",
+    "pan-fried": "w_a3e9c03.mp3",
+    "grilled": "w_3325e3d.mp3",
+    "beef": "w_3490290.mp3",
+    "lamb": "w_236eb95.mp3",
+    "seafood": "w_f57611a.mp3",
+    "abalone": "w_6e1ba55.mp3",
+    "Brie": "w_13ecc05.mp3",
+    "Cheddar": "w_73d9384.mp3",
+    "Danish Blue": "w_87d20a4.mp3",
+    "rye roll": "w_eebdca0.mp3",
+    "sesame bread": "w_d6cbeeb.mp3",
+    "dressing": "w_cebaea9.mp3",
+    "ice cream": "w_2d6cfc5.mp3",
+    "vanilla": "w_c68763c.mp3",
+    "coconut cake": "w_6f9b523.mp3",
+    "chocolate": "w_c378985.mp3",
+    "cashew": "w_8c30da6.mp3",
+    "almond": "w_7d8ba6c.mp3",
+    "hot towel": "w_91d6b19.mp3",
+    "blanket": "w_b24f10f.mp3",
+    "boarding pass": "w_6d33298.mp3",
+    "overhead locker": "w_a2dd0e6.mp3",
+    "lavatory": "w_abb07ae.mp3",
+    "seatbelt": "w_94dc14f.mp3",
+    "I am sorry about that": "w_63667ae.mp3",
+    "Could you repeat that": "w_4b665ea.mp3",
+    "Just a moment": "w_2648acb.mp3",
+    "May I help you": "w_0d2ada8.mp3",
+    "You are welcome": "w_1928fe2.mp3",
+    "Thank you for your understanding": "w_621bd06.mp3"
+  },
+  "s": {
+    "This Sauvignon Blanc is from Chile.": {
+      "n": "s_e4e08e5.mp3",
+      "s": "s_slow_e4e08e5.mp3"
+    },
+    "The Shiraz Cabernet has strong tannin.": {
+      "n": "s_91f9ae0.mp3",
+      "s": "s_slow_91f9ae0.mp3"
+    },
+    "Would you like a glass of champagne?": {
+      "n": "s_4537057.mp3",
+      "s": "s_slow_4537057.mp3"
+    },
+    "How would you like your whisky?": {
+      "n": "s_7c39e63.mp3",
+      "s": "s_slow_7c39e63.mp3"
+    },
+    "May I recommend a cocktail for you?": {
+      "n": "s_d23974e.mp3",
+      "s": "s_slow_d23974e.mp3"
+    },
+    "This red wine is the 2024 vintage.": {
+      "n": "s_23da385.mp3",
+      "s": "s_slow_23da385.mp3"
+    },
+    "We have Earl Grey and English Breakfast.": {
+      "n": "s_0b86837.mp3",
+      "s": "s_slow_0b86837.mp3"
+    },
+    "Our Pu'er tea is very popular.": {
+      "n": "s_8cfe788.mp3",
+      "s": "s_slow_8cfe788.mp3"
+    },
+    "Here is your black coffee, sir.": {
+      "n": "s_8ffdd1a.mp3",
+      "s": "s_slow_8ffdd1a.mp3"
+    },
+    "We also have decaffeinated coffee.": {
+      "n": "s_83451bd.mp3",
+      "s": "s_slow_83451bd.mp3"
+    },
+    "Would you care for a latte?": {
+      "n": "s_7b5dfbc.mp3",
+      "s": "s_slow_7b5dfbc.mp3"
+    },
+    "Would you like Oolong tea as usual?": {
+      "n": "s_7a38e95.mp3",
+      "s": "s_slow_7a38e95.mp3"
+    },
+    "The duck breast is pan-fried with rice.": {
+      "n": "s_2d30482.mp3",
+      "s": "s_slow_2d30482.mp3"
+    },
+    "The beef steak comes in red wine sauce.": {
+      "n": "s_e2a3591.mp3",
+      "s": "s_slow_e2a3591.mp3"
+    },
+    "The lobster comes with truffle potato.": {
+      "n": "s_347872c.mp3",
+      "s": "s_slow_347872c.mp3"
+    },
+    "Here is your pumpkin cream soup.": {
+      "n": "s_7454e18.mp3",
+      "s": "s_slow_7454e18.mp3"
+    },
+    "The congee comes with Chinese dim sum.": {
+      "n": "s_98daeb3.mp3",
+      "s": "s_slow_98daeb3.mp3"
+    },
+    "The omelette comes with bacon.": {
+      "n": "s_4674905.mp3",
+      "s": "s_slow_4674905.mp3"
+    },
+    "The steak is pan-fried in red wine sauce.": {
+      "n": "s_06d40c1.mp3",
+      "s": "s_slow_06d40c1.mp3"
+    },
+    "The chicken is grilled with herbs.": {
+      "n": "s_0b65b29.mp3",
+      "s": "s_slow_0b65b29.mp3"
+    },
+    "The beef is from Australia.": {
+      "n": "s_b255f27.mp3",
+      "s": "s_slow_b255f27.mp3"
+    },
+    "We also have lamb for the main course.": {
+      "n": "s_1108376.mp3",
+      "s": "s_slow_1108376.mp3"
+    },
+    "White wine goes well with seafood.": {
+      "n": "s_597f016.mp3",
+      "s": "s_slow_597f016.mp3"
+    },
+    "The prawn and abalone comes with udon.": {
+      "n": "s_7d14c2e.mp3",
+      "s": "s_slow_7d14c2e.mp3"
+    },
+    "The French Brie is creamy and mild.": {
+      "n": "s_57631e8.mp3",
+      "s": "s_slow_57631e8.mp3"
+    },
+    "British Cheddar is a hard cheese.": {
+      "n": "s_c2b2dbb.mp3",
+      "s": "s_slow_c2b2dbb.mp3"
+    },
+    "Danish Blue is a crumbly cheese.": {
+      "n": "s_013953d.mp3",
+      "s": "s_slow_013953d.mp3"
+    },
+    "Would you like a rye roll?": {
+      "n": "s_4e5a28b.mp3",
+      "s": "s_slow_4e5a28b.mp3"
+    },
+    "We have sesame bread and garlic slices.": {
+      "n": "s_e1da4c5.mp3",
+      "s": "s_slow_e1da4c5.mp3"
+    },
+    "We have thousand island dressing.": {
+      "n": "s_86d9f1e.mp3",
+      "s": "s_slow_86d9f1e.mp3"
+    },
+    "For dessert we have ice cream.": {
+      "n": "s_d544668.mp3",
+      "s": "s_slow_d544668.mp3"
+    },
+    "Which flavor, vanilla or strawberry?": {
+      "n": "s_f2cc849.mp3",
+      "s": "s_slow_f2cc849.mp3"
+    },
+    "The coconut cake is very popular.": {
+      "n": "s_eff67e8.mp3",
+      "s": "s_slow_eff67e8.mp3"
+    },
+    "Would you care for some chocolate?": {
+      "n": "s_9586bb0.mp3",
+      "s": "s_slow_9586bb0.mp3"
+    },
+    "Here are your cashews and drink.": {
+      "n": "s_c911a79.mp3",
+      "s": "s_slow_c911a79.mp3"
+    },
+    "The almonds are freshly roasted.": {
+      "n": "s_1090ef0.mp3",
+      "s": "s_slow_1090ef0.mp3"
+    },
+    "Here is the hot towel for you.": {
+      "n": "s_30774fe.mp3",
+      "s": "s_slow_30774fe.mp3"
+    },
+    "Let me get another blanket for you.": {
+      "n": "s_b15104c.mp3",
+      "s": "s_slow_b15104c.mp3"
+    },
+    "May I see your boarding pass?": {
+      "n": "s_45c162c.mp3",
+      "s": "s_slow_45c162c.mp3"
+    },
+    "Your bag goes in the overhead locker.": {
+      "n": "s_ba3cc9d.mp3",
+      "s": "s_slow_ba3cc9d.mp3"
+    },
+    "The lavatory is at the front.": {
+      "n": "s_59f15ef.mp3",
+      "s": "s_slow_59f15ef.mp3"
+    },
+    "Please fasten your seatbelt.": {
+      "n": "s_16ecc95.mp3",
+      "s": "s_slow_16ecc95.mp3"
+    },
+    "I am sorry about that, sir.": {
+      "n": "s_e46c4e2.mp3",
+      "s": "s_slow_e46c4e2.mp3"
+    },
+    "Could you repeat that, please?": {
+      "n": "s_15b9318.mp3",
+      "s": "s_slow_15b9318.mp3"
+    },
+    "Just a moment, please.": {
+      "n": "s_75e95a5.mp3",
+      "s": "s_slow_75e95a5.mp3"
+    },
+    "May I help you with your luggage?": {
+      "n": "s_46e459e.mp3",
+      "s": "s_slow_46e459e.mp3"
+    },
+    "You are welcome, sir.": {
+      "n": "s_b880e23.mp3",
+      "s": "s_slow_b880e23.mp3"
+    },
+    "Thank you for your understanding.": {
+      "n": "s_efa408a.mp3",
+      "s": "s_slow_efa408a.mp3"
+    }
+  },
+  "q": {
+    "What white wine goes with seafood?": "q_2275723.mp3",
+    "Which white wine do you recommend?": "q_1a4837f.mp3",
+    "What white wine do you have?": "q_4361d6e.mp3",
+    "Which red wine has strong tannin?": "q_dc2f624.mp3",
+    "What red wine pairs with steak?": "q_39bab95.mp3",
+    "Which red wine is full-bodied?": "q_c4020f7.mp3",
+    "What sparkling wine do you have?": "q_08cbfa0.mp3",
+    "Do you have champagne on board?": "q_babe5a2.mp3",
+    "What do you have for celebration?": "q_49d2ea6.mp3",
+    "I'd like a whisky, please.": "q_8547db3.mp3",
+    "Can I have a whisky?": "q_1437f5b.mp3",
+    "Whisky for me, please.": "q_f1e68e8.mp3",
+    "Do you have any cocktails?": "q_15abf08.mp3",
+    "What cocktails are available?": "q_5486719.mp3",
+    "Can I have a cocktail?": "q_beca9e9.mp3",
+    "What vintage is this red wine?": "q_33fd158.mp3",
+    "Which year is this wine from?": "q_14fa63e.mp3",
+    "How old is this wine?": "q_0c60418.mp3",
+    "Which black tea do you have?": "q_72befce.mp3",
+    "Do you serve Earl Grey?": "q_8205498.mp3",
+    "What black teas are available?": "q_1f81fda.mp3",
+    "What Chinese tea do you have?": "q_e4254ca.mp3",
+    "Do you have Pu'er tea?": "q_703e46c.mp3",
+    "Which Chinese tea do you recommend?": "q_122e5ad.mp3",
+    "Do you have black coffee?": "q_6aa7f5a.mp3",
+    "Is black coffee available?": "q_4c6e7fd.mp3",
+    "Can I get a black coffee?": "q_700aece.mp3",
+    "Do you have decaffeinated coffee?": "q_382531c.mp3",
+    "Can I get a decaf?": "q_046ce02.mp3",
+    "Is decaf available?": "q_9c3c7a6.mp3",
+    "What coffee do you have?": "q_fae7968.mp3",
+    "Is latte available?": "q_1e4ae18.mp3",
+    "What coffees are on board?": "q_aee11e9.mp3",
+    "What tea do you have today?": "q_f20bfd5.mp3",
+    "Which teas are available?": "q_7cff01b.mp3",
+    "Do you have Oolong tea?": "q_b062bf7.mp3",
+    "What is the first main course?": "q_b8833a3.mp3",
+    "What do you have for the main course?": "q_004c209.mp3",
+    "Tell me about the first choice.": "q_3da85ca.mp3",
+    "Which main course do you recommend?": "q_ea4e55a.mp3",
+    "What is good today?": "q_d30b93e.mp3",
+    "Recommend a main course, please.": "q_937d80e.mp3",
+    "What seafood do you have?": "q_c870868.mp3",
+    "Any seafood on the menu?": "q_5601bde.mp3",
+    "Do you serve lobster?": "q_3ccebf3.mp3",
+    "What soup do you serve?": "q_2fc7914.mp3",
+    "Which soup is it today?": "q_cd77497.mp3",
+    "Any soup to start?": "q_b2599a3.mp3",
+    "What is the Chinese breakfast?": "q_ed0cf5c.mp3",
+    "What do you have for Chinese breakfast?": "q_04053ef.mp3",
+    "Is there congee?": "q_55eac2b.mp3",
+    "What is the Western breakfast?": "q_3401195.mp3",
+    "What do you serve for Western breakfast?": "q_dccd07f.mp3",
+    "Is there an omelette?": "q_53e9f8a.mp3",
+    "How is the beef cooked?": "q_d1071a3.mp3",
+    "How do you cook the steak?": "q_c17cfb9.mp3",
+    "Is it fried or grilled?": "q_4ea66d2.mp3",
+    "How is the chicken cooked?": "q_3ea14a5.mp3",
+    "Is the chicken grilled?": "q_3e672ec.mp3",
+    "How do you prepare the chicken?": "q_4e7cdfa.mp3",
+    "Where is the beef from?": "q_4810ce2.mp3",
+    "What kind of meat is it?": "q_916912a.mp3",
+    "Is the beef Australian?": "q_6ff6b30.mp3",
+    "Do you have lamb?": "q_1456191.mp3",
+    "Is lamb available?": "q_5c7ada7.mp3",
+    "Any lamb on the menu?": "q_6dddc3e.mp3",
+    "What wine goes with seafood?": "q_fb8c648.mp3",
+    "Which wine pairs with fish?": "q_f739d77.mp3",
+    "What should I drink with seafood?": "q_6023c2b.mp3",
+    "What is in the second main course?": "q_37e8b90.mp3",
+    "Tell me about the second choice.": "q_9c458a2.mp3",
+    "What is the udon dish?": "q_fe00e33.mp3",
+    "Which soft cheese do you recommend?": "q_5bcb0d6.mp3",
+    "What soft cheese do you have?": "q_5813798.mp3",
+    "Is Brie available?": "q_53cfd9c.mp3",
+    "Which hard cheese do you have?": "q_2f3b6bd.mp3",
+    "Do you have Cheddar?": "q_7baabdf.mp3",
+    "What hard cheese is available?": "q_375f09a.mp3",
+    "Do you have blue cheese?": "q_2a73034.mp3",
+    "Is there any blue cheese?": "q_d369fe8.mp3",
+    "What crumbly cheese do you have?": "q_b2371b1.mp3",
+    "Can I have some bread?": "q_f452684.mp3",
+    "Could I get some bread?": "q_bbec93b.mp3",
+    "Do you have any bread?": "q_86e034e.mp3",
+    "What bread do you have?": "q_49ab67c.mp3",
+    "Which kinds of bread are there?": "q_f34206a.mp3",
+    "Any sesame bread?": "q_b99eb5c.mp3",
+    "I'd like the salad, please.": "q_afde76f.mp3",
+    "Can I have a salad?": "q_05ad847.mp3",
+    "I'll take the salad.": "q_4f8fd8f.mp3",
+    "What dessert do you have?": "q_937a9b4.mp3",
+    "What is for dessert?": "q_970c506.mp3",
+    "Any ice cream?": "q_df9fac3.mp3",
+    "What ice cream do you have?": "q_caf5337.mp3",
+    "Which ice cream flavors are there?": "q_1eb4822.mp3",
+    "Is vanilla available?": "q_4a051fe.mp3",
+    "What cake do you have?": "q_a9a4bb3.mp3",
+    "Is there coconut cake?": "q_5af35b7.mp3",
+    "Which cake is available?": "q_0963460.mp3",
+    "Do you have any chocolate?": "q_4c82653.mp3",
+    "Is chocolate available?": "q_09c01ef.mp3",
+    "Can I have some chocolate?": "q_4f50014.mp3",
+    "What nuts do you have?": "q_d5fc2b3.mp3",
+    "Which nuts are available?": "q_514bcac.mp3",
+    "Do you have cashews?": "q_aa9dd2a.mp3",
+    "Can I have some nuts?": "q_ba121e2.mp3",
+    "Could I get some nuts?": "q_eb04c39.mp3",
+    "May I have a hot towel?": "q_be0049f.mp3",
+    "Could I get a hot towel?": "q_3a4ae1d.mp3",
+    "Do you have hot towels?": "q_de45dd2.mp3",
+    "Could I have a blanket?": "q_ebaff0d.mp3",
+    "May I have one more blanket?": "q_dcbc7d8.mp3",
+    "Do you have a blanket?": "q_09b0b4e.mp3",
+    "Where is my seat?": "q_364964b.mp3",
+    "Can you help me find my seat?": "q_e6ba6a3.mp3",
+    "Which seat is mine?": "q_44e1cc9.mp3",
+    "Where can I put my bag?": "q_3911aed.mp3",
+    "Where should I stow my luggage?": "q_1e4ca5e.mp3",
+    "Can I keep my bag here?": "q_db12088.mp3",
+    "Where is the lavatory?": "q_35346bd.mp3",
+    "Where is the restroom?": "q_69d7716.mp3",
+    "Can you show me the toilet?": "q_1127959.mp3",
+    "Should I keep my seatbelt on?": "q_789f38a.mp3",
+    "Do I need the seatbelt now?": "q_31d6ade.mp3",
+    "Must I wear the seatbelt?": "q_24a45cd.mp3",
+    "The meal is cold.": "q_1d8be09.mp3",
+    "This is not what I ordered.": "q_801d58c.mp3",
+    "I'm not happy with this.": "q_2f40fb4.mp3",
+    "I'd like the, um, the beef I think.": "q_b4e2d20.mp3",
+    "The chicken, no wait, the fish.": "q_f6387d9.mp3",
+    "Can I get, you know, that one?": "q_8bb6d7f.mp3",
+    "Can I get my coat now?": "q_a497a99.mp3",
+    "Are you ready?": "q_4ea32be.mp3",
+    "Can you help me now?": "q_94baf5f.mp3",
+    "(Passenger looks lost)": "q_c022f1e.mp3",
+    "I can't find my seat.": "q_1171766.mp3",
+    "Excuse me, miss?": "q_9ba3c03.mp3",
+    "Thank you so much.": "q_4d311a5.mp3",
+    "Thanks a lot.": "q_4bc8974.mp3",
+    "I really appreciate it.": "q_9ff9bb2.mp3",
+    "(Passenger accepts the apology)": "q_4963a34.mp3",
+    "Alright, I understand.": "q_af93a27.mp3",
+    "Fine, thank you.": "q_5cc3001.mp3"
+  },
+  "a": {
+    "The Mapu Sauvignon Blanc from Chile.": {
+      "n": "a_5ac54c2.mp3",
+      "s": "a_slow_5ac54c2.mp3"
+    },
+    "The De Bortoli Shiraz Cabernet.": {
+      "n": "a_088214b.mp3",
+      "s": "a_slow_088214b.mp3"
+    },
+    "We have champagne from France.": {
+      "n": "a_299f2ca.mp3",
+      "s": "a_slow_299f2ca.mp3"
+    },
+    "How would you like your whisky, sir?": {
+      "n": "a_ec74505.mp3",
+      "s": "a_slow_ec74505.mp3"
+    },
+    "Yes, we have cocktails, Mimosa and Gin Tonic.": {
+      "n": "a_74ea49d.mp3",
+      "s": "a_slow_74ea49d.mp3"
+    },
+    "It is the 2024 vintage.": {
+      "n": "a_43ad1a1.mp3",
+      "s": "a_slow_43ad1a1.mp3"
+    },
+    "Yes, we serve Earl Grey and English Breakfast.": {
+      "n": "a_18848c5.mp3",
+      "s": "a_slow_18848c5.mp3"
+    },
+    "We have Pu'er tea and Dragon Well.": {
+      "n": "a_d7f7528.mp3",
+      "s": "a_slow_d7f7528.mp3"
+    },
+    "Yes, we serve black coffee, sir.": {
+      "n": "a_dd357f4.mp3",
+      "s": "a_slow_dd357f4.mp3"
+    },
+    "Yes, we have decaffeinated coffee.": {
+      "n": "a_856c357.mp3",
+      "s": "a_slow_856c357.mp3"
+    },
+    "We have latte, drip and black coffee.": {
+      "n": "a_72abde7.mp3",
+      "s": "a_slow_72abde7.mp3"
+    },
+    "Would you like your usual Oolong tea, sir?": {
+      "n": "a_ef3ded5.mp3",
+      "s": "a_slow_ef3ded5.mp3"
+    },
+    "Pan-fried duck breast with rice.": {
+      "n": "a_e98adb8.mp3",
+      "s": "a_slow_e98adb8.mp3"
+    },
+    "The pan-fried AUS beef steak.": {
+      "n": "a_183242f.mp3",
+      "s": "a_slow_183242f.mp3"
+    },
+    "We have pan-fried lobster.": {
+      "n": "a_280e259.mp3",
+      "s": "a_slow_280e259.mp3"
+    },
+    "Pumpkin cream soup, sir.": {
+      "n": "a_77e9ad8.mp3",
+      "s": "a_slow_77e9ad8.mp3"
+    },
+    "Congee with Chinese dim sum.": {
+      "n": "a_9e7613f.mp3",
+      "s": "a_slow_9e7613f.mp3"
+    },
+    "Omelette with bacon and cereal.": {
+      "n": "a_f1f47b2.mp3",
+      "s": "a_slow_f1f47b2.mp3"
+    },
+    "It is pan-fried, sir.": {
+      "n": "a_3341ed8.mp3",
+      "s": "a_slow_3341ed8.mp3"
+    },
+    "It is grilled with herbs.": {
+      "n": "a_7bf5206.mp3",
+      "s": "a_slow_7bf5206.mp3"
+    },
+    "The beef is from Australia, sir.": {
+      "n": "a_37b7743.mp3",
+      "s": "a_slow_37b7743.mp3"
+    },
+    "Yes, we have lamb rack.": {
+      "n": "a_5703b10.mp3",
+      "s": "a_slow_5703b10.mp3"
+    },
+    "A white wine for seafood, Sauvignon Blanc.": {
+      "n": "a_37ec996.mp3",
+      "s": "a_slow_37ec996.mp3"
+    },
+    "Prawn and abalone with udon noodles.": {
+      "n": "a_e044d8c.mp3",
+      "s": "a_slow_e044d8c.mp3"
+    },
+    "I'd recommend the French Brie.": {
+      "n": "a_b68f904.mp3",
+      "s": "a_slow_b68f904.mp3"
+    },
+    "We have British Cheddar and Gruyere.": {
+      "n": "a_e50c369.mp3",
+      "s": "a_slow_e50c369.mp3"
+    },
+    "Yes, we have Danish Blue.": {
+      "n": "a_da4ec56.mp3",
+      "s": "a_slow_da4ec56.mp3"
+    },
+    "Certainly, would you like a rye roll?": {
+      "n": "a_81484b8.mp3",
+      "s": "a_slow_81484b8.mp3"
+    },
+    "Soft roll, rye roll and sesame bread.": {
+      "n": "a_bf28a37.mp3",
+      "s": "a_slow_bf28a37.mp3"
+    },
+    "Thousand island or Italian dressing, sir?": {
+      "n": "a_30ce468.mp3",
+      "s": "a_slow_30ce468.mp3"
+    },
+    "Ice cream and coconut cake.": {
+      "n": "a_7966579.mp3",
+      "s": "a_slow_7966579.mp3"
+    },
+    "We have vanilla and strawberry, sir.": {
+      "n": "a_66a52f6.mp3",
+      "s": "a_slow_66a52f6.mp3"
+    },
+    "We have coconut cake.": {
+      "n": "a_ea46ff3.mp3",
+      "s": "a_slow_ea46ff3.mp3"
+    },
+    "Yes, would you care for some chocolate?": {
+      "n": "a_3ab6898.mp3",
+      "s": "a_slow_3ab6898.mp3"
+    },
+    "We have cashews and almonds.": {
+      "n": "a_53edfbc.mp3",
+      "s": "a_slow_53edfbc.mp3"
+    },
+    "Would you prefer almonds or cashews, sir?": {
+      "n": "a_bcc6344.mp3",
+      "s": "a_slow_bcc6344.mp3"
+    },
+    "Here is your hot towel, sir.": {
+      "n": "a_8411b07.mp3",
+      "s": "a_slow_8411b07.mp3"
+    },
+    "Certainly, here is a blanket.": {
+      "n": "a_f778724.mp3",
+      "s": "a_slow_f778724.mp3"
+    },
+    "May I see your boarding pass, please?": {
+      "n": "a_d3b9f32.mp3",
+      "s": "a_slow_d3b9f32.mp3"
+    },
+    "In the overhead locker, please.": {
+      "n": "a_9a15704.mp3",
+      "s": "a_slow_9a15704.mp3"
+    },
+    "The lavatory is at the front, sir.": {
+      "n": "a_cca9561.mp3",
+      "s": "a_slow_cca9561.mp3"
+    },
+    "Yes, please fasten your seatbelt.": {
+      "n": "a_c987315.mp3",
+      "s": "a_slow_c987315.mp3"
+    },
+    "I am sorry about that, sir.": {
+      "n": "a_e46c4e2.mp3",
+      "s": "a_slow_e46c4e2.mp3"
+    },
+    "Could you repeat that, please?": {
+      "n": "a_15b9318.mp3",
+      "s": "a_slow_15b9318.mp3"
+    },
+    "Just a moment, please.": {
+      "n": "a_75e95a5.mp3",
+      "s": "a_slow_75e95a5.mp3"
+    },
+    "May I help you, sir?": {
+      "n": "a_317d138.mp3",
+      "s": "a_slow_317d138.mp3"
+    },
+    "You are welcome.": {
+      "n": "a_f5e9766.mp3",
+      "s": "a_slow_f5e9766.mp3"
+    },
+    "Thank you for your understanding.": {
+      "n": "a_efa408a.mp3",
+      "s": "a_slow_efa408a.mp3"
+    }
+  },
+  "m": {
+    "I'd suggest the Chilean Sauvignon Blanc.": "m_8f90f46.mp3",
+    "The Mapu Sauvignon Blanc pairs well with seafood.": "m_14f71e8.mp3",
+    "I'd recommend the De Bortoli Shiraz Cabernet.": "m_d211410.mp3",
+    "The Shiraz Cabernet from Australia, 2024 vintage.": "m_dd59a43.mp3",
+    "We serve French champagne.": "m_b00e041.mp3",
+    "Yes, champagne is available on this flight.": "m_af61c0e.mp3",
+    "Would you like it on the rocks?": "m_6d486d2.mp3",
+    "With ice or straight up, sir?": "m_33e65ba.mp3",
+    "We offer Mimosa, Gin Tonic and Cuba Libre.": "m_77023f6.mp3",
+    "Certainly — Mimosa is light and refreshing.": "m_2980c3c.mp3",
+    "This one is a 2024 vintage.": "m_97052f9.mp3",
+    "It's from the 2024 harvest.": "m_1f36a86.mp3",
+    "We also have English Breakfast.": "m_3dbe0b8.mp3",
+    "Earl Grey is our most popular black tea.": "m_fef238f.mp3",
+    "We serve Pu'er, Tieh-Kwan-Yin and Dragon Well.": "m_6dc7d6e.mp3",
+    "Pu'er tea is a good choice.": "m_12f19d1.mp3",
+    "Black coffee is available, sir.": "m_3a6625c.mp3",
+    "We can prepare black coffee for you.": "m_40f1ced.mp3",
+    "Certainly, decaf is available.": "m_fa8ec03.mp3",
+    "Yes, we can prepare decaffeinated coffee.": "m_d3177bd.mp3",
+    "We serve latte and brewed coffee.": "m_6222448.mp3",
+    "Latte is our most popular coffee.": "m_33f2d64.mp3",
+    "We also serve Pu'er and Dragon Well.": "m_d076891.mp3",
+    "Oolong tea is ready for you, sir.": "m_e398bbc.mp3",
+    "The first choice is pan-fried duck breast.": "m_874f8f7.mp3",
+    "We have duck breast served with rice.": "m_c97b255.mp3",
+    "I'd suggest the Australian beef steak.": "m_d098417.mp3",
+    "The pan-fried beef steak is excellent.": "m_8fa726e.mp3",
+    "The lobster is served with truffle potato.": "m_423c313.mp3",
+    "We have pan-fried lobster in lobster sauce.": "m_fc0ecf4.mp3",
+    "We have pumpkin cream soup.": "m_64bc596.mp3",
+    "The soup today is pumpkin cream.": "m_2fcdb4b.mp3",
+    "We serve congee with pickles and dim sum.": "m_5eef803.mp3",
+    "The Chinese breakfast is congee.": "m_5d2ce73.mp3",
+    "Scrambled egg with bacon and cereal.": "m_fb5e549.mp3",
+    "We have omelette with sausage.": "m_b2a5c3d.mp3",
+    "It's pan-fried with red wine sauce.": "m_c71c140.mp3",
+    "The beef is pan-fried.": "m_32dde90.mp3",
+    "The chicken is grilled.": "m_a4dcd06.mp3",
+    "We grill it with fresh herbs.": "m_cc89f09.mp3",
+    "It's Australian beef.": "m_0c3d9d9.mp3",
+    "The beef comes from Australia.": "m_5d8dd39.mp3",
+    "Yes, we serve lamb cutlet.": "m_dc8ed81.mp3",
+    "Lamb is available today.": "m_af8142d.mp3",
+    "I'd suggest a white wine for seafood.": "m_5b6f35b.mp3",
+    "The Sauvignon Blanc matches seafood well.": "m_d406675.mp3",
+    "It's stir-fried prawn and abalone with udon.": "m_1eda598.mp3",
+    "The second choice has prawn and abalone.": "m_100ba5a.mp3",
+    "The Brie is creamy and mild.": "m_53663b3.mp3",
+    "May I suggest the French Brie?": "m_5ba9d5f.mp3",
+    "British Cheddar and Swiss Gruyere.": "m_c820fe5.mp3",
+    "We have Cheddar from Britain.": "m_12344f3.mp3",
+    "We have Danish Blue for crumbly cheese.": "m_82a20b2.mp3",
+    "Yes, Danish Blue is available.": "m_2bf2f8a.mp3",
+    "We have rye roll and sesame bread.": "m_c9b21a7.mp3",
+    "May I suggest the rye roll, sir?": "m_7e721f0.mp3",
+    "We have soft roll, hard roll and sesame bread.": "m_e7bf72c.mp3",
+    "Sesame bread is available.": "m_9c91078.mp3",
+    "We have French and Italian dressing.": "m_15a6174.mp3",
+    "May I suggest the thousand island?": "m_3a0d9f6.mp3",
+    "We have coconut cake or ice cream.": "m_196e77c.mp3",
+    "Ice cream is available.": "m_017312c.mp3",
+    "Vanilla and chocolate are available.": "m_fe0b024.mp3",
+    "May I suggest the vanilla, sir?": "m_7e93056.mp3",
+    "We serve coconut cake.": "m_3639b2e.mp3",
+    "Coconut cake is our special today.": "m_4235698.mp3",
+    "We have chocolate after the meal.": "m_717f518.mp3",
+    "Chocolate is available, sir.": "m_91b3a3c.mp3",
+    "We serve cashews and almonds.": "m_4e666b3.mp3",
+    "The cashews are freshly roasted.": "m_c99ac56.mp3",
+    "We have almonds and cashews today.": "m_37e267f.mp3",
+    "May I suggest the roasted almonds?": "m_d3a8220.mp3",
+    "Here you are, a hot towel.": "m_a151884.mp3",
+    "Certainly, here is your hot towel.": "m_598168b.mp3",
+    "Of course, I'll bring a blanket.": "m_6dbab25.mp3",
+    "Here is an extra blanket for you.": "m_b886f3f.mp3",
+    "Could I check your boarding pass?": "m_7a7df14.mp3",
+    "Your seat number is on the boarding pass.": "m_70742b8.mp3",
+    "Please stow it in the overhead locker.": "m_56cbef1.mp3",
+    "You may put it in the overhead compartment.": "m_8a67633.mp3",
+    "It's at the front of the cabin.": "m_f77e38f.mp3",
+    "It's just ahead on your left.": "m_10eb600.mp3",
+    "Please keep your seatbelt fastened.": "m_999aaa7.mp3",
+    "Yes, fasten it during the flight.": "m_e073cb8.mp3",
+    "I do apologize for that.": "m_a190ea6.mp3",
+    "I'm terribly sorry about the inconvenience.": "m_2975ec7.mp3",
+    "Sorry, could you say that again?": "m_5cfff3b.mp3",
+    "Pardon me, could you repeat it?": "m_28404a8.mp3",
+    "One moment, please.": "m_81f85a2.mp3",
+    "Please wait a moment.": "m_a7ebfa7.mp3",
+    "Can I help you with that?": "m_5b48e34.mp3",
+    "Let me help you, sir.": "m_93a2d81.mp3",
+    "It's my pleasure.": "m_d4da178.mp3",
+    "You're very welcome.": "m_515c788.mp3",
+    "Thanks for your understanding.": "m_19ff5e3.mp3",
+    "I appreciate your understanding.": "m_ff5e43c.mp3"
+  }
+}

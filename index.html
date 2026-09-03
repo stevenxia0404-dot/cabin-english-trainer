@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#04060D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>公务英语AI陪练 · 口语考核特训</title>
+<style>
+  :root {
+    --bg: #070B16;
+    --surface: rgba(255,255,255,.05);
+    --surface-2: rgba(255,255,255,.09);
+    --line: rgba(232,200,119,.22);
+    --text: #F6F1E3;
+    --muted: #9C937E;
+    --accent: #E8C877;
+    --accent-2: #D9C08A;
+    --ok: #34D399;
+    --ok-soft: rgba(52,211,153,.13);
+    --warn: #FBBF24;
+    --bad: #F87171;
+    --bad-soft: rgba(248,113,113,.12);
+    --radius: 18px;
+    --sans: -apple-system, "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html { font-size:16px; }
+  body {
+    font-family: var(--sans); color: var(--text);
+    background: radial-gradient(120% 80% at 15% 0%, rgba(232,200,119,.14), transparent 58%),
+                linear-gradient(160deg, #070B16, #04060D);
+    min-height: 100dvh; overflow-x: hidden;
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+  button { font-family: inherit; color: inherit; }
+
+  /* ============ 顶栏 ============ */
+  header {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(13,18,32,.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  header .back {
+    width: 36px; height: 36px; flex: none; border-radius: 12px;
+    background: var(--surface); border: 1px solid var(--line);
+    color: var(--muted); font-size: 1.05rem; cursor: pointer;
+    display: grid; place-items: center;
+  }
+  header .back:active { transform: scale(.92); }
+  header .crumbs { flex: 1; min-width: 0; }
+  header .crumbs .s1 { font-size: .7rem; color: var(--muted); letter-spacing: .05em; }
+  header .crumbs .s2 { font-size: .95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  header .lives {
+    font-size: .78rem; font-weight: 700; color: var(--warn);
+    background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.28);
+    padding: 6px 12px; border-radius: 999px; font-variant-numeric: tabular-nums;
+  }
+
+  /* ============ 通用屏 ============ */
+  .screen { display: none; animation: screenIn .3s ease both; }
+  .screen.active { display: block; }
+  @keyframes screenIn { from { opacity: 0; transform: translateY(10px); } }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 18px 16px 30px; }
+
+  /* ============ 首页 ============ */
+  .hero { padding: 22px 2px 18px; }
+  .hero .logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .hero .badge {
+    font-size: .68rem; font-weight: 800; letter-spacing: .14em;
+    color: var(--accent-2);
+    border: 1px solid rgba(217,192,138,.35); background: rgba(217,192,138,.08);
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .brand { margin-bottom: 12px; }
+  .brand-cn { font-size: 1.5rem; font-weight: 900; letter-spacing: .02em; line-height: 1.25; }
+  .brand-en { margin-top: 5px; font-size: .8rem; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
+  .hero .ver-line { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; font-weight: 800; color: var(--warn); background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.32); padding: 5px 12px; border-radius: 999px; width: fit-content; }
+  .hero .ver-line .upd { color: var(--muted); font-weight: 600; }
+
+
+  .sec-title {
+    font-size: .74rem; font-weight: 800; letter-spacing: .12em; color: var(--muted);
+    margin: 22px 2px 12px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .sec-title button { background:none; border:none; color: var(--accent-2); font-size: .72rem; font-weight: 700; cursor: pointer; padding: 4px 8px; border-radius: 8px; }
+  .sec-title button:active { background: rgba(217,192,138,.1); }
+
+  .review-banner {
+    display: none; align-items: center; gap: 12px;
+    background: rgba(251,191,36,.09); border: 1px solid rgba(251,191,36,.32);
+    border-radius: var(--radius); padding: 14px 16px; margin-bottom: 20px; cursor: pointer;
+  }
+  .review-banner.show { display: flex; }
+  .review-banner .icon { font-size: 1.3rem; }
+  .review-banner .tx { flex: 1; }
+  .review-banner .tx b { font-size: .88rem; }
+  .review-banner .tx span { display: block; font-size: .72rem; color: var(--muted); margin-top: 2px; }
+  .review-banner .go { color: var(--warn); font-weight: 800; }
+
+  .deck { margin-bottom: 14px; }
+  .deck-head {
+    display: flex; align-items: center; gap: 10px; padding: 12px 4px 10px;
+  }
+  .deck-head .ic { font-size: 1.15rem; }
+  .deck-head .nm { font-size: .95rem; font-weight: 800; flex: 1; }
+  .deck-head .ct { font-size: .7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .scene-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 15px 16px; margin-bottom: 10px; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    transition: transform .15s ease, border-color .2s;
+  }
+  .scene-card:active { transform: scale(.98); border-color: rgba(232,200,119,.5); }
+  .scene-card .icon {
+    width: 44px; height: 44px; flex: none; border-radius: 14px; display: grid; place-items: center;
+    font-size: 1.25rem; background: var(--surface-2); border: 1px solid var(--line);
+  }
+  .scene-card .mid { flex: 1; min-width: 0; }
+  .scene-card .mid .nm { font-size: .93rem; font-weight: 700; }
+  .scene-card .mid .ds { font-size: .72rem; color: var(--muted); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .scene-card .prog { width: 58px; flex: none; text-align: right; }
+  .scene-card .prog .pct { font-size: 1.05rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .scene-card .prog .lvl { font-size: .62rem; color: var(--muted); letter-spacing: .04em; }
+
+  /* ============ 场景详情 ============ */
+  .scene-hero { padding: 18px 2px 6px; display: flex; align-items: center; gap: 14px; }
+  .scene-hero .icon {
+    width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; font-size: 1.6rem;
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .scene-hero .t { flex: 1; }
+  .scene-hero .t h2 { font-size: 1.25rem; font-weight: 800; }
+  .scene-hero .t .d { font-size: .76rem; color: var(--muted); margin-top: 3px; }
+
+  .gates { display: grid; gap: 10px; margin-top: 16px; }
+  .gate {
+    position: relative; border-radius: var(--radius); padding: 16px;
+    background: var(--surface); border: 1px solid var(--line); cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color .2s, transform .15s;
+  }
+  .gate:active { transform: scale(.98); }
+  .gate.locked { opacity: .45; pointer-events: none; }
+  .gate .gnum {
+    width: 46px; height: 46px; flex: none; border-radius: 14px;
+    display: grid; place-items: center; font-weight: 800; font-size: 1.05rem;
+    background: rgba(232,200,119,.14); color: #F0E0B8; border: 1px solid rgba(232,200,119,.3);
+  }
+  .gate .gmid { flex: 1; min-width: 0; }
+  .gate .gmid .gnm { font-size: .98rem; font-weight: 800; }
+  .gate .gmid .gds { font-size: .73rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  .gate .gstate { flex: none; font-size: .68rem; font-weight: 700; padding: 5px 10px; border-radius: 999px; }
+  .gate .gstate.done { color: var(--ok); background: var(--ok-soft); }
+  .gate .gstate.now { color: var(--warn); background: rgba(251,191,36,.1); }
+  .gate .gstate.todo { color: var(--muted); background: rgba(255,255,255,.05); }
+  .gate .lock-tip { position: absolute; right: 14px; bottom: 8px; font-size: .62rem; color: var(--muted); }
+
+  /* ============ 练习屏（三关共用骨架） ============ */
+  .q-area { text-align: center; padding: 26px 8px 10px; }
+  .q-tag { display:inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .1em; color: var(--accent-2); background: rgba(217,192,138,.09); border: 1px solid rgba(217,192,138,.3); padding: 5px 14px; border-radius: 999px; margin-bottom: 18px; }
+  .q-en { font-size: clamp(1.35rem, 5.5vw, 1.9rem); font-weight: 800; line-height: 1.4; letter-spacing: .01em; }
+  .q-zh { font-size: .9rem; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+
+  .big-speak {
+    width: 78px; height: 78px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(140deg, #E8C877, #C9A961); color: #fff;
+    font-size: 1.6rem; display: grid; place-items: center; margin: 0 auto;
+    box-shadow: 0 14px 34px -10px rgba(232,200,119,.65);
+    transition: transform .15s;
+  }
+  .big-speak:active { transform: scale(.9); }
+  .big-speak.speaking { animation: throb 1s ease infinite; }
+  @keyframes throb { 50% { transform: scale(1.08); box-shadow: 0 18px 44px -10px rgba(139,92,246,.8); } }
+  .hint-tap { text-align: center; color: var(--muted); font-size: .74rem; margin-top: 12px; letter-spacing: .05em; }
+
+  /* 选项 */
+  .opts { display: grid; gap: 10px; margin-top: 26px; }
+  .opt {
+    background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 15px 16px; font-size: .92rem; text-align: left; cursor: pointer;
+    display: flex; align-items: center; gap: 12px; line-height: 1.45;
+    transition: border-color .15s, background .15s;
+  }
+  .opt .key {
+    width: 26px; height: 26px; flex: none; border-radius: 8px; display: grid; place-items: center;
+    background: var(--surface-2); font-size: .7rem; font-weight: 800; color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .opt:active { border-color: rgba(232,200,119,.55); }
+  .opt.right { border-color: rgba(52,211,153,.7); background: var(--ok-soft); }
+  .opt.right .key { background: var(--ok); color: #06281c; border-color: var(--ok); }
+  .opt.wrong { border-color: rgba(248,113,113,.7); background: var(--bad-soft); }
+  .opt.wrong .key { background: var(--bad); color: #2c0808; border-color: var(--bad); }
+  .opt.dim { opacity: .38; }
+
+  .feedback {
+    margin-top: 22px; border-radius: 16px; padding: 16px 18px;
+    display: none; text-align: center;
+  }
+  .feedback.show { display: block; animation: screenIn .25s ease both; }
+  .feedback.ok { background: var(--ok-soft); border: 1px solid rgba(52,211,153,.35); }
+  .feedback.bad { background: var(--bad-soft); border: 1px solid rgba(248,113,113,.35); }
+  .feedback .ft { font-weight: 800; font-size: .95rem; margin-bottom: 6px; }
+  .feedback.ok .ft { color: var(--ok); }
+  .feedback.bad .ft { color: var(--bad); }
+  .feedback .fd { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+
+  /* ============ 换说法 · 质变训练 ============ */
+  .tag-row { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .tag-row .q-tag { margin-bottom: 0; }
+  .var-badge {
+    display: inline-block; font-size: .66rem; font-weight: 800; letter-spacing: .06em;
+    color: var(--warn); background: rgba(251,191,36,.13); border: 1px solid rgba(251,191,36,.42);
+    padding: 5px 12px; border-radius: 999px;
+  }
+  .var-badge[hidden] { display: none; }
+
+  .varbox {
+    margin-top: 12px; border-radius: 16px; padding: 14px 16px;
+    background: var(--surface); border: 1px solid var(--line);
+    display: none; text-align: left;
+  }
+  .varbox.show { display: block; animation: screenIn .25s ease both; }
+  .varbox .vrow + .vrow { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
+  .varbox .vlb { font-size: .68rem; font-weight: 800; color: var(--muted); letter-spacing: .04em; margin-bottom: 6px; }
+  .varbox .vtx { font-size: .9rem; line-height: 1.6; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .varbox .vtx.en { font-weight: 600; }
+  .varbox .vtx .kw { color: var(--warn); font-weight: 900; background: rgba(251,191,36,.16); border-radius: 5px; padding: 0 4px; }
+  .varbox .vrow.alt .vtx { color: var(--accent-2); }
+  .vsay {
+    flex: none; border: 1px solid var(--line); background: var(--surface-2); color: var(--text);
+    border-radius: 999px; width: 38px; height: 38px; font-size: .85rem; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0;
+    transition: transform .12s, background .15s;
+  }
+  .vsay:active { transform: scale(.9); background: var(--surface); }
+  .key-chip {
+    flex: none; font-size: .82rem; font-weight: 900; letter-spacing: .02em;
+    color: #2A1C00; background: var(--warn); border-radius: 8px; padding: 3px 10px;
+  }
+  .varbox .kwz { font-size: .78rem; color: var(--muted); flex: 1; min-width: 120px; }
+  .varbox .alt-list { flex-direction: column; gap: 8px; align-items: stretch; }
+  .varbox .altline { display: flex; align-items: center; gap: 8px; font-size: .84rem; color: var(--muted); line-height: 1.55; }
+
+  /* 「换说法一览」按钮（换说法开关已于 2026-09-01 移除，开关卡片样式一并删掉） */
+  .ghost-wide {
+    margin-top: 10px; width: 100%; cursor: pointer; border-radius: 14px; padding: 13px;
+    background: var(--surface); border: 1px solid var(--line); color: var(--text);
+    font-size: .86rem; font-weight: 700;
+  }
+  .ghost-wide:active { transform: scale(.99); }
+
+
+  .next-row { margin-top: 26px; display: grid; gap: 10px; }
+  .btn-main {
+    border: none; cursor: pointer; border-radius: 18px; padding: 16px;
+    font-size: .98rem; font-weight: 800;
+    background: linear-gradient(120deg, #E8C877, #C9A961); color: #fff;
+    box-shadow: 0 12px 30px -10px rgba(232,200,119,.6);
+    transition: transform .15s;
+  }
+  .btn-main:active { transform: scale(.97); }
+  .btn-main[disabled] { opacity: .4; pointer-events: none; }
+  .btn-ghost {
+    background: none; border: 1px solid var(--line); color: var(--muted);
+    border-radius: 15px; padding: 13px; font-size: .84rem; font-weight: 700; cursor: pointer;
+  }
+
+  /* ============ 跟读关专用 ============ */
+  .replay-row { display: flex; justify-content: center; gap: 12px; margin-top: 18px; }
+  .pill-btn {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+    padding: 12px 22px; font-size: .84rem; font-weight: 700; color: var(--text); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; min-height: 46px;
+    transition: transform .12s, background .15s;
+  }
+  .pill-btn:active { transform: scale(.96); background: var(--surface-2); }
+  .pill-btn svg { width: 13px; height: 13px; }
+
+  .rec-btn {
+    width: 84px; height: 84px; border-radius: 50%; border: 3px solid rgba(232,200,119,.5);
+    background: rgba(232,200,119,.12); color: var(--accent); font-size: 1rem; font-weight: 800;
+    cursor: pointer; display: grid; place-items: center; margin: 26px auto 0;
+    transition: all .2s;
+  }
+  .rec-btn.rec { background: var(--bad); color: #fff; animation: throbR 1.1s ease infinite; }
+  @keyframes throbR { 50% { transform: scale(1.07); } }
+  .rec-state { text-align: center; margin-top: 10px; font-size: .74rem; color: var(--muted); }
+
+  .compare { margin-top: 18px; display: none; }
+  .compare.show { display: block; animation: screenIn .25s both; }
+  .compare .row {
+    display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 8px;
+  }
+  .compare .row .who { flex: none; }
+  .compare .row .who .avatar {
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1rem;
+  }
+  .compare .row.model .who .avatar { background: rgba(232,200,119,.15); border: 1px solid rgba(232,200,119,.4); }
+  .compare .row.mine .who .avatar { background: rgba(52,211,153,.13); border: 1px solid rgba(52,211,153,.4); }
+  .compare .row .mid { flex: 1; min-width: 0; }
+  .compare .row .mid .lb { font-size: .68rem; color: var(--muted); letter-spacing: .06em; }
+  .compare .row .mid .tx { font-size: .84rem; font-weight: 600; margin-top: 2px; }
+  .compare .row .pl {
+    width: 40px; height: 40px; flex: none; border-radius: 50%; cursor: pointer; border: none;
+    display: grid; place-items: center;
+  }
+  .compare .row.model .pl { background: rgba(232,200,119,.16); color: #F0E0B8; }
+  .compare .row.mine .pl { background: rgba(52,211,153,.14); color: var(--ok); }
+  .compare .row .pl svg { width: 15px; height: 15px; }
+
+  /* ============ 情景应答 ============ */
+  .exam-meta { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
+  .exam-chip {
+    display: inline-flex; align-items: baseline; gap: 12px;
+    font-size: 1.05rem; font-weight: 800; color: var(--text);
+    background: linear-gradient(135deg, rgba(232,200,119,.20), rgba(217,192,138,.12));
+    border: 1px solid rgba(232,200,119,.45);
+    padding: 12px 24px; border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(232,200,119,.18);
+  }
+  .exam-chip .lb { font-size: .74rem; font-weight: 700; color: var(--muted); letter-spacing: .08em; }
+  .exam-chip b { color: #fff; font-size: 1.4rem; font-weight: 900; }
+
+  .mic-zone { margin-top: 22px; text-align: center; }
+  .mic-big {
+    width: 96px; height: 96px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(140deg, #E8C877, #C9A961); color: #241B04;
+    font-size: 1.9rem; display: inline-grid; place-items: center;
+    box-shadow: 0 16px 40px -12px rgba(232,200,119,.55);
+    transition: transform .15s;
+  }
+  .mic-big:active { transform: scale(.92); }
+  .mic-big.rec { animation: throb 1s ease infinite; }
+
+  .heard {
+    margin: 20px auto 0; max-width: 460px; text-align: center;
+    background: var(--surface); border: 1px dashed rgba(255,255,255,.18); border-radius: 14px;
+    padding: 14px 16px; display: none;
+  }
+  .heard.show { display: block; }
+  .heard .lb { font-size: .66rem; color: var(--muted); letter-spacing: .1em; margin-bottom: 6px; }
+  .heard .tx { font-size: 1rem; font-weight: 700; line-height: 1.5; min-height: 1.5em; }
+  .heard .tx .miss { color: var(--bad); text-decoration: underline wavy rgba(248,113,113,.6); text-underline-offset: 4px; }
+
+  .score-line { text-align: center; margin-top: 14px; display: none; }
+  .score-line.show { display: block; }
+  .score-line b { font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .score-line.ok b { color: var(--ok); }
+  .score-line.bad b { color: var(--bad); }
+  .score-line span { font-size: .74rem; color: var(--muted); display: block; margin-top: 2px; }
+
+  .fallback-note {
+    margin: 20px auto 0; max-width: 460px;
+    background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.3); border-radius: 14px;
+    padding: 13px 15px; font-size: .76rem; color: #FDE68A; line-height: 1.65; text-align: left;
+  }
+
+  /* ============ 结果页 ============ */
+  .result-card {
+    max-width: 480px; margin: 8vh auto 0; text-align: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+    padding: 34px 24px 28px;
+  }
+  .result-card .emoji { font-size: 3rem; }
+  .result-card h2 { font-size: 1.5rem; font-weight: 800; margin-top: 10px; }
+  .result-card .sub { color: var(--muted); font-size: .82rem; margin-top: 6px; line-height: 1.6; }
+  .result-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 24px 0; }
+  .result-grid .cell { background: var(--surface-2); border-radius: 14px; padding: 14px 6px; }
+  .result-grid .cell b { display: block; font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .result-grid .cell span { font-size: .64rem; color: var(--muted); }
+  .result-acts { display: grid; gap: 10px; }
+
+  /* ============ 生句本 ============ */
+  .sb-item {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 13px 15px; margin-bottom: 9px; display: flex; align-items: center; gap: 12px;
+  }
+  .sb-item .en { flex: 1; min-width: 0; }
+  .sb-item .en .t1 { font-size: .88rem; font-weight: 700; }
+  .sb-item .en .t2 { font-size: .68rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sb-item .due { flex: none; font-size: .66rem; font-weight: 700; padding: 5px 10px; border-radius: 999px; }
+  .sb-item .due.now { color: var(--warn); background: rgba(251,191,36,.1); }
+  .sb-item .due.later { color: var(--muted); background: rgba(255,255,255,.05); }
+  .sb-item .listen { flex: none; width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer; background: rgba(232,200,119,.14); color: #F0E0B8; display: grid; place-items: center; font-size: .9rem; transition: transform .12s; }
+  .sb-item .listen:active { transform: scale(.9); }
+  .sb-item .sb-practice { flex: none; width: 42px; height: 42px; border-radius: 14px; border: none; cursor: pointer; background: rgba(52,211,153,.14); color: #6EE7B7; display: grid; place-items: center; font-size: 1rem; transition: transform .12s; }
+  .sb-item .sb-practice:active { transform: scale(.9); background: rgba(52,211,153,.26); }
+
+  .empty {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .empty .e-ic { font-size: 2.6rem; margin-bottom: 12px; }
+  .empty p { font-size: .84rem; line-height: 1.8; }
+
+  /* ============ v1.5 UX：触控放大 + 双音色播放态 + 步骤条 + 引导 ============ */
+  .vsay.speaking, .pl.speaking, .pill-btn.speaking { animation: throb 1s ease infinite; }
+  .v-q { box-shadow: 0 0 0 3px rgba(232,200,119,.6) !important; }
+  .v-a { box-shadow: 0 0 0 3px rgba(244,114,182,.6) !important; }
+  .cmp-seq { margin: 12px auto 0; display: block; width: 100%; cursor: pointer; border: 1px dashed rgba(255,255,255,.22);
+    background: var(--surface); color: var(--text); border-radius: 12px; padding: 11px; font-size: .78rem; font-weight: 700; }
+  .cmp-seq:active { background: var(--surface-2); }
+  .coach { position: fixed; inset: 0; z-index: 95; background: rgba(5,8,16,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .coach[hidden] { display: none; }
+  .coach-card { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px 22px; text-align: center; animation: screenIn .25s ease both; }
+  .coach-card .coach-ic { font-size: 2.4rem; }
+  .coach-card h3 { font-size: 1.2rem; font-weight: 800; margin: 10px 0 14px; }
+  .coach-card ol { text-align: left; margin: 0 0 20px; padding-left: 20px; color: var(--muted); font-size: .84rem; line-height: 1.9; }
+  .coach-card ol b { color: var(--text); }
+
+  /* ============ 底部导航 ============ */
+  .tabbar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(13,18,32,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    display: flex; justify-content: space-around;
+  }
+  .tab {
+    flex: 1; background: none; border: none; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    color: var(--muted); font-size: .62rem; font-weight: 700; padding: 6px 0;
+    border-radius: 12px;
+  }
+  .tab .ti { font-size: 1.25rem; line-height: 1; }
+  .tab.on { color: var(--accent-2); }
+  .tabbar .ver-foot { flex: 0 0 auto; align-self: center; font-size: .6rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; padding: 0 4px; white-space: nowrap; }
+  .tab:active { background: rgba(255,255,255,.05); }
+  .tab .dot { position: relative; }
+  .tab .dot::after {
+    content: ""; position: absolute; top: -2px; right: -6px; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--warn); display: none;
+  }
+  .tab .dot.alert::after { display: block; }
+
+  /* toast */
+  #toast {
+    position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px);
+    background: rgba(30,39,64,.97); border: 1px solid rgba(255,255,255,.15); color: var(--text);
+    padding: 11px 20px; border-radius: 12px; font-size: .8rem; font-weight: 600;
+    opacity: 0; pointer-events: none; transition: all .3s; z-index: 99; white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .type-toggle{display:block;margin:14px auto 0;background:transparent;border:1px solid rgba(140,150,175,.5);color:inherit;padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer;}
+  .type-toggle:active{transform:scale(.97);}
+  .type-wrap{display:none;gap:8px;margin-top:12px;align-items:center;}
+  .type-wrap:not([hidden]){display:flex;}
+  .type-input{flex:1;min-width:0;padding:11px 13px;border-radius:11px;border:1px solid rgba(140,150,175,.5);background:rgba(255,255,255,.06);color:inherit;font-size:15px;outline:none;}
+  .type-input:focus{border-color:rgba(120,170,255,.9);}
+  .btn-mini{background:#2f7de0;color:#fff;border:none;padding:11px 16px;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .btn-mini:active{transform:scale(.97);}
+  /* 第三关类似句型复用 .varbox 样式（与第一关例句卡完全一致），不再单独定义 */
+  /* F 方案 · 毛玻璃质感：卡片半透明 + 背景模糊 */
+  .scene-card, .gate, .varbox, .compare .row, .coach-card,
+  .result-grid .cell, .sb-item, .opt, .review-banner, .pill-btn, .q-area,
+  .mic-zone, .sheet-mask, .feedback {
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
+
+  /* ============ 自适应 · 三档断点（只增不改，不动布局引擎） ============ */
+  /* 手机 <744px：完全沿用现状，单列满宽，零改动 */
+
+  /* 平板 / iPad / iPad mini（744–1023px）：内容加宽、首页卡片两列、听辨选项两列、底栏内容居中 */
+  @media (min-width: 744px){
+    .wrap { max-width: 720px; padding: 24px 20px 36px; }
+    #scene-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    #scene-list .scene-card { margin-bottom: 0; }
+    .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tabbar {
+      padding-left: max(10px, calc((100% - 700px) / 2));
+      padding-right: max(10px, calc((100% - 700px) / 2));
+    }
+  }
+
+  /* 桌面（≥1024px）：内容再放宽，留白舒适不撑满 */
+  @media (min-width: 1024px){
+    .wrap { max-width: 820px; padding: 28px 24px 44px; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs></defs></svg>
+
+<div id="toast"></div>
+<audio id="rec-player" preload="auto" playsinline webkit-playsinline></audio>
+
+<!-- 换说法一览（底部弹层）已移除 -->
+
+<!-- ============ 首页 ============ -->
+<section id="scr-home" class="screen active">
+  <div class="wrap">
+    <div class="hero">
+      <div class="brand">
+        <div class="brand-cn">公务舱英语陪练</div>
+        <div class="brand-en">Business Class English Trainer</div>
+      </div>
+      <p class="ver-line" id="ver-line"></p>
+    </div>
+
+    <div class="review-banner" id="review-banner">
+      <span class="icon">🔁</span>
+      <div class="tx"><b>生词本有待复习</b><span id="review-count">0 个生词到期待巩固</span></div>
+      <span class="go">去复习 →</span>
+    </div>
+
+    <div class="sec-title"><span>全部混练 · 三关</span><span id="deck-count"></span></div>
+    <div id="scene-list"></div>
+  </div>
+</section>
+
+<!-- ============ 场景详情 ============ -->
+<section id="scr-scene" class="screen">
+  <header>
+    <button class="back" data-nav="home">←</button>
+    <div class="crumbs"><div class="s1" id="sc-crumb">SCENE</div><div class="s2" id="sc-title"></div></div>
+    <div class="lives" id="sc-progress">0%</div>
+  </header>
+  <div class="wrap">
+    <div class="scene-hero">
+      <div class="icon" id="sc-icon">🏨</div>
+      <div class="t"><h2 id="sc-name"></h2><div class="d" id="sc-desc"></div></div>
+    </div>
+
+    <div class="gates" id="gate-list"></div>
+  </div>
+</section>
+
+<!-- ============ 第一关 · 听辨 ============ -->
+<section id="scr-g1" class="screen">
+  <header>
+    <button class="back" data-nav="home">←</button>
+    <div class="crumbs"><div class="s1">第一关 · 听辨</div><div class="s2" id="g1-scene"></div></div>
+    <div class="lives" id="g1-count">1/10</div>
+  </header>
+  <div class="wrap">
+    <div class="q-area">
+      <div class="tag-row">
+        <span class="q-tag">🎧 听音频 · 选出正确含义</span>
+        <span class="var-badge" id="g1-vb" hidden>🔀 这句换了说法</span>
+      </div>
+      <button class="big-speak" id="g1-play">🔊</button>
+      <div class="hint-tap" id="g1-hint">点喇叭重复播放 · 听不清就多点几次</div>
+    </div>
+    <div class="opts" id="g1-opts"></div>
+    <div class="feedback" id="g1-fb"><div class="ft"></div><div class="fd"></div></div>
+    <div class="varbox" id="g1-var"></div>
+  </div>
+  <div class="next-row"><button class="btn-main" id="g1-next" disabled>下一句</button><button class="btn-ghost" id="g1-mark">🔖 加入生词本</button></div>
+</section>
+
+<!-- ============ 第二关 · 跟读 ============ -->
+<section id="scr-g2" class="screen">
+  <header>
+    <button class="back" data-nav="home">←</button>
+    <div class="crumbs"><div class="s1">第二关 · 跟读</div><div class="s2" id="g2-scene"></div></div>
+    <div class="lives" id="g2-count">1/10</div>
+  </header>
+  <div class="wrap">
+    <div class="q-area">
+      <span class="q-tag">🗣️ 听标准音 · 跟读并录音对比</span>
+      <div class="q-en" id="g2-en"></div>
+      <div class="q-zh" id="g2-zh"></div>
+      <div class="replay-row">
+        <button class="pill-btn" id="g2-model">▶ 标准音</button>
+        <button class="pill-btn" id="g2-slow">🐢 慢速</button>
+      </div>
+    </div>
+    <button class="rec-btn" id="g2-rec">🎙</button>
+    <div class="rec-state" id="g2-recstate">点击录音 → 再点一次结束</div>
+    <div class="compare" id="g2-compare">
+      <div class="row model">
+        <div class="who"><div class="avatar">🎧</div></div>
+        <div class="mid"><div class="lb">标准发音</div><div class="tx" id="g2-cmp-model-tx"></div></div>
+        <button class="pl" id="g2-play-model">▶</button>
+      </div>
+      <div class="row mine">
+        <div class="who"><div class="avatar">🙂</div></div>
+        <div class="mid"><div class="lb">我的录音</div><div class="tx" id="g2-cmp-mine-tx"></div></div>
+        <button class="pl" id="g2-play-mine">▶</button>
+      </div>
+    </div>
+  </div>
+  <div class="next-row">
+    <button class="btn-main" id="g2-yes">这句过了 ✓</button>
+    <button class="btn-ghost" id="g2-no">还不熟，待会再练</button>
+    <button class="btn-ghost" id="g2-mark">🔖 加入生词本</button>
+  </div>
+</section>
+
+<!-- ============ 第三关 · 情景应答 ============ -->
+<section id="scr-g3" class="screen">
+  <header>
+    <button class="back" data-nav="home">←</button>
+    <div class="crumbs"><div class="s1">第三关 · 情景应答</div><div class="s2" id="g3-scene"></div></div>
+    <div class="lives" id="g3-count">1/10</div>
+  </header>
+  <div class="wrap">
+    <div class="q-area">
+      <div class="q-en" id="g3-q"></div>
+      <div class="q-zh" id="g3-q-zh"></div>
+      <button class="big-speak" id="g3-play">🔊</button>
+      <div class="hint-tap">听清考官问题后再作答 · 没声音就再点一下喇叭</div>
+    </div>
+    <div class="exam-meta">
+      <div class="exam-chip"><span class="lb">目标词</span><b id="g3-target-len">—</b></div>
+    </div>
+    <div class="mic-zone">
+      <button class="mic-big" id="g3-mic">🎙</button>
+      <div class="rec-state" id="g3-recstate">点击开始作答</div>
+    </div>
+    <div class="compare" id="g3-compare">
+      <div class="row model">
+        <div class="who"><div class="avatar">🎯</div></div>
+        <div class="mid"><div class="lb">目标句</div><div class="tx" id="g3-cmp-target"></div></div>
+        <button class="pl" id="g3-play-target">▶</button>
+      </div>
+      <div class="row mine">
+        <div class="who"><div class="avatar">🎙</div></div>
+        <div class="mid"><div class="lb">我的作答</div><div class="tx">回放自查</div></div>
+        <button class="pl" id="g3-play-mine">▶</button>
+      </div>
+    </div>
+    <div class="varbox" id="g3-samples"></div>
+  </div>
+  <div class="next-row">
+    <button class="btn-main" id="g3-next" disabled>这句过了 →</button>
+    <button class="btn-ghost" id="g3-mark">🔖 加入生词本</button>
+  </div>
+</section>
+
+<!-- ============ 结果页 ============ -->
+<section id="scr-result" class="screen">
+  <div class="wrap">
+    <div class="result-card">
+      <div class="emoji" id="rs-emoji">🎉</div>
+      <h2 id="rs-title"></h2>
+      <p class="sub" id="rs-sub"></p>
+      <div class="result-grid">
+        <div class="cell"><b id="rs-right">0</b><span>正确</span></div>
+        <div class="cell"><b id="rs-wrong">0</b><span>出错</span></div>
+        <div class="cell"><b id="rs-acc">0%</b><span>正确率</span></div>
+      </div>
+      <div class="result-acts">
+        <button class="btn-main" id="rs-retry">错句重练</button>
+        <button class="btn-ghost" id="rs-back">返回练习</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 生句本 ============ -->
+<section id="scr-book" class="screen">
+  <header>
+    <div class="crumbs"><div class="s1">REVIEW</div><div class="s2">生句本</div></div>
+  </header>
+  <div class="wrap">
+    <div class="sec-title"><span>待巩固的生词</span><span id="sb-count"></span></div>
+    <div id="sb-list"></div>
+    <div class="empty" id="sb-empty" hidden>
+      <div class="e-ic">🌤️</div>
+      <p>生词本是空的<br>三关里标的生词会自动收进来<br>到期会提醒你复习</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 底部导航 ============ -->
+<nav class="tabbar">
+  <button class="tab on" data-nav="home"><span class="ti">🏠</span>练习</button>
+  <button class="tab" data-nav="book"><span class="ti" id="tab-book-ic">📖</span>生词本</button>
+  <span class="ver-foot" id="ver-foot"></span>
+</nav>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+
+/* 版本号：每次部署改这里即可（首页徽标与底部导航会自动同步） */
+const APP_VERSION = "v1.18";
+const APP_DATE = "2026-09-03";
+
+/* ================================================================
+ * 数据：两个示例场景（正式使用时替换为真实培训资料）
+ * ================================================================ */
+
+/* ================================================================
+ * 基础工具
+ * ================================================================ */
+const $ = id => document.getElementById(id);
+const shuffle = a => { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; };
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const todayStr = () => new Date().toISOString().slice(0,10);
+
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove("show"),2000); }
+
+function nav(name){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $("scr-"+name).classList.add("active");
+  window.scrollTo(0,0);
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on", t.dataset.nav===name || (name==="home")));
+  if(name==="home") renderHome();
+  if(name==="book") renderBook();
+}
+
+/* ---------------- 进度持久化 ---------------- */
+const STORE_KEY = "speakeasy_v1";
+let store = loadStore();
+function loadStore(){
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || freshStore(); }
+  catch(e){ return freshStore(); }
+}
+function freshStore(){
+  const s = { sentences:{}, wrong:{}, review:{}, variantMode: true };
+  DATA.scenes.forEach(sc=>sc.pairs.forEach(p=>{
+    const key = sc.id+"::"+p.a;
+    s.sentences[key] = { level: 0 };   // 0 陌生 → 1 听懂 → 2 能读 → 3 能答(过关)
+    s.wrong[key] = 0;
+    s.review[key] = null;
+  }));
+  return s;
+}
+function saveStore(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){ /* 无痕/隐私模式/配额满时 localStorage 不可用：静默降级，不阻断交互 */ } }
+function keyOf(sceneId, pair){ return sceneId+"::"+pair.a; }
+/* 取句子进度记录，不存在则初始化。
+ * 关键坑：store.sentences 初始为空 {}，只有答过的句子才有记录。
+ * 直接读 store.sentences[k].level 对未答过的句子会抛 TypeError，
+ * 中断整个答题函数 → 三关「点下一题无反应」的真凶（第二关已浏览器实测复现）。 */
+function ensureSentence(k){
+  if(!store.sentences[k]) store.sentences[k] = { level:0, review:false };
+  return store.sentences[k];
+}
+/* 生词本用什么 key 存：优先回真实场景（混练时也是同一个 pair 对象，能找到），
+ * 找不到再退回 __all__ 兜底。保证三关、混练里标的生词都能在生词本里被找到 */
+function bookKey(p){
+  for(const sc of DATA.scenes){ if(sc.pairs.includes(p)) return keyOf(sc.id, p); }
+  return "__all__::" + (p.w || p.a || "");
+}
+
+/* ================================================================
+ * 换说法（质变核心）
+ * 目标不是「记住资料里那一句」，而是「听懂同一意思的所有说法」。
+ * 做法：出题时随机从 [资料原句 + variants] 里抽一句播放，
+ *      答完把「你听到的 / 资料原句 / 信号词」摊开对比——
+ *      让学员自己看见：包装变了，信号词没变。
+ * ================================================================ */
+/* 换说法开关已于 2026-09-01 按 Steven 要求移除：功能常开，不再给关闭入口。
+ * 恒返回 true，保证老存档里被手动关过的（variantMode:false）也不会失效。 */
+function variantOn(){ return true; }
+function pickSpoken(p){
+  // 65% 概率抽换说法：既保证有实战感，又不至于整场一句原句都听不到
+  if(variantOn() && p.variants && p.variants.length && Math.random() < 0.65){
+    return { text: p.variants[Math.floor(Math.random()*p.variants.length)], isVariant: true };
+  }
+  return { text: p.q, isVariant: false };
+}
+const escAttr = s => esc(s).replace(/"/g,"&quot;");
+/* 把信号词在句子里高亮出来（支持 "luggage / bags" 这种多词写法） */
+function highlightKey(text, keyStr){
+  let html = esc(text);
+  (keyStr||"").split("/").map(s=>s.trim()).filter(Boolean).forEach(kw=>{
+    const re = new RegExp("(" + kw.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + ")", "ig");
+    html = html.replace(re, '<span class="kw">$1</span>');
+  });
+  return html;
+}
+function sayBtn(text, voice="q"){ return `<button class="vsay" data-say="${escAttr(text)}" data-voice="${voice}" aria-label="播放">▶</button>`; }
+/* 答完题后的「换说法讲解卡」 */
+function variantBox(p, spoken){
+  if(!p.variants || !p.variants.length) return "";
+  const heard = (spoken && spoken.text) || p.q;
+  const isV = !!(spoken && spoken.isVariant);
+  const others = p.variants.filter(v=>v!==heard);
+  return `
+    <div class="vrow">
+      <div class="vlb">${isV ? "🎧 你听到的 · 考官换了说法" : "🎧 你听到的 · 资料原句"}</div>
+      <div class="vtx en">${highlightKey(heard, p.key)}${sayBtn(heard)}</div>
+    </div>
+    ${isV ? `<div class="vrow alt">
+      <div class="vlb">📘 资料里对应的原句</div>
+      <div class="vtx en">${highlightKey(p.q, p.key)}${sayBtn(p.q)}</div>
+    </div>` : ""}
+    <div class="vrow">
+      <div class="vlb">🔑 信号词 · 换多少种说法它都不变</div>
+      <div class="vtx"><span class="key-chip">${esc(p.key||"—")}</span><span class="kwz">听到它 → 就是在问「${esc(p.keyz||p.qz)}」</span></div>
+    </div>
+    ${others.length ? `<div class="vrow">
+      <div class="vlb">🔀 同一个意思，还可能这么问</div>
+      <div class="vtx alt-list">${others.map(v=>
+        `<span class="altline">${highlightKey(v, p.key)}${sayBtn(v)}</span>`).join("")}</div>
+    </div>` : ""}`;
+}
+/* 讲解卡里的小喇叭：事件委托，动态插入的也管用 */
+document.addEventListener("click", e=>{
+  const b = e.target && e.target.closest ? e.target.closest(".vsay") : null;
+  if(!b) return;
+  e.stopPropagation();
+  speak(b.dataset.say, .9, b, b.dataset.voice || "q");
+}, true);
+
+function allPairs(){
+  const out=[];
+  DATA.scenes.forEach(sc=>sc.pairs.forEach(p=>out.push({scene:sc, pair:p, key:keyOf(sc.id,p)})));
+  return out;
+}
+/* 三档累计：level>=1 听懂(第一关) / >=2 能读(第二关) / >=3 能答(第三关) */
+function sceneProgress(sc){
+  const total = sc.pairs.length;
+  let l1=0,l2=0,l3=0;
+  sc.pairs.forEach(p=>{ const e = store.sentences[keyOf(sc.id,p)]; const v = e?e.level:0;
+    if(v>=1) l1++; if(v>=2) l2++; if(v>=3) l3++; });
+  return { l1, l2, l3, total, pct: total?Math.round(l3/total*100):0 };
+}
+
+/* ---------------- 发音：优先预生成神经语音，回退浏览器合成 ---------------- */
+/* 本地音频由 gen_audio.py 用微软神经语音预生成（考官=Guy 男声，应答=Jenny 女声）
+ * manifest 加载失败或句子缺失时自动回退 Web Speech API，功能不受影响 */
+let voices=[];
+function loadVoices(){ voices = speechSynthesis.getVoices(); }
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+
+/* MANIFEST_INLINE_START */
+const AUDIO_MANIFEST = {"w":{"Sauvignon Blanc":"w_f34a98d.mp3","Shiraz Cabernet":"w_96ef968.mp3","Champagne":"w_89b49e9.mp3","whisky":"w_b8c96ec.mp3","cocktail":"w_a16762a.mp3","vintage":"w_7b23b67.mp3","Earl Grey":"w_e229ee6.mp3","Pu'er tea":"w_e8648a8.mp3","black coffee":"w_f96e2d8.mp3","decaffeinated coffee":"w_aa6b110.mp3","latte":"w_c18c813.mp3","Oolong tea":"w_163a381.mp3","duck breast":"w_716409d.mp3","beef steak":"w_c4e66fc.mp3","lobster":"w_3168e6a.mp3","pumpkin cream soup":"w_0393ded.mp3","congee":"w_5a1cc17.mp3","omelette":"w_d5eefa9.mp3","pan-fried":"w_a3e9c03.mp3","grilled":"w_3325e3d.mp3","beef":"w_3490290.mp3","lamb":"w_236eb95.mp3","seafood":"w_f57611a.mp3","abalone":"w_6e1ba55.mp3","Brie":"w_13ecc05.mp3","Cheddar":"w_73d9384.mp3","Danish Blue":"w_87d20a4.mp3","rye roll":"w_eebdca0.mp3","sesame bread":"w_d6cbeeb.mp3","dressing":"w_cebaea9.mp3","ice cream":"w_2d6cfc5.mp3","vanilla":"w_c68763c.mp3","coconut cake":"w_6f9b523.mp3","chocolate":"w_c378985.mp3","cashew":"w_8c30da6.mp3","almond":"w_7d8ba6c.mp3","hot towel":"w_91d6b19.mp3","blanket":"w_b24f10f.mp3","boarding pass":"w_6d33298.mp3","overhead locker":"w_a2dd0e6.mp3","lavatory":"w_abb07ae.mp3","seatbelt":"w_94dc14f.mp3","I am sorry about that":"w_63667ae.mp3","Could you repeat that":"w_4b665ea.mp3","Just a moment":"w_2648acb.mp3","May I help you":"w_0d2ada8.mp3","You are welcome":"w_1928fe2.mp3","Thank you for your understanding":"w_621bd06.mp3"},"s":{"This Sauvignon Blanc is from Chile.":{"n":"s_e4e08e5.mp3","s":"s_slow_e4e08e5.mp3"},"The Shiraz Cabernet has strong tannin.":{"n":"s_91f9ae0.mp3","s":"s_slow_91f9ae0.mp3"},"Would you like a glass of champagne?":{"n":"s_4537057.mp3","s":"s_slow_4537057.mp3"},"How would you like your whisky?":{"n":"s_7c39e63.mp3","s":"s_slow_7c39e63.mp3"},"May I recommend a cocktail for you?":{"n":"s_d23974e.mp3","s":"s_slow_d23974e.mp3"},"This red wine is the 2024 vintage.":{"n":"s_23da385.mp3","s":"s_slow_23da385.mp3"},"We have Earl Grey and English Breakfast.":{"n":"s_0b86837.mp3","s":"s_slow_0b86837.mp3"},"Our Pu'er tea is very popular.":{"n":"s_8cfe788.mp3","s":"s_slow_8cfe788.mp3"},"Here is your black coffee, sir.":{"n":"s_8ffdd1a.mp3","s":"s_slow_8ffdd1a.mp3"},"We also have decaffeinated coffee.":{"n":"s_83451bd.mp3","s":"s_slow_83451bd.mp3"},"Would you care for a latte?":{"n":"s_7b5dfbc.mp3","s":"s_slow_7b5dfbc.mp3"},"Would you like Oolong tea as usual?":{"n":"s_7a38e95.mp3","s":"s_slow_7a38e95.mp3"},"The duck breast is pan-fried with rice.":{"n":"s_2d30482.mp3","s":"s_slow_2d30482.mp3"},"The beef steak comes in red wine sauce.":{"n":"s_e2a3591.mp3","s":"s_slow_e2a3591.mp3"},"The lobster comes with truffle potato.":{"n":"s_347872c.mp3","s":"s_slow_347872c.mp3"},"Here is your pumpkin cream soup.":{"n":"s_7454e18.mp3","s":"s_slow_7454e18.mp3"},"The congee comes with Chinese dim sum.":{"n":"s_98daeb3.mp3","s":"s_slow_98daeb3.mp3"},"The omelette comes with bacon.":{"n":"s_4674905.mp3","s":"s_slow_4674905.mp3"},"The steak is pan-fried in red wine sauce.":{"n":"s_06d40c1.mp3","s":"s_slow_06d40c1.mp3"},"The chicken is grilled with herbs.":{"n":"s_0b65b29.mp3","s":"s_slow_0b65b29.mp3"},"The beef is from Australia.":{"n":"s_b255f27.mp3","s":"s_slow_b255f27.mp3"},"We also have lamb for the main course.":{"n":"s_1108376.mp3","s":"s_slow_1108376.mp3"},"White wine goes well with seafood.":{"n":"s_597f016.mp3","s":"s_slow_597f016.mp3"},"The prawn and abalone comes with udon.":{"n":"s_7d14c2e.mp3","s":"s_slow_7d14c2e.mp3"},"The French Brie is creamy and mild.":{"n":"s_57631e8.mp3","s":"s_slow_57631e8.mp3"},"British Cheddar is a hard cheese.":{"n":"s_c2b2dbb.mp3","s":"s_slow_c2b2dbb.mp3"},"Danish Blue is a crumbly cheese.":{"n":"s_013953d.mp3","s":"s_slow_013953d.mp3"},"Would you like a rye roll?":{"n":"s_4e5a28b.mp3","s":"s_slow_4e5a28b.mp3"},"We have sesame bread and garlic slices.":{"n":"s_e1da4c5.mp3","s":"s_slow_e1da4c5.mp3"},"We have thousand island dressing.":{"n":"s_86d9f1e.mp3","s":"s_slow_86d9f1e.mp3"},"For dessert we have ice cream.":{"n":"s_d544668.mp3","s":"s_slow_d544668.mp3"},"Which flavor, vanilla or strawberry?":{"n":"s_f2cc849.mp3","s":"s_slow_f2cc849.mp3"},"The coconut cake is very popular.":{"n":"s_eff67e8.mp3","s":"s_slow_eff67e8.mp3"},"Would you care for some chocolate?":{"n":"s_9586bb0.mp3","s":"s_slow_9586bb0.mp3"},"Here are your cashews and drink.":{"n":"s_c911a79.mp3","s":"s_slow_c911a79.mp3"},"The almonds are freshly roasted.":{"n":"s_1090ef0.mp3","s":"s_slow_1090ef0.mp3"},"Here is the hot towel for you.":{"n":"s_30774fe.mp3","s":"s_slow_30774fe.mp3"},"Let me get another blanket for you.":{"n":"s_b15104c.mp3","s":"s_slow_b15104c.mp3"},"May I see your boarding pass?":{"n":"s_45c162c.mp3","s":"s_slow_45c162c.mp3"},"Your bag goes in the overhead locker.":{"n":"s_ba3cc9d.mp3","s":"s_slow_ba3cc9d.mp3"},"The lavatory is at the front.":{"n":"s_59f15ef.mp3","s":"s_slow_59f15ef.mp3"},"Please fasten your seatbelt.":{"n":"s_16ecc95.mp3","s":"s_slow_16ecc95.mp3"},"I am sorry about that, sir.":{"n":"s_e46c4e2.mp3","s":"s_slow_e46c4e2.mp3"},"Could you repeat that, please?":{"n":"s_15b9318.mp3","s":"s_slow_15b9318.mp3"},"Just a moment, please.":{"n":"s_75e95a5.mp3","s":"s_slow_75e95a5.mp3"},"May I help you with your luggage?":{"n":"s_46e459e.mp3","s":"s_slow_46e459e.mp3"},"You are welcome, sir.":{"n":"s_b880e23.mp3","s":"s_slow_b880e23.mp3"},"Thank you for your understanding.":{"n":"s_efa408a.mp3","s":"s_slow_efa408a.mp3"}},"q":{"What white wine goes with seafood?":"q_2275723.mp3","Which white wine do you recommend?":"q_1a4837f.mp3","What white wine do you have?":"q_4361d6e.mp3","Which red wine has strong tannin?":"q_dc2f624.mp3","What red wine pairs with steak?":"q_39bab95.mp3","Which red wine is full-bodied?":"q_c4020f7.mp3","What sparkling wine do you have?":"q_08cbfa0.mp3","Do you have champagne on board?":"q_babe5a2.mp3","What do you have for celebration?":"q_49d2ea6.mp3","I'd like a whisky, please.":"q_8547db3.mp3","Can I have a whisky?":"q_1437f5b.mp3","Whisky for me, please.":"q_f1e68e8.mp3","Do you have any cocktails?":"q_15abf08.mp3","What cocktails are available?":"q_5486719.mp3","Can I have a cocktail?":"q_beca9e9.mp3","What vintage is this red wine?":"q_33fd158.mp3","Which year is this wine from?":"q_14fa63e.mp3","How old is this wine?":"q_0c60418.mp3","Which black tea do you have?":"q_72befce.mp3","Do you serve Earl Grey?":"q_8205498.mp3","What black teas are available?":"q_1f81fda.mp3","What Chinese tea do you have?":"q_e4254ca.mp3","Do you have Pu'er tea?":"q_703e46c.mp3","Which Chinese tea do you recommend?":"q_122e5ad.mp3","Do you have black coffee?":"q_6aa7f5a.mp3","Is black coffee available?":"q_4c6e7fd.mp3","Can I get a black coffee?":"q_700aece.mp3","Do you have decaffeinated coffee?":"q_382531c.mp3","Can I get a decaf?":"q_046ce02.mp3","Is decaf available?":"q_9c3c7a6.mp3","What coffee do you have?":"q_fae7968.mp3","Is latte available?":"q_1e4ae18.mp3","What coffees are on board?":"q_aee11e9.mp3","What tea do you have today?":"q_f20bfd5.mp3","Which teas are available?":"q_7cff01b.mp3","Do you have Oolong tea?":"q_b062bf7.mp3","What is the first main course?":"q_b8833a3.mp3","What do you have for the main course?":"q_004c209.mp3","Tell me about the first choice.":"q_3da85ca.mp3","Which main course do you recommend?":"q_ea4e55a.mp3","What is good today?":"q_d30b93e.mp3","Recommend a main course, please.":"q_937d80e.mp3","What seafood do you have?":"q_c870868.mp3","Any seafood on the menu?":"q_5601bde.mp3","Do you serve lobster?":"q_3ccebf3.mp3","What soup do you serve?":"q_2fc7914.mp3","Which soup is it today?":"q_cd77497.mp3","Any soup to start?":"q_b2599a3.mp3","What is the Chinese breakfast?":"q_ed0cf5c.mp3","What do you have for Chinese breakfast?":"q_04053ef.mp3","Is there congee?":"q_55eac2b.mp3","What is the Western breakfast?":"q_3401195.mp3","What do you serve for Western breakfast?":"q_dccd07f.mp3","Is there an omelette?":"q_53e9f8a.mp3","How is the beef cooked?":"q_d1071a3.mp3","How do you cook the steak?":"q_c17cfb9.mp3","Is it fried or grilled?":"q_4ea66d2.mp3","How is the chicken cooked?":"q_3ea14a5.mp3","Is the chicken grilled?":"q_3e672ec.mp3","How do you prepare the chicken?":"q_4e7cdfa.mp3","Where is the beef from?":"q_4810ce2.mp3","What kind of meat is it?":"q_916912a.mp3","Is the beef Australian?":"q_6ff6b30.mp3","Do you have lamb?":"q_1456191.mp3","Is lamb available?":"q_5c7ada7.mp3","Any lamb on the menu?":"q_6dddc3e.mp3","What wine goes with seafood?":"q_fb8c648.mp3","Which wine pairs with fish?":"q_f739d77.mp3","What should I drink with seafood?":"q_6023c2b.mp3","What is in the second main course?":"q_37e8b90.mp3","Tell me about the second choice.":"q_9c458a2.mp3","What is the udon dish?":"q_fe00e33.mp3","Which soft cheese do you recommend?":"q_5bcb0d6.mp3","What soft cheese do you have?":"q_5813798.mp3","Is Brie available?":"q_53cfd9c.mp3","Which hard cheese do you have?":"q_2f3b6bd.mp3","Do you have Cheddar?":"q_7baabdf.mp3","What hard cheese is available?":"q_375f09a.mp3","Do you have blue cheese?":"q_2a73034.mp3","Is there any blue cheese?":"q_d369fe8.mp3","What crumbly cheese do you have?":"q_b2371b1.mp3","Can I have some bread?":"q_f452684.mp3","Could I get some bread?":"q_bbec93b.mp3","Do you have any bread?":"q_86e034e.mp3","What bread do you have?":"q_49ab67c.mp3","Which kinds of bread are there?":"q_f34206a.mp3","Any sesame bread?":"q_b99eb5c.mp3","I'd like the salad, please.":"q_afde76f.mp3","Can I have a salad?":"q_05ad847.mp3","I'll take the salad.":"q_4f8fd8f.mp3","What dessert do you have?":"q_937a9b4.mp3","What is for dessert?":"q_970c506.mp3","Any ice cream?":"q_df9fac3.mp3","What ice cream do you have?":"q_caf5337.mp3","Which ice cream flavors are there?":"q_1eb4822.mp3","Is vanilla available?":"q_4a051fe.mp3","What cake do you have?":"q_a9a4bb3.mp3","Is there coconut cake?":"q_5af35b7.mp3","Which cake is available?":"q_0963460.mp3","Do you have any chocolate?":"q_4c82653.mp3","Is chocolate available?":"q_09c01ef.mp3","Can I have some chocolate?":"q_4f50014.mp3","What nuts do you have?":"q_d5fc2b3.mp3","Which nuts are available?":"q_514bcac.mp3","Do you have cashews?":"q_aa9dd2a.mp3","Can I have some nuts?":"q_ba121e2.mp3","Could I get some nuts?":"q_eb04c39.mp3","May I have a hot towel?":"q_be0049f.mp3","Could I get a hot towel?":"q_3a4ae1d.mp3","Do you have hot towels?":"q_de45dd2.mp3","Could I have a blanket?":"q_ebaff0d.mp3","May I have one more blanket?":"q_dcbc7d8.mp3","Do you have a blanket?":"q_09b0b4e.mp3","Where is my seat?":"q_364964b.mp3","Can you help me find my seat?":"q_e6ba6a3.mp3","Which seat is mine?":"q_44e1cc9.mp3","Where can I put my bag?":"q_3911aed.mp3","Where should I stow my luggage?":"q_1e4ca5e.mp3","Can I keep my bag here?":"q_db12088.mp3","Where is the lavatory?":"q_35346bd.mp3","Where is the restroom?":"q_69d7716.mp3","Can you show me the toilet?":"q_1127959.mp3","Should I keep my seatbelt on?":"q_789f38a.mp3","Do I need the seatbelt now?":"q_31d6ade.mp3","Must I wear the seatbelt?":"q_24a45cd.mp3","The meal is cold.":"q_1d8be09.mp3","This is not what I ordered.":"q_801d58c.mp3","I'm not happy with this.":"q_2f40fb4.mp3","I'd like the, um, the beef I think.":"q_b4e2d20.mp3","The chicken, no wait, the fish.":"q_f6387d9.mp3","Can I get, you know, that one?":"q_8bb6d7f.mp3","Can I get my coat now?":"q_a497a99.mp3","Are you ready?":"q_4ea32be.mp3","Can you help me now?":"q_94baf5f.mp3","(Passenger looks lost)":"q_c022f1e.mp3","I can't find my seat.":"q_1171766.mp3","Excuse me, miss?":"q_9ba3c03.mp3","Thank you so much.":"q_4d311a5.mp3","Thanks a lot.":"q_4bc8974.mp3","I really appreciate it.":"q_9ff9bb2.mp3","(Passenger accepts the apology)":"q_4963a34.mp3","Alright, I understand.":"q_af93a27.mp3","Fine, thank you.":"q_5cc3001.mp3"},"a":{"The Mapu Sauvignon Blanc from Chile.":{"n":"a_5ac54c2.mp3","s":"a_slow_5ac54c2.mp3"},"The De Bortoli Shiraz Cabernet.":{"n":"a_088214b.mp3","s":"a_slow_088214b.mp3"},"We have champagne from France.":{"n":"a_299f2ca.mp3","s":"a_slow_299f2ca.mp3"},"How would you like your whisky, sir?":{"n":"a_ec74505.mp3","s":"a_slow_ec74505.mp3"},"Yes, we have cocktails, Mimosa and Gin Tonic.":{"n":"a_74ea49d.mp3","s":"a_slow_74ea49d.mp3"},"It is the 2024 vintage.":{"n":"a_43ad1a1.mp3","s":"a_slow_43ad1a1.mp3"},"Yes, we serve Earl Grey and English Breakfast.":{"n":"a_18848c5.mp3","s":"a_slow_18848c5.mp3"},"We have Pu'er tea and Dragon Well.":{"n":"a_d7f7528.mp3","s":"a_slow_d7f7528.mp3"},"Yes, we serve black coffee, sir.":{"n":"a_dd357f4.mp3","s":"a_slow_dd357f4.mp3"},"Yes, we have decaffeinated coffee.":{"n":"a_856c357.mp3","s":"a_slow_856c357.mp3"},"We have latte, drip and black coffee.":{"n":"a_72abde7.mp3","s":"a_slow_72abde7.mp3"},"Would you like your usual Oolong tea, sir?":{"n":"a_ef3ded5.mp3","s":"a_slow_ef3ded5.mp3"},"Pan-fried duck breast with rice.":{"n":"a_e98adb8.mp3","s":"a_slow_e98adb8.mp3"},"The pan-fried AUS beef steak.":{"n":"a_183242f.mp3","s":"a_slow_183242f.mp3"},"We have pan-fried lobster.":{"n":"a_280e259.mp3","s":"a_slow_280e259.mp3"},"Pumpkin cream soup, sir.":{"n":"a_77e9ad8.mp3","s":"a_slow_77e9ad8.mp3"},"Congee with Chinese dim sum.":{"n":"a_9e7613f.mp3","s":"a_slow_9e7613f.mp3"},"Omelette with bacon and cereal.":{"n":"a_f1f47b2.mp3","s":"a_slow_f1f47b2.mp3"},"It is pan-fried, sir.":{"n":"a_3341ed8.mp3","s":"a_slow_3341ed8.mp3"},"It is grilled with herbs.":{"n":"a_7bf5206.mp3","s":"a_slow_7bf5206.mp3"},"The beef is from Australia, sir.":{"n":"a_37b7743.mp3","s":"a_slow_37b7743.mp3"},"Yes, we have lamb rack.":{"n":"a_5703b10.mp3","s":"a_slow_5703b10.mp3"},"A white wine for seafood, Sauvignon Blanc.":{"n":"a_37ec996.mp3","s":"a_slow_37ec996.mp3"},"Prawn and abalone with udon noodles.":{"n":"a_e044d8c.mp3","s":"a_slow_e044d8c.mp3"},"I'd recommend the French Brie.":{"n":"a_b68f904.mp3","s":"a_slow_b68f904.mp3"},"We have British Cheddar and Gruyere.":{"n":"a_e50c369.mp3","s":"a_slow_e50c369.mp3"},"Yes, we have Danish Blue.":{"n":"a_da4ec56.mp3","s":"a_slow_da4ec56.mp3"},"Certainly, would you like a rye roll?":{"n":"a_81484b8.mp3","s":"a_slow_81484b8.mp3"},"Soft roll, rye roll and sesame bread.":{"n":"a_bf28a37.mp3","s":"a_slow_bf28a37.mp3"},"Thousand island or Italian dressing, sir?":{"n":"a_30ce468.mp3","s":"a_slow_30ce468.mp3"},"Ice cream and coconut cake.":{"n":"a_7966579.mp3","s":"a_slow_7966579.mp3"},"We have vanilla and strawberry, sir.":{"n":"a_66a52f6.mp3","s":"a_slow_66a52f6.mp3"},"We have coconut cake.":{"n":"a_ea46ff3.mp3","s":"a_slow_ea46ff3.mp3"},"Yes, would you care for some chocolate?":{"n":"a_3ab6898.mp3","s":"a_slow_3ab6898.mp3"},"We have cashews and almonds.":{"n":"a_53edfbc.mp3","s":"a_slow_53edfbc.mp3"},"Would you prefer almonds or cashews, sir?":{"n":"a_bcc6344.mp3","s":"a_slow_bcc6344.mp3"},"Here is your hot towel, sir.":{"n":"a_8411b07.mp3","s":"a_slow_8411b07.mp3"},"Certainly, here is a blanket.":{"n":"a_f778724.mp3","s":"a_slow_f778724.mp3"},"May I see your boarding pass, please?":{"n":"a_d3b9f32.mp3","s":"a_slow_d3b9f32.mp3"},"In the overhead locker, please.":{"n":"a_9a15704.mp3","s":"a_slow_9a15704.mp3"},"The lavatory is at the front, sir.":{"n":"a_cca9561.mp3","s":"a_slow_cca9561.mp3"},"Yes, please fasten your seatbelt.":{"n":"a_c987315.mp3","s":"a_slow_c987315.mp3"},"I am sorry about that, sir.":{"n":"a_e46c4e2.mp3","s":"a_slow_e46c4e2.mp3"},"Could you repeat that, please?":{"n":"a_15b9318.mp3","s":"a_slow_15b9318.mp3"},"Just a moment, please.":{"n":"a_75e95a5.mp3","s":"a_slow_75e95a5.mp3"},"May I help you, sir?":{"n":"a_317d138.mp3","s":"a_slow_317d138.mp3"},"You are welcome.":{"n":"a_f5e9766.mp3","s":"a_slow_f5e9766.mp3"},"Thank you for your understanding.":{"n":"a_efa408a.mp3","s":"a_slow_efa408a.mp3"}},"m":{"I'd suggest the Chilean Sauvignon Blanc.":"m_8f90f46.mp3","The Mapu Sauvignon Blanc pairs well with seafood.":"m_14f71e8.mp3","I'd recommend the De Bortoli Shiraz Cabernet.":"m_d211410.mp3","The Shiraz Cabernet from Australia, 2024 vintage.":"m_dd59a43.mp3","We serve French champagne.":"m_b00e041.mp3","Yes, champagne is available on this flight.":"m_af61c0e.mp3","Would you like it on the rocks?":"m_6d486d2.mp3","With ice or straight up, sir?":"m_33e65ba.mp3","We offer Mimosa, Gin Tonic and Cuba Libre.":"m_77023f6.mp3","Certainly — Mimosa is light and refreshing.":"m_2980c3c.mp3","This one is a 2024 vintage.":"m_97052f9.mp3","It's from the 2024 harvest.":"m_1f36a86.mp3","We also have English Breakfast.":"m_3dbe0b8.mp3","Earl Grey is our most popular black tea.":"m_fef238f.mp3","We serve Pu'er, Tieh-Kwan-Yin and Dragon Well.":"m_6dc7d6e.mp3","Pu'er tea is a good choice.":"m_12f19d1.mp3","Black coffee is available, sir.":"m_3a6625c.mp3","We can prepare black coffee for you.":"m_40f1ced.mp3","Certainly, decaf is available.":"m_fa8ec03.mp3","Yes, we can prepare decaffeinated coffee.":"m_d3177bd.mp3","We serve latte and brewed coffee.":"m_6222448.mp3","Latte is our most popular coffee.":"m_33f2d64.mp3","We also serve Pu'er and Dragon Well.":"m_d076891.mp3","Oolong tea is ready for you, sir.":"m_e398bbc.mp3","The first choice is pan-fried duck breast.":"m_874f8f7.mp3","We have duck breast served with rice.":"m_c97b255.mp3","I'd suggest the Australian beef steak.":"m_d098417.mp3","The pan-fried beef steak is excellent.":"m_8fa726e.mp3","The lobster is served with truffle potato.":"m_423c313.mp3","We have pan-fried lobster in lobster sauce.":"m_fc0ecf4.mp3","We have pumpkin cream soup.":"m_64bc596.mp3","The soup today is pumpkin cream.":"m_2fcdb4b.mp3","We serve congee with pickles and dim sum.":"m_5eef803.mp3","The Chinese breakfast is congee.":"m_5d2ce73.mp3","Scrambled egg with bacon and cereal.":"m_fb5e549.mp3","We have omelette with sausage.":"m_b2a5c3d.mp3","It's pan-fried with red wine sauce.":"m_c71c140.mp3","The beef is pan-fried.":"m_32dde90.mp3","The chicken is grilled.":"m_a4dcd06.mp3","We grill it with fresh herbs.":"m_cc89f09.mp3","It's Australian beef.":"m_0c3d9d9.mp3","The beef comes from Australia.":"m_5d8dd39.mp3","Yes, we serve lamb cutlet.":"m_dc8ed81.mp3","Lamb is available today.":"m_af8142d.mp3","I'd suggest a white wine for seafood.":"m_5b6f35b.mp3","The Sauvignon Blanc matches seafood well.":"m_d406675.mp3","It's stir-fried prawn and abalone with udon.":"m_1eda598.mp3","The second choice has prawn and abalone.":"m_100ba5a.mp3","The Brie is creamy and mild.":"m_53663b3.mp3","May I suggest the French Brie?":"m_5ba9d5f.mp3","British Cheddar and Swiss Gruyere.":"m_c820fe5.mp3","We have Cheddar from Britain.":"m_12344f3.mp3","We have Danish Blue for crumbly cheese.":"m_82a20b2.mp3","Yes, Danish Blue is available.":"m_2bf2f8a.mp3","We have rye roll and sesame bread.":"m_c9b21a7.mp3","May I suggest the rye roll, sir?":"m_7e721f0.mp3","We have soft roll, hard roll and sesame bread.":"m_e7bf72c.mp3","Sesame bread is available.":"m_9c91078.mp3","We have French and Italian dressing.":"m_15a6174.mp3","May I suggest the thousand island?":"m_3a0d9f6.mp3","We have coconut cake or ice cream.":"m_196e77c.mp3","Ice cream is available.":"m_017312c.mp3","Vanilla and chocolate are available.":"m_fe0b024.mp3","May I suggest the vanilla, sir?":"m_7e93056.mp3","We serve coconut cake.":"m_3639b2e.mp3","Coconut cake is our special today.":"m_4235698.mp3","We have chocolate after the meal.":"m_717f518.mp3","Chocolate is available, sir.":"m_91b3a3c.mp3","We serve cashews and almonds.":"m_4e666b3.mp3","The cashews are freshly roasted.":"m_c99ac56.mp3","We have almonds and cashews today.":"m_37e267f.mp3","May I suggest the roasted almonds?":"m_d3a8220.mp3","Here you are, a hot towel.":"m_a151884.mp3","Certainly, here is your hot towel.":"m_598168b.mp3","Of course, I'll bring a blanket.":"m_6dbab25.mp3","Here is an extra blanket for you.":"m_b886f3f.mp3","Could I check your boarding pass?":"m_7a7df14.mp3","Your seat number is on the boarding pass.":"m_70742b8.mp3","Please stow it in the overhead locker.":"m_56cbef1.mp3","You may put it in the overhead compartment.":"m_8a67633.mp3","It's at the front of the cabin.":"m_f77e38f.mp3","It's just ahead on your left.":"m_10eb600.mp3","Please keep your seatbelt fastened.":"m_999aaa7.mp3","Yes, fasten it during the flight.":"m_e073cb8.mp3","I do apologize for that.":"m_a190ea6.mp3","I'm terribly sorry about the inconvenience.":"m_2975ec7.mp3","Sorry, could you say that again?":"m_5cfff3b.mp3","Pardon me, could you repeat it?":"m_28404a8.mp3","One moment, please.":"m_81f85a2.mp3","Please wait a moment.":"m_a7ebfa7.mp3","Can I help you with that?":"m_5b48e34.mp3","Let me help you, sir.":"m_93a2d81.mp3","It's my pleasure.":"m_d4da178.mp3","You're very welcome.":"m_515c788.mp3","Thanks for your understanding.":"m_19ff5e3.mp3","I appreciate your understanding.":"m_ff5e43c.mp3"}};
+/* MANIFEST_INLINE_END */
+
+const ttsPlayer = $("rec-player");
+let ttsBtn = null;
+ttsPlayer.onended = () => {
+  ttsLast = null;
+  if(ttsBtn){ ttsBtn.classList.remove("speaking"); ttsBtn=null; }
+};
+
+/* iOS 音频解锁：iPhone Safari 要求首次音频必须由用户手势触发。
+ * 用一段真实的静音 WAV（data URI）以 volume=0 播放来解锁通道。
+ * 注意：不能用 muted=true（静音播放不被 iOS 认可为解锁），
+ * 且必须用真实音频源（空 src 的 play() 会直接失败，导致音量永远恢复不了）。 */
+let audioUnlocked = false;
+const SILENT_WAV = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=";
+function unlockAudio(){
+  if(audioUnlocked) return;
+  audioUnlocked = true; // 只尝试一次，无论成败都不再重复
+  try{
+    ttsPlayer.volume = 0;
+    ttsPlayer.src = SILENT_WAV;
+    const restore = ()=>{
+      // 只有 src 仍是静音 WAV 时才清理，避免切断了已切换到真实音频的播放
+      try{
+        if(ttsPlayer.src === SILENT_WAV || ttsPlayer.src.endsWith("UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=")){
+          ttsPlayer.pause();
+          ttsPlayer.src = "";
+        }
+        ttsPlayer.volume = 1;
+        ttsPlayer.muted = false;
+      }catch(e){}
+    };
+    ttsPlayer.play().then(restore).catch(restore);
+  }catch(e){ try{ ttsPlayer.volume = 1; }catch(e2){} }
+  // 同时解锁 speechSynthesis 通道
+  try{ if("speechSynthesis" in window){ const u=new SpeechSynthesisUtterance(" "); u.volume=0; speechSynthesis.speak(u); } }catch(e){}
+}
+document.addEventListener("touchstart", unlockAudio, { once: true, capture: true });
+document.addEventListener("click", unlockAudio, { once: true, capture: true });
+
+/* 兜底策略：只在「预生成音频真的加载/解码失败」时才改用浏览器合成音。
+ * 这里刻意不用定时器去猜"有没有出声"——定时器会把"加载慢"误判成"没出声"，
+ * 于是合成音补念一遍，和随后加载成功的 Brian 撞在一起，听着像两个人同时说。 */
+let ttsLast = null;   /* 最近一次播放请求，供加载失败时兜底使用 */
+ttsPlayer.onerror = () => {
+  const last = ttsLast;
+  if(!last) return;                 /* src 是我们主动清空的，不算失败 */
+  ttsLast = null;
+  try{ ttsPlayer.pause(); ttsPlayer.src = ""; }catch(e){}
+  if(ttsBtn){ ttsBtn.classList.remove("speaking"); ttsBtn = null; }
+  speak(last.text, last.rate, last.btn, last.voice, true);
+};
+
+function speak(text, rate=0.92, btn=null, voice="a", forceFallback=false){
+  // 1) 尝试预生成的神经语音
+  if(!forceFallback && AUDIO_MANIFEST && AUDIO_MANIFEST[voice] && AUDIO_MANIFEST[voice][text]){
+    const entry = AUDIO_MANIFEST[voice][text];
+    const file = (typeof entry === "string") ? entry : (rate <= 0.7 ? entry.s : entry.n);
+    try{
+      ttsPlayer.pause();
+      // 防御性复位：无论之前发生过什么，确保本次播放有声
+      ttsPlayer.muted = false;
+      ttsPlayer.volume = 1;
+      ttsLast = { text, rate, btn, voice };
+      ttsPlayer.src = "audio/" + file;
+      document.querySelectorAll(".speaking").forEach(b=>b.classList.remove("speaking","v-q","v-a"));
+      if(btn){ btn.classList.remove("v-q","v-a"); btn.classList.add("speaking", voice==="q"||voice==="w" ? "v-q":"v-a"); ttsBtn = btn; }
+      ttsPlayer.onended = ()=>{ if(btn){ btn.classList.remove("speaking","v-q","v-a"); } };
+      ttsPlayer.play().catch(()=>{
+        /* play() 被拒（如 iOS 自动播放限制）→ 改用浏览器合成音。
+         * 关键：兜底前必须停掉并清空 player，否则预生成音频若随后加载成功，
+         * 会和合成音重叠，出现 Brian 与 Samantha 同时说一句的情况。 */
+        ttsLast = null;
+        try{ ttsPlayer.pause(); ttsPlayer.src = ""; }catch(e){}
+        if(btn) btn.classList.remove("speaking"); ttsBtn=null;
+        speak(text, rate, btn, voice, true);
+      });
+      return;
+    }catch(e){ /* 播放失败则回退 */ }
+  }
+  // 2) 回退：浏览器自带语音合成
+  if(!("speechSynthesis" in window)){ toast("此浏览器不支持语音播放"); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices.find(v=>/en[-_]US/i.test(v.lang)) || voices.find(v=>/^en/i.test(v.lang));
+  if(v) u.voice=v;
+  u.lang="en-US"; u.rate=rate;
+  document.querySelectorAll(".speaking").forEach(b=>b.classList.remove("speaking","v-q","v-a"));
+  if(btn){ btn.classList.remove("v-q","v-a"); btn.classList.add("speaking", voice==="q"||voice==="w" ? "v-q":"v-a"); u.onend = ()=>btn.classList.remove("speaking","v-q","v-a"); }
+  speechSynthesis.speak(u);
+}
+
+/* ---------------- 录音 ---------------- */
+let mediaRec=null, audioChunks=[], audioURL=null, recDoneCb=null;
+let recStarting = false; // 麦克风启动中（权限申请/设备初始化），此间点击不算操作
+let recStream = null;    // 当前麦克风流：必须全局保存，否则残留的 stream 无法 stop -> 红色麦克风标志不消失
+let recStartTimer = null;// recStarting 兜底：getUrUserMedia 若永久 pending，不能让按钮永远卡死
+
+/* 彻底释放麦克风：停掉 recorder + stop 所有轨道。
+ * 地址栏那个红色/橙色麦克风标志，只有轨道全部 stop 后才会消失。
+ * 之前 stream 是 startRec 的局部变量，一旦 onstop 没触发就永远泄漏，
+ * 累积几题后麦克风被占死，点什么都没反应 —— 故改为全局持有 + 统一释放。 */
+function releaseMic(){
+  if(mediaRec){
+    try{ if(mediaRec.state==="recording") mediaRec.stop(); }catch(e){}
+    if(mediaRec.stream){ try{ mediaRec.stream.getTracks().forEach(t=>t.stop()); }catch(e){} }
+  }
+  if(recStream){ try{ recStream.getTracks().forEach(t=>t.stop()); }catch(e){} recStream = null; }
+}
+
+/* 给 Promise 加超时：getUrUserMedia 在权限弹窗挂着或设备被占用时可能永久 pending，
+ * await 一个永不返回的 Promise 会让 recStarting 永远为 true，按钮彻底失灵。 */
+function withTimeout(promise, ms){
+  return Promise.race([
+    promise,
+    new Promise((_, rej)=>setTimeout(()=>rej(new Error("timeout")), ms))
+  ]);
+}
+
+/* 各浏览器录音格式不同：Chrome 出 webm，iPhone Safari 出 mp4。
+ * 必须动态探测并按实际格式标记，否则 Safari 因类型不匹配拒绝播放。 */
+function pickMime(){
+  if(!window.MediaRecorder || !MediaRecorder.isTypeSupported) return "";
+  const list = [
+    "audio/webm;codecs=opus", "audio/webm",
+    "audio/mp4;codecs=mp4a.40.2", "audio/mp4",
+    "audio/aac", "audio/mpeg", "audio/ogg;codecs=opus"
+  ];
+  for(const m of list){ try{ if(MediaRecorder.isTypeSupported(m)) return m; }catch(e){} }
+  return "";
+}
+
+async function startRec(btn, stateEl, doneCb){
+  if(!window.MediaRecorder){
+    toast("此浏览器版本过旧不支持录音，建议升级系统或改用 Chrome");
+    return false;
+  }
+  // 防御：先彻底释放上一轮残留的麦克风，再开始新的录音
+  recDoneCb = null;
+  releaseMic();
+  try{
+    const stream = await withTimeout(navigator.mediaDevices.getUserMedia({audio:true}), 10000);
+    recStream = stream;
+    // 关键修复：拿到权限后立刻创建并启动 MediaRecorder，
+    // 中间不做任何可能让浏览器判定"授权失效"的等待/请求。
+    audioChunks=[]; audioURL=null; recDoneCb = doneCb||null;
+    const mime = pickMime();
+    try{
+      mediaRec = mime ? new MediaRecorder(stream, {mimeType: mime}) : new MediaRecorder(stream);
+    }catch(e){
+      mediaRec = new MediaRecorder(stream);
+    }
+    const actualMime = mediaRec.mimeType || "audio/mp4";
+    clearTimeout(stopRecTimer);
+    mediaRec.ondataavailable = e=>{ if(e.data && e.data.size>0) audioChunks.push(e.data); };
+    mediaRec.onstop = ()=>{
+      clearTimeout(stopRecTimer);
+      releaseMic();
+      try{
+        audioURL = URL.createObjectURL(new Blob(audioChunks, {type: actualMime}));
+      }catch(e){ audioURL = null; }
+      const cb = recDoneCb; recDoneCb = null;
+      if(cb) cb(!!audioURL);
+    };
+    try{
+      mediaRec.start();
+    }catch(e){
+      // start 抛错 = 授权实际已被浏览器撤回，明确提示
+      releaseMic();
+      toast("录音启动失败，请刷新页面后重试，并在弹框选“允许”");
+      return false;
+    }
+    btn.classList.add("rec");
+    if(stateEl) stateEl.textContent="录音中…";
+    return true;
+  }catch(e){
+    // getUserMedia 拒绝 / 未授权 / 超时
+    releaseMic();
+    if(e && e.message === "timeout"){
+      toast("麦克风启动超时：可能正被其他功能占用，稍等两秒再点");
+    }else{
+      const isDenied = /PermissionDenied|NotAllowed/i.test(e && (e.name || e.message || ""));
+      toast(isDenied ? "麦克风权限被拒绝：请去系统设置允许浏览器访问麦克风，然后刷新页面" : "麦克风未授权或不可用，请点击“允许”后再试");
+    }
+    return false;
+  }
+}
+/* 停止录音超时兜底：iOS 上 MediaRecorder.stop() 偶发不触发 onstop，
+ * 导致麦克风指示灯常亮、界面卡死。设置 1.5s 兜底，无论 onstop 是否触发，
+ * 都强制清理 media stream 并复位界面，保证录音一定能结束。 */
+let stopRecTimer = null;
+function forceStopTracks(){
+  if(mediaRec && mediaRec.stream){
+    try{ mediaRec.stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+  }
+}
+function stopRec(btn, stateEl){
+  // 有活跃轨道 = 还在录音 → 必须走 mediaRec.stop()，确保 onstop 触发并驱动后续评分/界面
+  if(mediaRec){
+    const hasLive = mediaRec.stream && mediaRec.stream.getAudioTracks().some(t=>t.readyState==="live");
+    if(hasLive || mediaRec.state==="recording"){
+      try{ mediaRec.stop(); }catch(e){ try{ forceStopTracks(); }catch(e2){} }
+    } else {
+      // 无活跃轨道但 mediaRec 存在：可能 onstop 还没跑完，强制清理并尝试调用回调
+      try{ forceStopTracks(); }catch(e){}
+      const cb = recDoneCb; recDoneCb = null;
+      if(cb) cb(!!audioURL);
+    }
+  }
+  btn.classList.remove("rec");
+  if(stateEl) stateEl.textContent="处理中…";
+  // 兜底：1.5s 内若 onstop 未触发（onstop 里会 clearTimeout），强制复位界面
+  clearTimeout(stopRecTimer);
+  stopRecTimer = setTimeout(()=>{
+    forceStopTracks();
+    if(stateEl) stateEl.textContent="已停止";
+    if(btn) btn.classList.remove("rec");
+  }, 1500);
+  return true;
+}
+/* 切换句子时停掉未完成的录音，避免旧回调污染新界面 */
+function cancelPendingRec(){
+  // 切题/离开界面时无条件清理：录音和语音识别都会占用麦克风，
+  // 任何一个没停干净，下一题的麦克风就被占着（表现为"要点好几次"）。
+  recDoneCb = null;
+  releaseMic();
+  if(typeof stopRecog === "function") stopRecog();
+}
+function playMine(){
+  if(!audioURL){ toast("录音还没准备好，稍等一下再点"); return; }
+  const a = $("rec-player");
+  try{ a.pause(); }catch(e){}
+  ttsLast = null;   /* 切到录音回放，别让上一句 TTS 的兜底在这里误触发 */
+  a.src = audioURL;
+  a.play().catch(()=>toast("播放失败，请再点一次"));
+}
+/* Web Audio 合成轻音效（零 mp3，方案 F：极简轻点）。对=高频轻响，错=低频轻响，靠音高区分 */
+function playTone(kind){
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    const ac = window.__toneAC || (window.__toneAC = new Ctx());
+    if(ac.state === "suspended") ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain();
+    const t = ac.currentTime;
+    const freq = (kind === "ok") ? 1200 : 300;
+    const dur  = (kind === "ok") ? 0.04 : 0.05;
+    o.type = "sine";
+    o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.12, t+0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+    o.connect(g); g.connect(ac.destination);
+    o.start(t); o.stop(t+dur+0.03);
+  }catch(e){}
+}
+/* 生词本「练」：进单句跟读，练完回生词本 */
+let bookReturn = false;
+function practiceBookPair(pair){
+  bookReturn = true;
+  curScene = { id:"__book__", name:"生词练习", desc:"单句跟读", practice:true, pairs:[pair] };
+  practiceMode = true;
+  startGate2();
+}
+(function bindCoach(){
+  const bind = ()=>{
+    const ok = $("coach-g3-ok");
+    if(ok) ok.onclick = ()=>{
+      try{ localStorage.setItem("seenCoachG3","1"); }catch(e){}
+      const c=$("coach-g3"); if(c) c.hidden=true;
+      /* 关掉浮层后才播第一题：浮层开着时 renderG3 只是把播报挂起来，没真播 */
+      try{ if(G3 && G3._pendingSpeak){ const f=G3._pendingSpeak; G3._pendingSpeak=null; setTimeout(()=>f(),400); } }catch(e){}
+    };
+  };
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind);
+  else bind();
+})();
+
+/* ---------------- 语音识别 ---------------- */
+const STT_OK = "webkitSpeechRecognition" in window || "SpeechRecognition" in window;
+function isRestrictedWebView(){
+  const ua = navigator.userAgent || "";
+  // 微信/QQ/企业微信/钉钉/飞书等内置浏览器通常会拦截 getUserMedia / SpeechRecognition，表现为点了麦克风没反应
+  return /MicroMessenger|WeChat|QQ\/|wxwork|DingTalk|Feishu|Lark/i.test(ua);
+}
+let recog=null, recogFinal="";
+function stopRecog(){
+  if(recog){
+    try{ recog.onend=null; recog.onresult=null; recog.onerror=null; if(recog.abort) recog.abort(); else recog.stop(); }catch(e){}
+    recog=null;
+  }
+}
+function recognizeOnce(onResult, onEnd, onError){
+  if(!STT_OK){ onError && onError("unsupported"); return; }
+  stopRecog(); // 先停掉上一轮残留识别；否则多个实例同时占麦，几题后会彻底抢不到麦
+  const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recog = new R();
+  recog.lang="en-US"; recog.interimResults=false; recog.maxAlternatives=1;
+  recogFinal="";
+  recog.onresult = e=>{ if(e.results[0]) recogFinal = e.results[0][0].transcript; };
+  recog.onerror = e=>{ onError && onError(e.error); };
+  recog.onend = ()=>{ onEnd(recogFinal); };
+  try{ recog.start(); }catch(e){ onError && onError(String(e)); }
+}
+
+/* ================================================================
+ * 首页渲染
+ * ================================================================ */
+function renderHome(){
+  const due = dueReviewList();
+  $("review-banner").classList.toggle("show", due.length>0);
+  $("review-count").textContent = `${due.length} 个句子到期待巩固`;
+  $("review-banner").onclick = ()=>startReview();
+
+  $("deck-count").textContent = DATA.scenes.reduce((n,s)=>n+s.pairs.length,0) + " 组";
+  const sceneList = $("scene-list");
+  if(sceneList){
+    let wv = $("home-wv-tip");
+    if(!wv && isRestrictedWebView()){
+      wv = document.createElement("div");
+      wv.id = "home-wv-tip";
+      wv.style.cssText = "margin:12px 0;padding:12px 14px;background:#3b2a1a;color:#ffd89a;border-radius:12px;font-size:14px;line-height:1.5;border:1px solid #8c6b3d;";
+      wv.innerHTML = "⚠️ <b>当前是微信/QQ 内置浏览器</b>，录音按钮可能点了没反应。请用 <b>Safari（iPhone）或 Chrome（安卓）</b> 重新打开本页面，三关体验才完整。";
+      sceneList.parentNode.insertBefore(wv, sceneList);
+    }else if(wv){ wv.style.display = isRestrictedWebView() ? "block" : "none"; }
+  }
+  if(!allScene){
+    allScene = { id:"__all__", icon:"🎯", name:"全部混练", desc:"所有类别混在一起练", practice:true,
+      pairs: allPairs().map(x=>x.pair) };
+  }
+  const gateCards = [
+    { g:1, icon:"🎧", nm:"第一关 · 听辨", ds:"听单词发音，选出正确中文意思。同类词混着出，顺便练辨析。" },
+    { g:2, icon:"🗣️", nm:"第二关 · 跟读", ds:"听标准音、录音对比。自己的耳朵是最好的老师。" },
+    { g:3, icon:"🎤", nm:"第三关 · 情景应答", ds:"听短问，说带目标词的短答，录音自查、自己对比。" }
+  ];
+  const reviewPairs = reviewPairsList();
+  let cardsHtml = gateCards.map(c=>`<div class="scene-card" data-g="${c.g}">
+      <div class="icon">${c.icon}</div>
+      <div class="mid"><div class="nm">${c.nm}</div><div class="ds">${c.ds} · 全部 ${allScene.pairs.length} 组混练</div></div>
+      <div class="prog"><div class="pct">🎯</div><div class="lvl">练习</div></div>
+    </div>`).join("");
+  cardsHtml += `<div class="scene-card review-card" data-review="1">
+      <div class="icon">🔖</div>
+      <div class="mid"><div class="nm">生词本</div><div class="ds">${reviewPairs.length ? `专练你标过的 ${reviewPairs.length} 句` : "还没有生词，三关里点 🔖 加入"}</div></div>
+      <div class="prog"><div class="pct">${reviewPairs.length || "∅"}</div><div class="lvl">生词</div></div>
+    </div>`;
+  $("scene-list").innerHTML = cardsHtml;
+  $("scene-list").querySelectorAll(".scene-card[data-g]").forEach(el=>{
+    el.onclick = ()=>openPracticeGate(+el.dataset.g);
+  });
+  const rc = $("scene-list").querySelector(".review-card");
+  if(rc) rc.onclick = ()=>openReviewGate();
+}
+
+/* ================================================================
+ * 场景详情：三关
+ * ================================================================ */
+let curScene = null;
+let practiceMode = false;
+let allScene = null;
+function openScene(sc){
+  curScene = sc;
+  practiceMode = !!sc.practice;
+  $("sc-crumb").textContent = sc.practice ? "PRACTICE" : "SCENE";
+  $("sc-title").textContent = sc.name;
+  $("sc-icon").textContent = sc.icon;
+  $("sc-name").textContent = sc.name;
+  const vCount = sc.pairs.reduce((n,p)=>n+((p.variants||[]).length), 0);
+  $("sc-desc").textContent = `${sc.desc} · ${sc.pairs.length} 组问答` + (vCount ? ` · ${vCount} 种换说法` : "");
+  renderGates();
+  nav("scene");
+}
+/* 首页三关卡片：直接进入对应关的全部混练（practice 模式，不写进度） */
+function openPracticeGate(n){
+  if(!allScene){
+    allScene = { id:"__all__", icon:"🎯", name:"全部混练", desc:"所有类别混在一起练", practice:true,
+      pairs: allPairs().map(x=>x.pair) };
+  }
+  curScene = allScene; practiceMode = true;
+  if(n===1) startGate1();
+  else if(n===2) startGate2();
+  else startGate3();
+}
+function reviewPairsList(){
+  const all = allPairs();
+  const keys = Object.keys(store.review).filter(k=>store.review[k]);
+  const seen = new Set(); const list = [];
+  for(const k of keys){
+    const meta = all.find(x=>x.key===k);
+    if(meta && !seen.has(meta.pair)){ seen.add(meta.pair); list.push(meta.pair); }
+  }
+  return list;
+}
+function openReviewGate(){
+  const pairs = reviewPairsList();
+  if(!pairs.length){ toast("生词本是空的，先去三关里点 🔖 标几个生词吧"); return; }
+  curScene = { id:"__review__", icon:"🔖", name:"生词本", desc:"专练你标过的生词", practice:true, pairs };
+  practiceMode = true;
+  startGate2();
+}
+function renderGates(){
+  const p = sceneProgress(curScene);
+  $("sc-progress").textContent = practiceMode ? "练习" : p.pct + "%";
+  const g1ok = practiceMode || g1Passed(curScene);
+  const g2ok = practiceMode || g2Passed(curScene);
+  const state = (ok, now)=> ok ? `<span class="gstate done">已通过</span>` : now ? `<span class="gstate now">进行中</span>` : `<span class="gstate todo">待挑战</span>`;
+  $("gate-list").innerHTML = `
+    <div class="gate" id="gate-1">
+      <div class="gnum">1</div>
+      <div class="gmid"><div class="gnm">🎧 听辨关</div><div class="gds">听单词发音，选出正确中文意思。同类词混着出，顺便练辨析。</div></div>
+      ${state(g1ok, true)}
+    </div>
+    <div class="gate ${g1ok?"":"locked"}" id="gate-2">
+      <div class="gnum">2</div>
+      <div class="gmid"><div class="gnm">🗣️ 跟读关</div><div class="gds">听标准音、录音对比。自己的耳朵是最好的老师。</div></div>
+      ${state(g2ok)}
+      ${g1ok?"":'<div class="lock-tip">🔒 先过第一关</div>'}
+    </div>
+    <div class="gate ${g2ok?"":"locked"}" id="gate-3">
+      <div class="gnum">3</div>
+      <div class="gmid"><div class="gnm">🎤 情景应答</div><div class="gds">听短问，说带目标词的短答，录音自查、自己对比、自己点过了。碎片时间随时练。</div></div>
+      ${state(practiceMode || g3Best(curScene)>=80)}
+      ${g2ok?"":'<div class="lock-tip">🔒 先过第二关</div>'}
+    </div>`;
+  $("gate-1").onclick = ()=>startGate1();
+  if(g1ok) $("gate-2").onclick = ()=>startGate2();
+  if(g2ok) $("gate-3").onclick = ()=>startGate3();
+}
+function gatePassedStore(gate){ return store["gate_"+gate] || (store["gate_"+gate]={}); }
+function g1Passed(sc){ return Object.keys(gatePassedStore("1")).filter(k=>k.startsWith(sc.id+"::")).length >= sc.pairs.length; }
+function g2Passed(sc){ return Object.keys(gatePassedStore("2")).filter(k=>k.startsWith(sc.id+"::")).length >= sc.pairs.length; }
+function g3Best(sc){ return store["g3_"+sc.id] || 0; }
+
+/* ================================================================
+ * 第一关 · 听辨
+ * ================================================================ */
+let G1 = null;
+function startGate1(){
+  const pairs = shuffle(curScene.pairs);
+  G1 = { idx:0, queue:pairs, right:0, wrong:[], answered:false };
+  $("g1-scene").textContent = curScene.name;
+  nav("g1"); renderG1();
+}
+function renderG1(){
+  const p = G1.queue[G1.idx];
+  G1.answered = false; G1.cur = p;
+  $("g1-vb").hidden = true;
+  $("g1-var").className = "varbox"; $("g1-var").innerHTML = "";
+  $("g1-count").textContent = `${G1.idx+1}/${G1.queue.length}`;
+  $("g1-fb").className = "feedback"; $("g1-fb").classList.remove("show");
+  $("g1-next").disabled = true;
+  $("g1-hint").textContent = "点喇叭听单词发音 · 选对应的中文意思";
+  // 听辨：听英文单词，选「单词的中文意思」——干扰项从同类别随机取，顺便练同类辨析
+  const others = shuffle(curScene.pairs.filter(x=>x.wz !== p.wz)).slice(0,3).map(x=>x.wz);
+  const opts = shuffle([p.wz, ...others]);
+  $("g1-opts").innerHTML = opts.map((o,i)=>
+    `<button class="opt" data-ok="${o===p.wz}"><span class="key">${"ABCD"[i]}</span>${esc(o)}</button>`).join("");
+  $("g1-opts").querySelectorAll(".opt").forEach(el=>el.onclick=()=>answerG1(el, p));
+  setTimeout(()=>speak(p.w, .92, $("g1-play"), "w"), 350);
+}
+function answerG1(el, p){
+  if(G1.answered) return; G1.answered = true;
+  // 先解锁「下一句」：避免前面任何 DOM/音效/存储异常导致按钮卡死
+  $("g1-next").disabled = false;
+  $("g1-next").textContent = "下一句";
+  const ok = el.dataset.ok==="true";
+  const k = keyOf(curScene.id, p);
+  // 无论对错，都把「单词拼写 + 中文意思」摊开，帮助从“听不出”到“认得出”
+  $("g1-var").innerHTML = `
+    <div class="vrow"><div class="vlb">🔊 单词 · 中文</div>
+      <div class="vtx en">${esc(p.w)}${sayBtn(p.w, "w")}</div>
+      <div class="vtx">${esc(p.wz)}</div></div>`;
+  $("g1-var").classList.add("show");
+  if(ok){
+    G1.right++;
+    /* 练习模式也记等级：首页三档进度要用（闯关通过标记仍只在正式模式写） */
+    const sRec1 = ensureSentence(k);
+    if(sRec1.level<1) sRec1.level=1;
+    if(!practiceMode){
+      gatePassedStore("1")[k] = true;
+    }
+    $("g1-fb").className="feedback ok show";
+    $("g1-fb").querySelector(".ft").textContent = "✓ 听对了";
+    playTone("ok");
+    $("g1-fb").querySelector(".fd").textContent=`${esc(p.w)} —— ${esc(p.wz)}`;
+  }else{
+    G1.wrong.push(p);
+    // 错句隔 2 张插回队列，本轮内必须重新听对
+    const rest = G1.queue.slice(G1.idx+1);
+    rest.splice(Math.min(2, rest.length), 0, p);
+    G1.queue = G1.queue.slice(0, G1.idx+1).concat(rest);
+    store.wrong[k]++;
+    if(!practiceMode) markReview(bookKey(p));
+    $("g1-fb").className="feedback bad show";
+    $("g1-fb").querySelector(".ft").textContent = "✗ 答错了，隔 2 句它会回来";
+    playTone("bad");
+    $("g1-fb").querySelector(".fd").textContent=`正确是：${esc(p.w)} —— ${esc(p.wz)}`;
+    // 标对错样式
+    $("g1-opts").querySelectorAll(".opt").forEach(o=>{
+      if(o.dataset.ok==="true") o.classList.add("right");
+      else if(o===el) o.classList.add("wrong");
+      else o.classList.add("dim");
+    });
+  }
+  saveStore();
+  $("g1-next").disabled = false;
+  $("g1-next").textContent = "下一句";
+}
+$("g1-play").onclick = ()=>{ if(!G1) return; speak(G1.queue[G1.idx].w, .92, $("g1-play"), "w"); };
+$("g1-next").addEventListener("click", ()=>{
+  if($("g1-next").disabled) return;
+  G1.idx++;
+  if(G1.idx>=G1.queue.length) return showResult("1");
+  renderG1();
+});
+
+/* ================================================================
+ * 第二关 · 跟读
+ * ================================================================ */
+let G2 = null;
+function startGate2(){
+  const pairs = shuffle(curScene.pairs);
+  G2 = { idx:0, queue:pairs, recOn:false };
+  $("g2-scene").textContent = curScene.name;
+  const back2 = document.querySelector("#scr-g2 .back");
+  if(back2) back2.onclick = ()=>{ if(bookReturn){ bookReturn=false; nav("book"); } else nav("home"); };
+  nav("g2"); renderG2();
+}
+function renderG2(){
+  cancelPendingRec();
+  const p = G2.queue[G2.idx];
+  G2.recOn = false;
+  $("g2-count").textContent = `${G2.idx+1}/${G2.queue.length}`;
+  $("g2-en").textContent = p.s;
+  $("g2-zh").textContent = p.sz;
+  $("g2-cmp-model-tx").textContent = p.s;
+  $("g2-compare").classList.remove("show");
+  $("g2-recstate").textContent = "点击录音 → 再点一次结束";
+  $("g2-rec").classList.remove("rec");
+  setTimeout(()=>speak(p.s,.92,$("g2-model"),"s"), 350);
+}
+$("g2-model").onclick = ()=>speak(G2.queue[G2.idx].s,.92,$("g2-model"),"s");
+$("g2-slow").onclick = ()=>speak(G2.queue[G2.idx].s,.62,$("g2-slow"),"s");
+$("g2-play-model").onclick = ()=>speak(G2.queue[G2.idx].s,.92,$("g2-play-model"),"s");
+$("g2-play-mine").onclick = playMine;
+$("g2-rec").onclick = async ()=>{
+  if(recStarting){ toast("正在启动麦克风，稍候…"); return; }
+  const hasLiveTrack = mediaRec && mediaRec.stream && mediaRec.stream.getAudioTracks().some(t=>t.readyState==="live");
+  const recording = (mediaRec && mediaRec.state==="recording") || hasLiveTrack;
+
+  if(recording){
+    stopRec($("g2-rec"), $("g2-recstate"));
+    return;
+  }
+
+  $("g2-recstate").textContent = "正在启动麦克风…";
+  recStarting = true;
+  const ok = await startRec($("g2-rec"), $("g2-recstate"), (ok2)=>{
+    if(!G2) return;
+    $("g2-compare").classList.add("show");
+    $("g2-cmp-mine-tx").textContent = ok2 ? "回放自查" : "—";
+    $("g2-recstate").textContent = ok2 ? "已录音 ✓ 对比听听：先标准音，再你的" : "录音好像失败了，再试一次？";
+  });
+  recStarting = false;
+  if(ok) $("g2-recstate").textContent = "录音中…再点一次结束";
+};
+$("g2-yes").addEventListener("click", ()=>{
+  if($("g2-yes").disabled) return;
+  const p = G2.queue[G2.idx]; const k = keyOf(curScene.id,p);
+  playTone("ok");
+  /* 练习模式也记等级：首页三档进度要用（闯关通过标记仍只在正式模式写） */
+  const sRec2 = ensureSentence(k);
+  if(sRec2.level<2) sRec2.level=2;
+  if(!practiceMode){
+    gatePassedStore("2")[k]=true;
+  }
+  saveStore();
+  nextG2();
+});
+$("g2-no").addEventListener("click", ()=>{
+  if($("g2-no").disabled) return;
+  const p = G2.queue[G2.idx];
+  if(!practiceMode) markReview(bookKey(p));
+  saveStore();
+  // 不熟的句子隔 2 张插回，本轮内再练一次
+  const rest = G2.queue.slice(G2.idx+1);
+  rest.splice(Math.min(2, rest.length), 0, p);
+  G2.queue = G2.queue.slice(0, G2.idx+1).concat(rest);
+  toast("已加入生词本，稍后回来再练这句");
+  nextG2();
+});
+function nextG2(){
+  G2.idx++;
+  if(G2.idx>=G2.queue.length) return showResult("2");
+  renderG2();
+}
+
+/* ================================================================
+ * 第三关 · 情景应答
+ * ================================================================ */
+let G3 = null;
+function startGate3(subset){
+  const pairs = subset ? subset : shuffle(curScene.pairs);
+  G3 = { idx:0, queue:pairs, right:0, wrong:[], answered:false, recOn:false, targetLen:0 };
+  $("g3-scene").textContent = curScene.name;
+  nav("g3"); renderG3();
+}
+function renderG3(){
+  cancelPendingRec();
+  const p = G3.queue[G3.idx];
+  G3.answered=false; G3.recOn=false;
+  G3.spoken = pickSpoken(p);          // 情景应答也随机换说法，贴近真实对话
+  $("g3-count").textContent = `${G3.idx+1}/${G3.queue.length}`;
+  $("g3-target-len").textContent = p.key;
+  $("g3-q").textContent = "👨‍🏫 考官正在提问…";
+  $("g3-q-zh").textContent = "";
+  $("g3-compare").classList.remove("show");
+  $("g3-samples").className = "varbox"; $("g3-samples").innerHTML = "";
+  $("g3-mic").classList.remove("rec");
+  $("g3-recstate").textContent = "点击开始作答";
+  const recState = $("g3-recstate");
+  let wv3 = $("g3-wv-tip");
+  if(!wv3 && isRestrictedWebView()){
+    wv3 = document.createElement("div");
+    wv3.id = "g3-wv-tip";
+    wv3.style.cssText = "margin:10px 0;padding:10px 12px;background:#3b2a1a;color:#ffd89a;border-radius:10px;font-size:13px;line-height:1.4;border:1px solid #8c6b3d;text-align:center;";
+    wv3.innerHTML = "⚠️ 微信/QQ 内置浏览器不支持录音，请用 Safari/Chrome 打开";
+    recState.parentNode.insertBefore(wv3, recState);
+  }else if(wv3){ wv3.style.display = isRestrictedWebView() ? "block" : "none"; }
+  $("g3-next").disabled = true;
+  $("g3-next").textContent = G3.idx===G3.queue.length-1 ? "看成绩" : "下一题";
+  if(!localStorage.getItem("seenCoachG3")){ const c=$("coach-g3"); if(c) c.hidden=false; }
+  // 先只播问题，不显示文本（考听力）
+  // 首次进第三关（教练浮层还开着）时先不播，等点「开始练习」关掉浮层后再播第一题
+  if(localStorage.getItem("seenCoachG3")){
+    setTimeout(()=>speak(G3.spoken.text,.95,$("g3-play"),"q"), 400);
+  }else{
+    G3._pendingSpeak = ()=>speak(G3.spoken.text,.95,$("g3-play"),"q");
+  }
+}
+$("g3-play").onclick = ()=>{ if(!G3) return; speak((G3.spoken||{text:G3.queue[G3.idx].q}).text,.95,$("g3-play"),"q"); };
+$("g3-play-target").onclick = ()=>speak(G3.queue[G3.idx].a,.92,$("g3-play-target"),"a");
+$("g3-play-mine").onclick = playMine;
+
+$("g3-mic").onclick = async ()=>{
+  try{
+    const p = G3.queue[G3.idx];
+    if(G3.answered) return;
+    if(recStarting){ toast("正在启动麦克风，稍候…"); return; }
+    if(isRestrictedWebView()){
+      toast("微信/QQ 内置浏览器不支持录音，请用 Safari/Chrome 打开");
+      return;
+    }
+
+    // 录音中 → 点第二次结束（与跟读关逻辑一致）
+    const hasLiveTrack = mediaRec && mediaRec.stream && mediaRec.stream.getAudioTracks().some(t=>t.readyState==="live");
+    const recording = (mediaRec && mediaRec.state==="recording") || hasLiveTrack;
+    if(recording){
+      stopRec($("g3-mic"), $("g3-recstate"));
+      return;
+    }
+
+    $("g3-recstate").textContent = "正在启动麦克风…";
+    recStarting = true;
+    const micOk = await startRec($("g3-mic"), $("g3-recstate"), (ok2)=>{
+      if(!G3 || G3.answered) return;
+      if(!ok2){
+        $("g3-recstate").textContent = "录音失败，点麦克风重试";
+        $("g3-mic").classList.remove("rec");
+        return;
+      }
+      // 录音完成 → 弹出自查对比面板，解锁「这句过了」
+      $("g3-compare").classList.add("show");
+      $("g3-cmp-target").textContent = p.a;
+      renderG3Samples(p);   /* 开放式：录完直接铺开「还能怎么答」，不用再点开关 */
+      $("g3-recstate").textContent = "已录音 ✓ 对比听听：标准音 ↔ 你的 → 觉得像就点「这句过了」";
+      $("g3-next").disabled = false;
+      $("g3-next").textContent = "这句过了 →";
+    });
+    recStarting = false;
+    if(micOk){
+      $("g3-recstate").textContent = "录音中…再点一次结束";
+    }else{
+      $("g3-recstate").textContent = "请点麦克风重试（弹出权限框时选“允许”）";
+    }
+  }catch(e){
+    console.error(e);
+    recStarting=false;
+    $("g3-mic").classList.remove("rec");
+    $("g3-recstate").textContent = "麦克风调用异常，请刷新页面重试";
+    toast("麦克风调用异常，刷新后若仍无效，请换 Safari/Chrome 打开");
+  }
+};
+$("g3-next").addEventListener("click", ()=>{
+  if($("g3-next").disabled) return;
+  const p = G3.queue[G3.idx];
+  g3Manual(p, true);
+});
+
+/* 第三关统一为「录音 → 自己对比 → 自己点过了」，不再提供文字作答通道（以最低配 iPhone Safari 为准，iOS/安卓一视同仁）。 */
+
+/* 关键信息槽评分相关函数（norm/lev/fuzzyMatch/slotHit/answerSlots/renderSlotCheck）已移除：
+ * 第三关不再做自动判分，统一为学员「录音 → 自己对比 → 自己点过了」的自查模式。 */
+/* gradeG3 / scoreShown 自动判分函数已移除：过关判定改由 g3Manual(p, true) 在学员点「这句过了 →」时记录。 */
+/* 第三关类似句型：与第一关「换说法例句」同款 UI（varbox + 关键词高亮 + 🔊）。
+ * 高亮用答案侧关键信息：accept 各槽规范说法（等价于第一关用 p.key 高亮提问）。 */
+function renderG3Samples(p){
+  const box = $("g3-samples");
+  if(!p.samples || !p.samples.length){ box.className = "varbox"; box.innerHTML = ""; return; }
+  const keyForAns = (p.accept||[]).map(s=>s&&s[0]?s[0]:"").filter(Boolean).join(" / ");
+  const items = p.samples.map(s=>
+    `<div class="altline">${highlightKey(s, keyForAns)}${sayBtn(s, "m")}</div>`).join("");
+  let html = `<div class="vrow"><div class="vlb">🔀 同一个意思，还能这么答（都算对）</div><div class="vtx alt-list">${items}</div></div>`;
+  if(keyForAns){
+    html += `<div class="vrow"><div class="vlb">🔑 关键信息 · 这句话要包含</div><div class="vtx"><span class="key-chip">${esc(keyForAns)}</span><span class="kwz">答到这些，意思就对了</span></div></div>`;
+  }
+  box.innerHTML = html;
+  box.classList.add("show");
+}
+function g3Manual(p, ok){
+  const k = bookKey(p);
+  if(ok){
+    G3.right++;
+    playTone("ok");
+    const sk = keyOf(curScene.id, p);
+    /* 练习模式也记等级：首页三档进度要用（正式模式额外清除复习标记） */
+    const sRec3 = ensureSentence(sk);
+    if(sRec3.level<3) sRec3.level=3;
+    if(!practiceMode){
+      delete store.review[sk];
+    }
+  }else{
+    G3.wrong.push(p); store.wrong[k]++; markReview(k);
+  }
+  saveStore();
+  G3.idx++;
+  if(G3.idx>=G3.queue.length) return showResult("3");
+  renderG3();
+}
+
+/* ================================================================
+ * 结果页
+ * ================================================================ */
+function showResult(gate){
+  const acc = G1||G2? null : null;
+  let right=0, wrong=0, wrongList=[];
+  if(gate==="1"){ right=G1.right; wrong=G1.wrong.length; wrongList=G1.wrong; }
+  if(gate==="2"){ right=G2.queue.length; wrong=0; wrongList=[]; }
+  if(gate==="3"){ right=G3.right; wrong=G3.wrong.length; wrongList=G3.wrong; }
+  const total = right+wrong;
+  const pct = total? Math.round(right/total*100):0;
+
+  $("rs-emoji").textContent = pct>=80?"🏆":pct>=50?"🎉":"💪";
+  $("rs-title").textContent = gate==="3" ? (pct>=80?"情景应答通过！":"再练一轮就稳了") : "本关完成！";
+  $("rs-sub").textContent = gate==="1"?"听辨是地基，稳了":"错句已进生词本，到期提醒复习";
+  $("rs-right").textContent = right;
+  $("rs-wrong").textContent = wrong;
+  $("rs-acc").textContent = pct+"%";
+
+  const retry = $("rs-retry");
+  if(wrongList.length && gate!=="2"){
+    retry.hidden = false;
+    retry.textContent = `错句重练（${wrongList.length} 句）`;
+    retry.onclick = ()=>{
+      if(gate==="1"){ G1 = { idx:0, queue:shuffle(wrongList), right:0, wrong:[], answered:false }; nav("g1"); renderG1(); }
+      if(gate==="3"){ startGate3(shuffle(wrongList)); }
+    };
+  }else{
+    retry.hidden = true;
+  }
+  $("rs-back").onclick = ()=>{ const br = bookReturn; bookReturn=false; nav(br ? "book" : "home"); };
+  nav("result");
+}
+
+/* ================================================================
+ * 生句本（间隔重复）
+ * ================================================================ */
+function markReview(key){
+  // 错误后 1 天到期；复习通过一次则 3 天后再到期，再通过移除
+  const stage = store.review[key];
+  const days = stage===null||stage===undefined ? 1 : 3;
+  const due = new Date(Date.now() + days*86400000).toISOString().slice(0,10);
+  store.review[key] = due;
+}
+function dueReviewList(){
+  const t = todayStr();
+  return Object.entries(store.review).filter(([k,d])=>d && d<=t).map(([k])=>k);
+}
+function renderBook(){
+  const entries = Object.entries(store.review).filter(([k,d])=>d);
+  const due = entries.filter(([k,d])=>d<=todayStr());
+  $("sb-count").textContent = entries.length ? `${due.length} 待复习 / 共 ${entries.length}` : "";
+  $("sb-empty").hidden = entries.length>0;
+  const all = allPairs();
+  $("sb-list").innerHTML = entries.sort((a,b)=>a[1]<b[1]?-1:1).map(([k,d])=>{
+    const meta = all.find(x=>x.key===k);
+    if(!meta) return "";
+    const isDue = d<=todayStr();
+    return `<div class="sb-item">
+      <div class="en"><div class="t1">${esc(meta.pair.w)}</div><div class="t2">${esc(meta.pair.wz)}</div></div>
+      <span class="due ${isDue?"now":"later"}">${isDue?"待复习":d.slice(5)+" 到期"}</span>
+      <button class="sb-practice" data-p="${esc(k)}">🗣️</button>
+      <button class="listen" data-k="${esc(k)}">🔊</button>
+    </div>`;
+  }).join("");
+  $("sb-list").querySelectorAll(".listen").forEach(b=>b.onclick=()=>{
+    const meta = allPairs().find(x=>x.key===b.dataset.k);
+    if(meta) speak(meta.pair.w,.92,b,"w");
+  });
+  $("sb-list").querySelectorAll(".sb-practice").forEach(b=>b.onclick=(e)=>{
+    e.stopPropagation();
+    const meta = allPairs().find(x=>x.key===b.dataset.p);
+    if(meta) practiceBookPair(meta.pair);
+  });
+}
+function startReview(){
+  const due = dueReviewList();
+  if(!due.length) return;
+  const all = allPairs();
+  const items = due.map(k=>all.find(x=>x.key===k)).filter(Boolean);
+  // 复习 = 听辨形式快速过
+  const first = items[0];
+  curScene = first.scene;
+  startGate3(items.map(x=>x.pair)); // 用情景应答形式复习（最接近实战）
+  toast(`开始复习 ${items.length} 句`);
+}
+
+/* ================================================================
+ * 导航与初始化
+ * ================================================================ */
+document.querySelectorAll("[data-nav]").forEach(el=>{
+  el.addEventListener("click", ()=>nav(el.dataset.nav));
+});
+document.querySelectorAll(".tab").forEach(el=>{
+  el.addEventListener("click", ()=>nav(el.dataset.nav));
+});
+
+/* 三关「🔖 加入生词本」按钮：把当前词加进生词本 */
+function markWord(p){
+  if(!p) return;
+  markReview(bookKey(p));
+  saveStore();
+  toast("已加入生词本 🔖");
+}
+$("g1-mark").onclick = ()=> markWord(G1 && G1.queue[G1.idx]);
+$("g2-mark").onclick = ()=> markWord(G2 && G2.queue[G2.idx]);
+$("g3-mark").onclick = ()=> markWord(G3 && G3.queue[G3.idx]);
+
+$("ver-line").innerHTML = APP_VERSION + ' · <span class="upd">更新于 ' + APP_DATE + '</span>';
+$("ver-foot").textContent = APP_VERSION;
+renderHome();
+</script>
+<div class="coach" id="coach-g3" hidden>
+  <div class="coach-card">
+    <div class="coach-ic">🎤</div>
+    <h3>第三关怎么练</h3>
+    <ol>
+      <li>听考官提问（男声 <b>Brian</b>）。</li>
+      <li>按住麦克风，说出带<b>目标词</b>的短答（女声 <b>Jenny</b> 是标准答案）。</li>
+      <li>录音后对比标准句，觉得像就点「这句过了」。</li>
+    </ol>
+    <button class="btn-main" id="coach-g3-ok">开始练习</button>
+  </div>
+</div>
+</body>
+</html>
