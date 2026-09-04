@@ -40,9 +40,14 @@ def main():
         raise SystemExit("以下音频缺失，请先跑 gen_audio.py：%s" % missing[:5])
 
     # 重建 _app（manifest 已内联进 index.html，故不再单独复制 manifest.json）
+    # 受限环境（沙箱 / 回收站不可用）下 rmtree 会抛错，此时退化为覆盖同步：
+    # 旧孤儿 mp3 会残留，但部署包功能不受影响，只是体积略大。
     if os.path.exists(APP):
-        shutil.rmtree(APP, ignore_errors=True)
-    os.makedirs(os.path.join(APP, "audio"))
+        try:
+            shutil.rmtree(APP, ignore_errors=True)
+        except Exception as e:
+            print("    注意：_app 清理失败，改为覆盖同步（%s）" % e)
+    os.makedirs(os.path.join(APP, "audio"), exist_ok=True)
 
     for name in ("index.html", "data.js"):
         shutil.copyfile(os.path.join(ROOT, name), os.path.join(APP, name))
