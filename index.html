@@ -180,7 +180,7 @@
   .hint-tap { text-align: center; color: var(--muted); font-size: .74rem; margin-top: 12px; letter-spacing: .05em; }
 
   /* 选项 */
-  .opts { display: grid; gap: 10px; margin-top: 26px; }
+  .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 26px; }
   .opt {
     background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px;
     padding: 15px 16px; font-size: .92rem; text-align: left; cursor: pointer;
@@ -210,6 +210,7 @@
   .feedback.ok .ft { color: var(--ok); }
   .feedback.bad .ft { color: var(--bad); }
   .feedback .fd { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+  .feedback .kw { color: var(--warn); font-weight: 900; background: rgba(251,191,36,.16); border-radius: 5px; padding: 0 4px; }
 
   /* ============ 换说法 · 质变训练 ============ */
   .tag-row { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
@@ -553,7 +554,6 @@
     </div>
     <div class="opts" id="g1-opts"></div>
     <div class="feedback" id="g1-fb"><div class="ft"></div><div class="fd"></div></div>
-    <div class="varbox" id="g1-var"></div>
   </div>
   <div class="next-row"><button class="btn-main" id="g1-next" disabled>下一句</button><button class="btn-ghost" id="g1-mark">🔖 加入生词本</button></div>
 </section>
@@ -592,7 +592,6 @@
   </div>
   <div class="next-row">
     <button class="btn-main" id="g2-yes">这句过了 ✓</button>
-    <button class="btn-ghost" id="g2-no">还不熟，待会再练</button>
     <button class="btn-ghost" id="g2-mark">🔖 加入生词本</button>
   </div>
 </section>
@@ -685,8 +684,8 @@
 "use strict";
 
 /* 版本号：每次部署改这里即可（首页徽标与底部导航会自动同步） */
-const APP_VERSION = "v1.18";
-const APP_DATE = "2026-09-03";
+const APP_VERSION = "v1.21";
+const APP_DATE = "2026-09-04";
 
 /* ================================================================
  * 数据：两个示例场景（正式使用时替换为真实培训资料）
@@ -715,8 +714,12 @@ function nav(name){
 const STORE_KEY = "speakeasy_v1";
 let store = loadStore();
 function loadStore(){
-  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || freshStore(); }
-  catch(e){ return freshStore(); }
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(STORE_KEY)); } catch(e){ s = null; }
+  if(!s) return freshStore();
+  // 兼容清理：老数据里 review 可能残留 null 占位键，去掉以免污染“已标记集合”
+  if(s.review){ for(const k in s.review){ if(s.review[k]===null || s.review[k]===undefined) delete s.review[k]; } }
+  return s;
 }
 function freshStore(){
   const s = { sentences:{}, wrong:{}, review:{}, variantMode: true };
@@ -724,7 +727,7 @@ function freshStore(){
     const key = sc.id+"::"+p.a;
     s.sentences[key] = { level: 0 };   // 0 陌生 → 1 听懂 → 2 能读 → 3 能答(过关)
     s.wrong[key] = 0;
-    s.review[key] = null;
+    // review 初始为空：只在用户真正标记生词时写入，不预填占位（避免脏数据）
   }));
   return s;
 }
@@ -741,8 +744,13 @@ function ensureSentence(k){
 /* 生词本用什么 key 存：优先回真实场景（混练时也是同一个 pair 对象，能找到），
  * 找不到再退回 __all__ 兜底。保证三关、混练里标的生词都能在生词本里被找到 */
 function bookKey(p){
-  for(const sc of DATA.scenes){ if(sc.pairs.includes(p)) return keyOf(sc.id, p); }
-  return "__all__::" + (p.w || p.a || "");
+  const hit = allPairs().find(x=>x.pair===p);
+  return hit ? hit.key : null;
+}
+function sbDisplay(pair, gate){
+  if(gate==="2") return { t1:pair.s, t2:pair.sz, field:"s", voice:"s" };
+  if(gate==="3") return { t1:pair.q, t2:pair.qz, field:"q", voice:"q" };
+  return { t1:pair.w, t2:pair.wz, field:"w", voice:"w" };
 }
 
 /* ================================================================
@@ -1276,7 +1284,6 @@ function renderG1(){
   const p = G1.queue[G1.idx];
   G1.answered = false; G1.cur = p;
   $("g1-vb").hidden = true;
-  $("g1-var").className = "varbox"; $("g1-var").innerHTML = "";
   $("g1-count").textContent = `${G1.idx+1}/${G1.queue.length}`;
   $("g1-fb").className = "feedback"; $("g1-fb").classList.remove("show");
   $("g1-next").disabled = true;
@@ -1296,12 +1303,6 @@ function answerG1(el, p){
   $("g1-next").textContent = "下一句";
   const ok = el.dataset.ok==="true";
   const k = keyOf(curScene.id, p);
-  // 无论对错，都把「单词拼写 + 中文意思」摊开，帮助从“听不出”到“认得出”
-  $("g1-var").innerHTML = `
-    <div class="vrow"><div class="vlb">🔊 单词 · 中文</div>
-      <div class="vtx en">${esc(p.w)}${sayBtn(p.w, "w")}</div>
-      <div class="vtx">${esc(p.wz)}</div></div>`;
-  $("g1-var").classList.add("show");
   if(ok){
     G1.right++;
     /* 练习模式也记等级：首页三档进度要用（闯关通过标记仍只在正式模式写） */
@@ -1313,7 +1314,7 @@ function answerG1(el, p){
     $("g1-fb").className="feedback ok show";
     $("g1-fb").querySelector(".ft").textContent = "✓ 听对了";
     playTone("ok");
-    $("g1-fb").querySelector(".fd").textContent=`${esc(p.w)} —— ${esc(p.wz)}`;
+    $("g1-fb").querySelector(".fd").innerHTML=`<span class="kw">${esc(p.w)}</span> —— ${esc(p.wz)}`;
   }else{
     G1.wrong.push(p);
     // 错句隔 2 张插回队列，本轮内必须重新听对
@@ -1321,18 +1322,18 @@ function answerG1(el, p){
     rest.splice(Math.min(2, rest.length), 0, p);
     G1.queue = G1.queue.slice(0, G1.idx+1).concat(rest);
     store.wrong[k]++;
-    if(!practiceMode) markReview(bookKey(p));
+    if(!practiceMode) markReview(bookKey(p), "1");
     $("g1-fb").className="feedback bad show";
     $("g1-fb").querySelector(".ft").textContent = "✗ 答错了，隔 2 句它会回来";
     playTone("bad");
-    $("g1-fb").querySelector(".fd").textContent=`正确是：${esc(p.w)} —— ${esc(p.wz)}`;
-    // 标对错样式
-    $("g1-opts").querySelectorAll(".opt").forEach(o=>{
-      if(o.dataset.ok==="true") o.classList.add("right");
-      else if(o===el) o.classList.add("wrong");
-      else o.classList.add("dim");
-    });
+    $("g1-fb").querySelector(".fd").innerHTML=`正确是：<span class="kw">${esc(p.w)}</span> —— ${esc(p.wz)}`;
   }
+  // 标对错样式：不论对错都标 —— 正确项变绿，点错的那个变红，其余变暗
+  $("g1-opts").querySelectorAll(".opt").forEach(o=>{
+    if(o.dataset.ok==="true") o.classList.add("right");
+    else if(o===el) o.classList.add("wrong");
+    else o.classList.add("dim");
+  });
   saveStore();
   $("g1-next").disabled = false;
   $("g1-next").textContent = "下一句";
@@ -1406,18 +1407,6 @@ $("g2-yes").addEventListener("click", ()=>{
     gatePassedStore("2")[k]=true;
   }
   saveStore();
-  nextG2();
-});
-$("g2-no").addEventListener("click", ()=>{
-  if($("g2-no").disabled) return;
-  const p = G2.queue[G2.idx];
-  if(!practiceMode) markReview(bookKey(p));
-  saveStore();
-  // 不熟的句子隔 2 张插回，本轮内再练一次
-  const rest = G2.queue.slice(G2.idx+1);
-  rest.splice(Math.min(2, rest.length), 0, p);
-  G2.queue = G2.queue.slice(0, G2.idx+1).concat(rest);
-  toast("已加入生词本，稍后回来再练这句");
   nextG2();
 });
 function nextG2(){
@@ -1561,7 +1550,7 @@ function g3Manual(p, ok){
       delete store.review[sk];
     }
   }else{
-    G3.wrong.push(p); store.wrong[k]++; markReview(k);
+    G3.wrong.push(p); store.wrong[k]++; markReview(k, "3");
   }
   saveStore();
   G3.idx++;
@@ -1606,19 +1595,19 @@ function showResult(gate){
 /* ================================================================
  * 生句本（间隔重复）
  * ================================================================ */
-function markReview(key){
+function markReview(key, gate){
   // 错误后 1 天到期；复习通过一次则 3 天后再到期，再通过移除
   const stage = store.review[key];
   const days = stage===null||stage===undefined ? 1 : 3;
   const due = new Date(Date.now() + days*86400000).toISOString().slice(0,10);
-  store.review[key] = due;
+  store.review[key] = { due, gate: gate||null };
 }
 function dueReviewList(){
   const t = todayStr();
-  return Object.entries(store.review).filter(([k,d])=>d && d<=t).map(([k])=>k);
+  return Object.entries(store.review).filter(([k,v])=>{ const d=(v&&v.due!==undefined)?v.due:v; return d && d<=t; }).map(([k])=>k);
 }
 function renderBook(){
-  const entries = Object.entries(store.review).filter(([k,d])=>d);
+  const entries = Object.entries(store.review).map(([k,v])=>[k,(v&&v.due!==undefined)?v.due:v]).filter(([k,d])=>d);
   const due = entries.filter(([k,d])=>d<=todayStr());
   $("sb-count").textContent = entries.length ? `${due.length} 待复习 / 共 ${entries.length}` : "";
   $("sb-empty").hidden = entries.length>0;
@@ -1626,17 +1615,19 @@ function renderBook(){
   $("sb-list").innerHTML = entries.sort((a,b)=>a[1]<b[1]?-1:1).map(([k,d])=>{
     const meta = all.find(x=>x.key===k);
     if(!meta) return "";
+    const gate = (store.review[k] && store.review[k].gate) || null;
+    const disp = sbDisplay(meta.pair, gate);
     const isDue = d<=todayStr();
     return `<div class="sb-item">
-      <div class="en"><div class="t1">${esc(meta.pair.w)}</div><div class="t2">${esc(meta.pair.wz)}</div></div>
+      <div class="en"><div class="t1">${esc(disp.t1)}</div><div class="t2">${esc(disp.t2)}</div></div>
       <span class="due ${isDue?"now":"later"}">${isDue?"待复习":d.slice(5)+" 到期"}</span>
       <button class="sb-practice" data-p="${esc(k)}">🗣️</button>
-      <button class="listen" data-k="${esc(k)}">🔊</button>
+      <button class="listen" data-k="${esc(k)}" data-g="${esc(gate||"")}">🔊</button>
     </div>`;
   }).join("");
   $("sb-list").querySelectorAll(".listen").forEach(b=>b.onclick=()=>{
     const meta = allPairs().find(x=>x.key===b.dataset.k);
-    if(meta) speak(meta.pair.w,.92,b,"w");
+    if(meta){ const g=b.dataset.g||null; const disp=sbDisplay(meta.pair,g); speak(meta.pair[disp.field],.92,b,disp.voice); }
   });
   $("sb-list").querySelectorAll(".sb-practice").forEach(b=>b.onclick=(e)=>{
     e.stopPropagation();
@@ -1667,15 +1658,17 @@ document.querySelectorAll(".tab").forEach(el=>{
 });
 
 /* 三关「🔖 加入生词本」按钮：把当前词加进生词本 */
-function markWord(p){
+function markWord(p, gate){
   if(!p) return;
-  markReview(bookKey(p));
+  const k = bookKey(p);
+  if(!k) return;
+  markReview(k, gate);
   saveStore();
   toast("已加入生词本 🔖");
 }
-$("g1-mark").onclick = ()=> markWord(G1 && G1.queue[G1.idx]);
-$("g2-mark").onclick = ()=> markWord(G2 && G2.queue[G2.idx]);
-$("g3-mark").onclick = ()=> markWord(G3 && G3.queue[G3.idx]);
+$("g1-mark").onclick = ()=> markWord(G1 && G1.queue[G1.idx], "1");
+$("g2-mark").onclick = ()=> markWord(G2 && G2.queue[G2.idx], "2");
+$("g3-mark").onclick = ()=> markWord(G3 && G3.queue[G3.idx], "3");
 
 $("ver-line").innerHTML = APP_VERSION + ' · <span class="upd">更新于 ' + APP_DATE + '</span>';
 $("ver-foot").textContent = APP_VERSION;
