@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-"""同步部署目录：只把 manifest 真正引用到的 mp3 复制进 _app/audio。
+"""同步部署目录：复制 index.html / data.js / 内联 manifest，以及 manifest 引用的 mp3 与 PWA 静态资源（manifest.webmanifest + icons/）进 _app/。
 
 为什么需要这一步：
 换题库后，本地 audio/ 会残留旧句子生成的孤儿 mp3。这些孤儿在沙箱环境里
 用 os.remove 常常删不掉（回收站不可用会抛 OSError，见 gen_audio.py --clean 的容错处理）。
 部署包只装 manifest 引用到的文件，既保持干净，又绕开了删除限制。
+
+PWA 静态资源（manifest.webmanifest + icons/*.png）由本脚本一并复制，避免改了图标/manifest 却忘带进部署包。
 
 用法：
     python sync_app.py
@@ -49,8 +51,20 @@ def main():
             print("    注意：_app 清理失败，改为覆盖同步（%s）" % e)
     os.makedirs(os.path.join(APP, "audio"), exist_ok=True)
 
-    for name in ("index.html", "data.js"):
-        shutil.copyfile(os.path.join(ROOT, name), os.path.join(APP, name))
+    for name in ("index.html", "data.js", "manifest.json", "sw.js"):
+        src = os.path.join(ROOT, name)
+        if os.path.exists(src):
+            shutil.copyfile(src, os.path.join(APP, name))
+
+    # PWA 图标目录（manifest 引用），整目录复制 .png
+    ICONS = os.path.join(ROOT, "icons")
+    if os.path.exists(ICONS):
+        dst_icons = os.path.join(APP, "icons")
+        os.makedirs(dst_icons, exist_ok=True)
+        for fn in os.listdir(ICONS):
+            if fn.lower().endswith(".png"):
+                shutil.copyfile(os.path.join(ICONS, fn), os.path.join(dst_icons, fn))
+
     for f in need:
         shutil.copyfile(os.path.join(AUDIO, f), os.path.join(APP, "audio", f))
 
@@ -62,6 +76,8 @@ def main():
     print("本地 audio/ 共 %d 个 mp3，其中 %d 个是孤儿（未复制进部署包）"
           % (local, local - len(need)))
     print("manifest 已内联在 index.html 中，故部署包不再单独含 manifest.json")
+    if os.path.exists(os.path.join(ROOT, "manifest.json")):
+        print("已复制 manifest.json + icons/ + sw.js 进 _app/（PWA 安装资源 + 离线 Service Worker）")
 
 
 if __name__ == "__main__":

@@ -47,7 +47,43 @@
     "Just a moment": "w_2648acb.mp3",
     "May I help you": "w_0d2ada8.mp3",
     "You are welcome": "w_1928fe2.mp3",
-    "Thank you for your understanding": "w_621bd06.mp3"
+    "Thank you for your understanding": "w_621bd06.mp3",
+    "Mimosa": "w_70f5707.mp3",
+    "Gin Tonic": "w_5ba7cca.mp3",
+    "Cuba Libre": "w_de7a2a3.mp3",
+    "Black Russian": "w_0f646ab.mp3",
+    "Bloody Mary": "w_c7e6faa.mp3",
+    "Mojito": "w_d92b090.mp3",
+    "steamed": "w_b367f8b.mp3",
+    "braised": "w_02ae041.mp3",
+    "roasted": "w_7e99162.mp3",
+    "baked": "w_2843a17.mp3",
+    "stir-fried": "w_4c2bc56.mp3",
+    "poached": "w_545cbba.mp3",
+    "salmon": "w_180fd18.mp3",
+    "tuna": "w_2bf93a8.mp3",
+    "crab": "w_bd58933.mp3",
+    "shrimp": "w_34842e4.mp3",
+    "scallop": "w_eb41a28.mp3",
+    "cod": "w_2d5278b.mp3",
+    "asparagus": "w_0809020.mp3",
+    "broccoli": "w_fb8da64.mp3",
+    "spinach": "w_76aba95.mp3",
+    "carrot": "w_005d05d.mp3",
+    "avocado": "w_6118fda.mp3",
+    "mushroom": "w_4e02653.mp3",
+    "apple": "w_1f3870b.mp3",
+    "banana": "w_72b302b.mp3",
+    "grape": "w_b781cbb.mp3",
+    "strawberry": "w_495bf98.mp3",
+    "mango": "w_aa00faf.mp3",
+    "melon": "w_3a2cf27.mp3",
+    "pajama": "w_eaec750.mp3",
+    "amenity kit": "w_86c3420.mp3",
+    "slipper": "w_08c3bb9.mp3",
+    "earphone": "w_57e4e39.mp3",
+    "call button": "w_d4a3647.mp3",
+    "reading light": "w_805eb82.mp3"
   },
   "s": {
     "This Sauvignon Blanc is from Chile.": {
@@ -241,6 +277,150 @@
     "Thank you for your understanding.": {
       "n": "s_efa408a.mp3",
       "s": "s_slow_efa408a.mp3"
+    },
+    "The Mimosa is light and refreshing.": {
+      "n": "s_cc2c301.mp3",
+      "s": "s_slow_cc2c301.mp3"
+    },
+    "Would you like a Gin Tonic?": {
+      "n": "s_fae6ce1.mp3",
+      "s": "s_slow_fae6ce1.mp3"
+    },
+    "The Cuba Libre is rum and cola.": {
+      "n": "s_374e316.mp3",
+      "s": "s_slow_374e316.mp3"
+    },
+    "The Black Russian is vodka and coffee liqueur.": {
+      "n": "s_ec59b49.mp3",
+      "s": "s_slow_ec59b49.mp3"
+    },
+    "The Bloody Mary is a classic brunch drink.": {
+      "n": "s_5a42bd6.mp3",
+      "s": "s_slow_5a42bd6.mp3"
+    },
+    "The Mojito is fresh mint and lime.": {
+      "n": "s_6ba27ea.mp3",
+      "s": "s_slow_6ba27ea.mp3"
+    },
+    "The fish is steamed with ginger.": {
+      "n": "s_9b2e9df.mp3",
+      "s": "s_slow_9b2e9df.mp3"
+    },
+    "The beef is braised in red wine.": {
+      "n": "s_35862f6.mp3",
+      "s": "s_slow_35862f6.mp3"
+    },
+    "The chicken is roasted with herbs.": {
+      "n": "s_6669144.mp3",
+      "s": "s_slow_6669144.mp3"
+    },
+    "The salmon is baked with cheese.": {
+      "n": "s_ccb3afe.mp3",
+      "s": "s_slow_ccb3afe.mp3"
+    },
+    "The vegetables are stir-fried.": {
+      "n": "s_bf98737.mp3",
+      "s": "s_slow_bf98737.mp3"
+    },
+    "The egg is poached, not boiled.": {
+      "n": "s_3270567.mp3",
+      "s": "s_slow_3270567.mp3"
+    },
+    "The salmon is fresh from Norway.": {
+      "n": "s_a43062f.mp3",
+      "s": "s_slow_a43062f.mp3"
+    },
+    "The tuna is seared lightly.": {
+      "n": "s_289d678.mp3",
+      "s": "s_slow_289d678.mp3"
+    },
+    "The crab is steamed with ginger.": {
+      "n": "s_724ce0b.mp3",
+      "s": "s_slow_724ce0b.mp3"
+    },
+    "The shrimp is grilled with garlic.": {
+      "n": "s_67885d7.mp3",
+      "s": "s_slow_67885d7.mp3"
+    },
+    "The scallop is pan-seared.": {
+      "n": "s_c162da4.mp3",
+      "s": "s_slow_c162da4.mp3"
+    },
+    "The cod is baked with lemon.": {
+      "n": "s_eaef104.mp3",
+      "s": "s_slow_eaef104.mp3"
+    },
+    "The asparagus is steamed fresh.": {
+      "n": "s_093d16e.mp3",
+      "s": "s_slow_093d16e.mp3"
+    },
+    "The broccoli is lightly steamed.": {
+      "n": "s_14130f6.mp3",
+      "s": "s_slow_14130f6.mp3"
+    },
+    "The spinach is sauteed with garlic.": {
+      "n": "s_6993135.mp3",
+      "s": "s_slow_6993135.mp3"
+    },
+    "The carrot is roasted sweet.": {
+      "n": "s_a3f19a5.mp3",
+      "s": "s_slow_a3f19a5.mp3"
+    },
+    "The salad has fresh avocado.": {
+      "n": "s_1384e09.mp3",
+      "s": "s_slow_1384e09.mp3"
+    },
+    "The mushroom is sauteed in butter.": {
+      "n": "s_ff37c65.mp3",
+      "s": "s_slow_ff37c65.mp3"
+    },
+    "The apple is crisp and sweet.": {
+      "n": "s_b927bf8.mp3",
+      "s": "s_slow_b927bf8.mp3"
+    },
+    "The banana is ripe and soft.": {
+      "n": "s_60db14c.mp3",
+      "s": "s_slow_60db14c.mp3"
+    },
+    "The grape is seedless and sweet.": {
+      "n": "s_30d13e3.mp3",
+      "s": "s_slow_30d13e3.mp3"
+    },
+    "The strawberry is fresh in season.": {
+      "n": "s_c2ec17d.mp3",
+      "s": "s_slow_c2ec17d.mp3"
+    },
+    "The mango is ripe and juicy.": {
+      "n": "s_567ce18.mp3",
+      "s": "s_slow_567ce18.mp3"
+    },
+    "The melon is sweet and chilled.": {
+      "n": "s_3fe2d43.mp3",
+      "s": "s_slow_3fe2d43.mp3"
+    },
+    "Here is your pajama for the flight.": {
+      "n": "s_c174fed.mp3",
+      "s": "s_slow_c174fed.mp3"
+    },
+    "The amenity kit has essentials.": {
+      "n": "s_2e677be.mp3",
+      "s": "s_slow_2e677be.mp3"
+    },
+    "Would you like a pair of slippers?": {
+      "n": "s_afebd43.mp3",
+      "s": "s_slow_afebd43.mp3"
+    },
+    "Here are your earphones for the movie.": {
+      "n": "s_9a973d1.mp3",
+      "s": "s_slow_9a973d1.mp3"
+    },
+    "Please press the call button for service.": {
+      "n": "s_53f5b7a.mp3",
+      "s": "s_slow_53f5b7a.mp3"
+    },
+    "You can turn on the reading light.": {
+      "n": "s_b768d6d.mp3",
+      "s": "s_slow_b768d6d.mp3"
     }
   },
   "q": {
@@ -386,7 +566,114 @@
     "I really appreciate it.": "q_9ff9bb2.mp3",
     "(Passenger accepts the apology)": "q_4963a34.mp3",
     "Alright, I understand.": "q_af93a27.mp3",
-    "Fine, thank you.": "q_5cc3001.mp3"
+    "Fine, thank you.": "q_5cc3001.mp3",
+    "What cocktail do you recommend?": "q_c2040ca.mp3",
+    "Which cocktail is light?": "q_02e86c3.mp3",
+    "Do you have a champagne cocktail?": "q_ee671c0.mp3",
+    "I'd like a gin-based cocktail.": "q_97d16bf.mp3",
+    "Can I have a Gin Tonic?": "q_bf0417a.mp3",
+    "What's in a Gin Tonic?": "q_e01fc31.mp3",
+    "What rum cocktail do you have?": "q_5f29e8f.mp3",
+    "Do you have a Cuba Libre?": "q_d9a25f2.mp3",
+    "Any rum drink?": "q_86c4bb0.mp3",
+    "Something strong, please.": "q_44edf2d.mp3",
+    "What's a strong cocktail?": "q_e0d3fd8.mp3",
+    "I'll have a Black Russian.": "q_98599ce.mp3",
+    "Any tomato-based cocktail?": "q_3f889d8.mp3",
+    "Do you have Bloody Mary?": "q_dccc4b2.mp3",
+    "A savory cocktail, please.": "q_cd81150.mp3",
+    "Something fresh and minty?": "q_40eddae.mp3",
+    "Can I get a Mojito?": "q_79bb12f.mp3",
+    "What cocktail has mint?": "q_ef8c369.mp3",
+    "How is the fish cooked?": "q_f73d621.mp3",
+    "Is it steamed or fried?": "q_af62d15.mp3",
+    "How do you cook the fish?": "q_5e1d49f.mp3",
+    "How is the beef prepared?": "q_038b709.mp3",
+    "Is the beef braised?": "q_9cfc4b3.mp3",
+    "How do you prepare the beef?": "q_82fc37c.mp3",
+    "How is the chicken done?": "q_b33c18b.mp3",
+    "Is it roasted?": "q_263a4e5.mp3",
+    "How is the salmon cooked?": "q_03e3f1c.mp3",
+    "Is the salmon baked?": "q_93223fe.mp3",
+    "How do you cook the salmon?": "q_3e8a6a0.mp3",
+    "How are the vegetables cooked?": "q_efb3911.mp3",
+    "Are they stir-fried?": "q_422ff3b.mp3",
+    "How do you cook the vegetables?": "q_4d6ee61.mp3",
+    "How is the egg cooked?": "q_aaa967e.mp3",
+    "Is the egg poached?": "q_013e1e3.mp3",
+    "How do you cook the egg?": "q_c8a856f.mp3",
+    "What fish do you serve?": "q_e9a7714.mp3",
+    "Do you have salmon?": "q_07d1536.mp3",
+    "Which fish is fresh?": "q_115a152.mp3",
+    "Any tuna today?": "q_482147d.mp3",
+    "Is tuna available?": "q_8dbca55.mp3",
+    "What about tuna?": "q_3387dae.mp3",
+    "What seafood is special?": "q_67f692e.mp3",
+    "Do you have crab?": "q_432cb8f.mp3",
+    "Any crab dish?": "q_7a7aeb4.mp3",
+    "What shellfish do you have?": "q_116d0a1.mp3",
+    "Do you have shrimp?": "q_64d7b11.mp3",
+    "Any shellfish today?": "q_d29bce2.mp3",
+    "Any scallops on the menu?": "q_3370b1b.mp3",
+    "Do you serve scallops?": "q_2610845.mp3",
+    "What about scallops?": "q_bddfe21.mp3",
+    "What white fish do you have?": "q_2210103.mp3",
+    "Do you have cod?": "q_326a6f7.mp3",
+    "Which white fish?": "q_b307c0c.mp3",
+    "What vegetable goes with it?": "q_acfe40e.mp3",
+    "Do you have asparagus?": "q_5cdd133.mp3",
+    "Which vegetable is it?": "q_042862a.mp3",
+    "Any green vegetable?": "q_4106374.mp3",
+    "Do you have broccoli?": "q_059e50b.mp3",
+    "What greens do you serve?": "q_bcd7e91.mp3",
+    "What leaf vegetable do you have?": "q_81e59fc.mp3",
+    "Do you have spinach?": "q_bd98fcf.mp3",
+    "Any leafy greens?": "q_f27fbc4.mp3",
+    "What root vegetable is it?": "q_ee4d233.mp3",
+    "Do you have carrot?": "q_ca6d0f6.mp3",
+    "Which root vegetable?": "q_10c557e.mp3",
+    "Any avocado in the salad?": "q_431396d.mp3",
+    "Does it have avocado?": "q_c71e26d.mp3",
+    "I'd like avocado.": "q_f073113.mp3",
+    "What fungus vegetable do you have?": "q_e78de0c.mp3",
+    "Do you have mushroom?": "q_5a8b864.mp3",
+    "Any mushroom dish?": "q_1d3ad99.mp3",
+    "What fruit do you have?": "q_b26a16e.mp3",
+    "Do you have apple?": "q_59aa4eb.mp3",
+    "Which fruit is fresh?": "q_7015c8b.mp3",
+    "Any banana?": "q_04e4086.mp3",
+    "Do you have banana?": "q_4c57fd1.mp3",
+    "Can I get a banana?": "q_23ac576.mp3",
+    "What fruit is sweet?": "q_294bd8a.mp3",
+    "Do you have grapes?": "q_bdb8d21.mp3",
+    "Any sweet fruit?": "q_b4d91eb.mp3",
+    "Do you have berries?": "q_120bb9e.mp3",
+    "Do you have strawberry?": "q_b45952f.mp3",
+    "Any strawberries?": "q_fffe179.mp3",
+    "Any tropical fruit?": "q_4d3a3ee.mp3",
+    "Do you have mango?": "q_e5694fd.mp3",
+    "Which tropical fruit?": "q_afa70c6.mp3",
+    "What fruit is refreshing?": "q_953fca3.mp3",
+    "Do you have melon?": "q_e0707b3.mp3",
+    "Any chilled fruit?": "q_adadfd8.mp3",
+    "May I have sleepwear?": "q_5e4685c.mp3",
+    "Can I get the pajama?": "q_b1e5fe8.mp3",
+    "Do you have sleepwear?": "q_1a663e1.mp3",
+    "Where is my amenity kit?": "q_77c83ce.mp3",
+    "Do you have an amenity kit?": "q_71ff8d1.mp3",
+    "Can I get the kit?": "q_fceffb1.mp3",
+    "Can I have slippers?": "q_bf348b0.mp3",
+    "Do you have slippers?": "q_ddda249.mp3",
+    "May I get slippers?": "q_b551ed7.mp3",
+    "Can I get earphones?": "q_76ce154.mp3",
+    "Do you have earphones?": "q_1f186c8.mp3",
+    "I need headphones.": "q_d80ae45.mp3",
+    "How do I call the crew?": "q_16deb83.mp3",
+    "How can I reach you?": "q_4375afd.mp3",
+    "Where is the call button?": "q_fab0c15.mp3",
+    "How do I turn on the light?": "q_053f7f3.mp3",
+    "Where is the reading light?": "q_958d3b4.mp3",
+    "Can I have more light?": "q_1bdf251.mp3"
   },
   "a": {
     "The Mapu Sauvignon Blanc from Chile.": {
@@ -580,6 +867,150 @@
     "Thank you for your understanding.": {
       "n": "a_efa408a.mp3",
       "s": "a_slow_efa408a.mp3"
+    },
+    "I'd suggest a Mimosa, sir.": {
+      "n": "a_1de2913.mp3",
+      "s": "a_slow_1de2913.mp3"
+    },
+    "A Gin Tonic for you, sir.": {
+      "n": "a_1ea05b4.mp3",
+      "s": "a_slow_1ea05b4.mp3"
+    },
+    "We have Cuba Libre, sir.": {
+      "n": "a_59515ba.mp3",
+      "s": "a_slow_59515ba.mp3"
+    },
+    "How about a Black Russian, sir?": {
+      "n": "a_083a2db.mp3",
+      "s": "a_slow_083a2db.mp3"
+    },
+    "We serve Bloody Mary, sir.": {
+      "n": "a_e94bf75.mp3",
+      "s": "a_slow_e94bf75.mp3"
+    },
+    "A Mojito would be perfect, sir.": {
+      "n": "a_1c93560.mp3",
+      "s": "a_slow_1c93560.mp3"
+    },
+    "It is steamed, sir.": {
+      "n": "a_cde148a.mp3",
+      "s": "a_slow_cde148a.mp3"
+    },
+    "It is braised, sir.": {
+      "n": "a_c9390cd.mp3",
+      "s": "a_slow_c9390cd.mp3"
+    },
+    "It is roasted, sir.": {
+      "n": "a_187159a.mp3",
+      "s": "a_slow_187159a.mp3"
+    },
+    "It is baked, sir.": {
+      "n": "a_78101ac.mp3",
+      "s": "a_slow_78101ac.mp3"
+    },
+    "They are stir-fried, sir.": {
+      "n": "a_1d42e68.mp3",
+      "s": "a_slow_1d42e68.mp3"
+    },
+    "It is poached, sir.": {
+      "n": "a_a8c1abc.mp3",
+      "s": "a_slow_a8c1abc.mp3"
+    },
+    "We have fresh salmon, sir.": {
+      "n": "a_e7a9a6a.mp3",
+      "s": "a_slow_e7a9a6a.mp3"
+    },
+    "Yes, we have seared tuna.": {
+      "n": "a_0bab853.mp3",
+      "s": "a_slow_0bab853.mp3"
+    },
+    "Our steamed crab is popular.": {
+      "n": "a_cf55136.mp3",
+      "s": "a_slow_cf55136.mp3"
+    },
+    "We have grilled shrimp, sir.": {
+      "n": "a_6673c10.mp3",
+      "s": "a_slow_6673c10.mp3"
+    },
+    "Yes, pan-seared scallops.": {
+      "n": "a_920a947.mp3",
+      "s": "a_slow_920a947.mp3"
+    },
+    "We have baked cod, sir.": {
+      "n": "a_e0a35c1.mp3",
+      "s": "a_slow_e0a35c1.mp3"
+    },
+    "We serve asparagus, sir.": {
+      "n": "a_2de1b33.mp3",
+      "s": "a_slow_2de1b33.mp3"
+    },
+    "We have broccoli, sir.": {
+      "n": "a_2dab425.mp3",
+      "s": "a_slow_2dab425.mp3"
+    },
+    "We serve spinach, sir.": {
+      "n": "a_7a698c5.mp3",
+      "s": "a_slow_7a698c5.mp3"
+    },
+    "It is carrot, sir.": {
+      "n": "a_982d126.mp3",
+      "s": "a_slow_982d126.mp3"
+    },
+    "Yes, we add avocado, sir.": {
+      "n": "a_3c18e26.mp3",
+      "s": "a_slow_3c18e26.mp3"
+    },
+    "We serve mushroom, sir.": {
+      "n": "a_7459013.mp3",
+      "s": "a_slow_7459013.mp3"
+    },
+    "We have apple, sir.": {
+      "n": "a_34b1bc8.mp3",
+      "s": "a_slow_34b1bc8.mp3"
+    },
+    "Yes, we have banana, sir.": {
+      "n": "a_fa69e84.mp3",
+      "s": "a_slow_fa69e84.mp3"
+    },
+    "We serve grape, sir.": {
+      "n": "a_b99eb1a.mp3",
+      "s": "a_slow_b99eb1a.mp3"
+    },
+    "We have strawberry, sir.": {
+      "n": "a_8edb45d.mp3",
+      "s": "a_slow_8edb45d.mp3"
+    },
+    "We serve mango, sir.": {
+      "n": "a_fe313d3.mp3",
+      "s": "a_slow_fe313d3.mp3"
+    },
+    "We have melon, sir.": {
+      "n": "a_539e18a.mp3",
+      "s": "a_slow_539e18a.mp3"
+    },
+    "Certainly, here is your pajama.": {
+      "n": "a_ded861f.mp3",
+      "s": "a_slow_ded861f.mp3"
+    },
+    "Here is your amenity kit, sir.": {
+      "n": "a_066687c.mp3",
+      "s": "a_slow_066687c.mp3"
+    },
+    "Certainly, here are your slippers.": {
+      "n": "a_8e3c8fe.mp3",
+      "s": "a_slow_8e3c8fe.mp3"
+    },
+    "Yes, here are your earphones.": {
+      "n": "a_8028fde.mp3",
+      "s": "a_slow_8028fde.mp3"
+    },
+    "Just press the call button, sir.": {
+      "n": "a_01eec86.mp3",
+      "s": "a_slow_01eec86.mp3"
+    },
+    "Use the reading light, sir.": {
+      "n": "a_71bbb8b.mp3",
+      "s": "a_slow_71bbb8b.mp3"
     }
   },
   "m": {
@@ -678,6 +1109,78 @@
     "It's my pleasure.": "m_d4da178.mp3",
     "You're very welcome.": "m_515c788.mp3",
     "Thanks for your understanding.": "m_19ff5e3.mp3",
-    "I appreciate your understanding.": "m_ff5e43c.mp3"
+    "I appreciate your understanding.": "m_ff5e43c.mp3",
+    "A Mimosa is champagne with orange juice.": "m_483f93d.mp3",
+    "Mimosa is our lightest cocktail.": "m_a6af5ff.mp3",
+    "A Gin Tonic is gin with tonic water.": "m_7e7714f.mp3",
+    "We serve Gin Tonic, sir.": "m_ef2772a.mp3",
+    "Cuba Libre is rum with cola.": "m_07e92e5.mp3",
+    "Sure, a Cuba Libre for you.": "m_a40685a.mp3",
+    "Black Russian is vodka with coffee liqueur.": "m_69d7bf9.mp3",
+    "A Black Russian, certainly.": "m_7f5d9ab.mp3",
+    "Bloody Mary is vodka with tomato juice.": "m_15fdda9.mp3",
+    "Bloody Mary is available, sir.": "m_b061dc4.mp3",
+    "Mojito is rum with mint and lime.": "m_4fae601.mp3",
+    "A Mojito for you, sir.": "m_bae2ec1.mp3",
+    "It's steamed with light sauce.": "m_db4a10d.mp3",
+    "We steam it to keep it tender.": "m_025df93.mp3",
+    "It's braised slowly.": "m_2a175d4.mp3",
+    "Braised beef is very tender.": "m_b4198b8.mp3",
+    "It's roasted in the oven.": "m_bc095e2.mp3",
+    "Roasted chicken is our special.": "m_de70d32.mp3",
+    "It's baked with a cheese crust.": "m_f823c6d.mp3",
+    "Baked salmon is light and healthy.": "m_5a94a0d.mp3",
+    "They're quickly stir-fried.": "m_8e39718.mp3",
+    "Stir-fried with garlic, sir.": "m_f27a9eb.mp3",
+    "It's gently poached.": "m_00c258f.mp3",
+    "Poached egg on the side, sir.": "m_31e0b8e.mp3",
+    "The salmon is from Norway.": "m_7ed3f20.mp3",
+    "Salmon is our signature fish.": "m_91f5ec7.mp3",
+    "The tuna is lightly seared.": "m_6878b36.mp3",
+    "We serve tuna steak, sir.": "m_a7aa45a.mp3",
+    "The crab is steamed.": "m_ac4fb27.mp3",
+    "Crab is a customer favorite.": "m_62f797e.mp3",
+    "The shrimp is garlic grilled.": "m_d50cbe1.mp3",
+    "We serve shrimp, sir.": "m_36d276d.mp3",
+    "The scallops are seared.": "m_f7b885e.mp3",
+    "Pan-seared scallops today, sir.": "m_0a67b9d.mp3",
+    "The cod is baked with lemon.": "m_eaef104.mp3",
+    "Cod is a mild white fish.": "m_4b5ff71.mp3",
+    "The asparagus is fresh.": "m_88247f3.mp3",
+    "Asparagus on the side, sir.": "m_884bb12.mp3",
+    "The broccoli is steamed.": "m_b9c8a1a.mp3",
+    "Broccoli is available, sir.": "m_4fd54b2.mp3",
+    "The spinach is garlicky.": "m_1e5933a.mp3",
+    "Spinach is on the menu, sir.": "m_82d838c.mp3",
+    "The carrot is roasted.": "m_26df5be.mp3",
+    "Carrot adds a sweet note, sir.": "m_eba7a1e.mp3",
+    "The salad has avocado.": "m_9195f55.mp3",
+    "Avocado makes it creamy, sir.": "m_6a2733d.mp3",
+    "The mushroom is buttery.": "m_a1db796.mp3",
+    "Mushroom is available, sir.": "m_879105a.mp3",
+    "The apple is from the farm.": "m_f9c5174.mp3",
+    "Apple is available, sir.": "m_27c29f8.mp3",
+    "The banana is ripe.": "m_c8e409e.mp3",
+    "Banana is on the fruit plate, sir.": "m_8d594a2.mp3",
+    "The grapes are seedless.": "m_d1c2092.mp3",
+    "Grape is available, sir.": "m_2135c5b.mp3",
+    "The strawberry is fresh.": "m_9a20d6d.mp3",
+    "Strawberry is in season, sir.": "m_1e24356.mp3",
+    "The mango is juicy.": "m_7f46730.mp3",
+    "Mango is available, sir.": "m_41cb377.mp3",
+    "The melon is chilled.": "m_39f93e6.mp3",
+    "Melon is refreshing, sir.": "m_8ec049b.mp3",
+    "Here is the pajama, sir.": "m_db56beb.mp3",
+    "Pajama is in the amenity kit.": "m_b00c0d3.mp3",
+    "Here is the amenity kit.": "m_e87081e.mp3",
+    "The kit has toothbrush and cream.": "m_13739c7.mp3",
+    "Here are your slippers, sir.": "m_ccb7120.mp3",
+    "Slippers are by your seat.": "m_2913f51.mp3",
+    "Here are the earphones, sir.": "m_35a2c28.mp3",
+    "Earphones for the entertainment system.": "m_e42da20.mp3",
+    "Press the call button above you.": "m_ead863b.mp3",
+    "The call button is on the panel.": "m_04179c8.mp3",
+    "The reading light is above you.": "m_b560a16.mp3",
+    "Adjust the reading light as you like.": "m_093440c.mp3"
   }
 }

@@ -1,4 +1,4 @@
-// 公务舱英语陪练 · 词汇驱动题库（第一版 48 词／8 类）
+// 公务舱英语陪练 · 词汇驱动题库（第一版 84 词／14 类）
 // 字段：w/wz=单词+中文(第一关听辨)  s/sz=跟读短句(第二关)  q/a/qz/az=情景应答(第三关)
 // 规格：q<=12词 a<=15词 s<=12词，目标词必现在 a 与 s 中
 // 音色：考官(男 Brian) 念 w 与 q；示范/应答(女 Jenny) 念 s 与 a
@@ -1420,6 +1420,970 @@ const DATA = {
           "samples": [
             "Thanks for your understanding.",
             "I appreciate your understanding."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cocktail",
+      "icon": "🍸",
+      "name": "鸡尾酒",
+      "desc": "经典鸡尾酒与调配",
+      "pairs": [
+        {
+          "w": "Mimosa",
+          "wz": "含羞草（香槟+橙汁）",
+          "s": "The Mimosa is light and refreshing.",
+          "sz": "含羞草清淡爽口。",
+          "q": "What cocktail do you recommend?",
+          "a": "I'd suggest a Mimosa, sir.",
+          "qz": "推荐什么鸡尾酒？",
+          "az": "我推荐含羞草，先生。",
+          "key": "Mimosa",
+          "keyz": "含羞草",
+          "variants": [
+            "Which cocktail is light?",
+            "Do you have a champagne cocktail?"
+          ],
+          "accept": [
+            [
+              "mimosa"
+            ]
+          ],
+          "samples": [
+            "A Mimosa is champagne with orange juice.",
+            "Mimosa is our lightest cocktail."
+          ]
+        },
+        {
+          "w": "Gin Tonic",
+          "wz": "金汤力",
+          "s": "Would you like a Gin Tonic?",
+          "sz": "您要金汤力吗？",
+          "q": "I'd like a gin-based cocktail.",
+          "a": "A Gin Tonic for you, sir.",
+          "qz": "我要金酒类的鸡尾酒。",
+          "az": "给您金汤力，先生。",
+          "key": "Gin Tonic",
+          "keyz": "金汤力",
+          "variants": [
+            "Can I have a Gin Tonic?",
+            "What's in a Gin Tonic?"
+          ],
+          "accept": [
+            [
+              "gin tonic",
+              "gin and tonic"
+            ]
+          ],
+          "samples": [
+            "A Gin Tonic is gin with tonic water.",
+            "We serve Gin Tonic, sir."
+          ]
+        },
+        {
+          "w": "Cuba Libre",
+          "wz": "自由古巴（朗姆+可乐）",
+          "s": "The Cuba Libre is rum and cola.",
+          "sz": "自由古巴是朗姆加可乐。",
+          "q": "What rum cocktail do you have?",
+          "a": "We have Cuba Libre, sir.",
+          "qz": "有什么朗姆鸡尾酒？",
+          "az": "有自由古巴，先生。",
+          "key": "Cuba Libre",
+          "keyz": "自由古巴",
+          "variants": [
+            "Do you have a Cuba Libre?",
+            "Any rum drink?"
+          ],
+          "accept": [
+            [
+              "cuba libre"
+            ]
+          ],
+          "samples": [
+            "Cuba Libre is rum with cola.",
+            "Sure, a Cuba Libre for you."
+          ]
+        },
+        {
+          "w": "Black Russian",
+          "wz": "黑俄（伏特加+咖啡利口酒）",
+          "s": "The Black Russian is vodka and coffee liqueur.",
+          "sz": "黑俄是伏特加加咖啡利口酒。",
+          "q": "Something strong, please.",
+          "a": "How about a Black Russian, sir?",
+          "qz": "来杯烈的。",
+          "az": "来杯黑俄怎么样，先生？",
+          "key": "Black Russian",
+          "keyz": "黑俄",
+          "variants": [
+            "What's a strong cocktail?",
+            "I'll have a Black Russian."
+          ],
+          "accept": [
+            [
+              "black russian"
+            ]
+          ],
+          "samples": [
+            "Black Russian is vodka with coffee liqueur.",
+            "A Black Russian, certainly."
+          ]
+        },
+        {
+          "w": "Bloody Mary",
+          "wz": "血腥玛丽",
+          "s": "The Bloody Mary is a classic brunch drink.",
+          "sz": "血腥玛丽是经典的早午餐酒。",
+          "q": "Any tomato-based cocktail?",
+          "a": "We serve Bloody Mary, sir.",
+          "qz": "有番茄基底的鸡尾酒吗？",
+          "az": "我们有血腥玛丽，先生。",
+          "key": "Bloody Mary",
+          "keyz": "血腥玛丽",
+          "variants": [
+            "Do you have Bloody Mary?",
+            "A savory cocktail, please."
+          ],
+          "accept": [
+            [
+              "bloody mary"
+            ]
+          ],
+          "samples": [
+            "Bloody Mary is vodka with tomato juice.",
+            "Bloody Mary is available, sir."
+          ]
+        },
+        {
+          "w": "Mojito",
+          "wz": "莫吉托（朗姆+薄荷青柠）",
+          "s": "The Mojito is fresh mint and lime.",
+          "sz": "莫吉托是薄荷加青柠。",
+          "q": "Something fresh and minty?",
+          "a": "A Mojito would be perfect, sir.",
+          "qz": "来杯清新带薄荷的。",
+          "az": "莫吉托正合适，先生。",
+          "key": "Mojito",
+          "keyz": "莫吉托",
+          "variants": [
+            "Can I get a Mojito?",
+            "What cocktail has mint?"
+          ],
+          "accept": [
+            [
+              "mojito"
+            ]
+          ],
+          "samples": [
+            "Mojito is rum with mint and lime.",
+            "A Mojito for you, sir."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cooking",
+      "icon": "🍳",
+      "name": "烹饪方式",
+      "desc": "蒸烤炒煮等烹饪法",
+      "pairs": [
+        {
+          "w": "steamed",
+          "wz": "蒸",
+          "s": "The fish is steamed with ginger.",
+          "sz": "鱼是姜丝清蒸的。",
+          "q": "How is the fish cooked?",
+          "a": "It is steamed, sir.",
+          "qz": "鱼怎么做的？",
+          "az": "是清蒸的，先生。",
+          "key": "steamed",
+          "keyz": "蒸",
+          "variants": [
+            "Is it steamed or fried?",
+            "How do you cook the fish?"
+          ],
+          "accept": [
+            [
+              "steamed"
+            ]
+          ],
+          "samples": [
+            "It's steamed with light sauce.",
+            "We steam it to keep it tender."
+          ]
+        },
+        {
+          "w": "braised",
+          "wz": "炖（焖煮）",
+          "s": "The beef is braised in red wine.",
+          "sz": "牛肉是红酒焖煮的。",
+          "q": "How is the beef prepared?",
+          "a": "It is braised, sir.",
+          "qz": "牛肉怎么烹制的？",
+          "az": "是焖煮的，先生。",
+          "key": "braised",
+          "keyz": "炖/焖",
+          "variants": [
+            "Is the beef braised?",
+            "How do you prepare the beef?"
+          ],
+          "accept": [
+            [
+              "braised"
+            ]
+          ],
+          "samples": [
+            "It's braised slowly.",
+            "Braised beef is very tender."
+          ]
+        },
+        {
+          "w": "roasted",
+          "wz": "烤（烘烤）",
+          "s": "The chicken is roasted with herbs.",
+          "sz": "鸡肉是香草烤制的。",
+          "q": "How is the chicken done?",
+          "a": "It is roasted, sir.",
+          "qz": "鸡肉怎么做？",
+          "az": "是烤的，先生。",
+          "key": "roasted",
+          "keyz": "烤",
+          "variants": [
+            "Is it roasted?",
+            "How is the chicken cooked?"
+          ],
+          "accept": [
+            [
+              "roasted",
+              "roast"
+            ]
+          ],
+          "samples": [
+            "It's roasted in the oven.",
+            "Roasted chicken is our special."
+          ]
+        },
+        {
+          "w": "baked",
+          "wz": "焗（烤箱烘焙）",
+          "s": "The salmon is baked with cheese.",
+          "sz": "三文鱼是芝士焗的。",
+          "q": "How is the salmon cooked?",
+          "a": "It is baked, sir.",
+          "qz": "三文鱼怎么做的？",
+          "az": "是焗的，先生。",
+          "key": "baked",
+          "keyz": "焗/烘焙",
+          "variants": [
+            "Is the salmon baked?",
+            "How do you cook the salmon?"
+          ],
+          "accept": [
+            [
+              "baked",
+              "bake"
+            ]
+          ],
+          "samples": [
+            "It's baked with a cheese crust.",
+            "Baked salmon is light and healthy."
+          ]
+        },
+        {
+          "w": "stir-fried",
+          "wz": "炒（快炒）",
+          "s": "The vegetables are stir-fried.",
+          "sz": "蔬菜是快炒的。",
+          "q": "How are the vegetables cooked?",
+          "a": "They are stir-fried, sir.",
+          "qz": "蔬菜怎么做的？",
+          "az": "是炒的，先生。",
+          "key": "stir-fried",
+          "keyz": "炒",
+          "variants": [
+            "Are they stir-fried?",
+            "How do you cook the vegetables?"
+          ],
+          "accept": [
+            [
+              "stir fried",
+              "stir-fried",
+              "stirfried"
+            ]
+          ],
+          "samples": [
+            "They're quickly stir-fried.",
+            "Stir-fried with garlic, sir."
+          ]
+        },
+        {
+          "w": "poached",
+          "wz": "水煮（嫩煮）",
+          "s": "The egg is poached, not boiled.",
+          "sz": "蛋是水煮嫩煮的，不是全熟。",
+          "q": "How is the egg cooked?",
+          "a": "It is poached, sir.",
+          "qz": "蛋怎么做的？",
+          "az": "是水煮嫩蛋，先生。",
+          "key": "poached",
+          "keyz": "水煮/嫩煮",
+          "variants": [
+            "Is the egg poached?",
+            "How do you cook the egg?"
+          ],
+          "accept": [
+            [
+              "poached"
+            ]
+          ],
+          "samples": [
+            "It's gently poached.",
+            "Poached egg on the side, sir."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "seafood",
+      "icon": "🦐",
+      "name": "海鲜",
+      "desc": "鱼贝虾蟹等海产",
+      "pairs": [
+        {
+          "w": "salmon",
+          "wz": "三文鱼",
+          "s": "The salmon is fresh from Norway.",
+          "sz": "三文鱼产自挪威，很新鲜。",
+          "q": "What fish do you serve?",
+          "a": "We have fresh salmon, sir.",
+          "qz": "有什么鱼？",
+          "az": "我们有新鲜三文鱼，先生。",
+          "key": "salmon",
+          "keyz": "三文鱼",
+          "variants": [
+            "Do you have salmon?",
+            "Which fish is fresh?"
+          ],
+          "accept": [
+            [
+              "salmon"
+            ]
+          ],
+          "samples": [
+            "The salmon is from Norway.",
+            "Salmon is our signature fish."
+          ]
+        },
+        {
+          "w": "tuna",
+          "wz": "金枪鱼",
+          "s": "The tuna is seared lightly.",
+          "sz": "金枪鱼是轻煎的。",
+          "q": "Any tuna today?",
+          "a": "Yes, we have seared tuna.",
+          "qz": "今天有金枪鱼吗？",
+          "az": "有，我们有香煎金枪鱼。",
+          "key": "tuna",
+          "keyz": "金枪鱼",
+          "variants": [
+            "Is tuna available?",
+            "What about tuna?"
+          ],
+          "accept": [
+            [
+              "tuna"
+            ]
+          ],
+          "samples": [
+            "The tuna is lightly seared.",
+            "We serve tuna steak, sir."
+          ]
+        },
+        {
+          "w": "crab",
+          "wz": "蟹",
+          "s": "The crab is steamed with ginger.",
+          "sz": "蟹是姜葱蒸的。",
+          "q": "What seafood is special?",
+          "a": "Our steamed crab is popular.",
+          "qz": "什么海鲜招牌？",
+          "az": "我们的蒸蟹很受欢迎。",
+          "key": "crab",
+          "keyz": "蟹",
+          "variants": [
+            "Do you have crab?",
+            "Any crab dish?"
+          ],
+          "accept": [
+            [
+              "crab"
+            ]
+          ],
+          "samples": [
+            "The crab is steamed.",
+            "Crab is a customer favorite."
+          ]
+        },
+        {
+          "w": "shrimp",
+          "wz": "虾",
+          "s": "The shrimp is grilled with garlic.",
+          "sz": "虾是蒜香烤的。",
+          "q": "What shellfish do you have?",
+          "a": "We have grilled shrimp, sir.",
+          "qz": "有什么贝类？",
+          "az": "我们有烤虾，先生。",
+          "key": "shrimp",
+          "keyz": "虾",
+          "variants": [
+            "Do you have shrimp?",
+            "Any shellfish today?"
+          ],
+          "accept": [
+            [
+              "shrimp"
+            ]
+          ],
+          "samples": [
+            "The shrimp is garlic grilled.",
+            "We serve shrimp, sir."
+          ]
+        },
+        {
+          "w": "scallop",
+          "wz": "扇贝",
+          "s": "The scallop is pan-seared.",
+          "sz": "扇贝是煎的。",
+          "q": "Any scallops on the menu?",
+          "a": "Yes, pan-seared scallops.",
+          "qz": "菜单有扇贝吗？",
+          "az": "有，香煎扇贝。",
+          "key": "scallop",
+          "keyz": "扇贝",
+          "variants": [
+            "Do you serve scallops?",
+            "What about scallops?"
+          ],
+          "accept": [
+            [
+              "scallop"
+            ]
+          ],
+          "samples": [
+            "The scallops are seared.",
+            "Pan-seared scallops today, sir."
+          ]
+        },
+        {
+          "w": "cod",
+          "wz": "鳕鱼",
+          "s": "The cod is baked with lemon.",
+          "sz": "鳕鱼是柠檬焗的。",
+          "q": "What white fish do you have?",
+          "a": "We have baked cod, sir.",
+          "qz": "有什么白鱼？",
+          "az": "我们有柠檬焗鳕鱼，先生。",
+          "key": "cod",
+          "keyz": "鳕鱼",
+          "variants": [
+            "Do you have cod?",
+            "Which white fish?"
+          ],
+          "accept": [
+            [
+              "cod"
+            ]
+          ],
+          "samples": [
+            "The cod is baked with lemon.",
+            "Cod is a mild white fish."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "produce",
+      "icon": "🥦",
+      "name": "蔬果",
+      "desc": "时蔬与菌菇",
+      "pairs": [
+        {
+          "w": "asparagus",
+          "wz": "芦笋",
+          "s": "The asparagus is steamed fresh.",
+          "sz": "芦笋是清蒸的。",
+          "q": "What vegetable goes with it?",
+          "a": "We serve asparagus, sir.",
+          "qz": "配什么蔬菜？",
+          "az": "我们配芦笋，先生。",
+          "key": "asparagus",
+          "keyz": "芦笋",
+          "variants": [
+            "Do you have asparagus?",
+            "Which vegetable is it?"
+          ],
+          "accept": [
+            [
+              "asparagus"
+            ]
+          ],
+          "samples": [
+            "The asparagus is fresh.",
+            "Asparagus on the side, sir."
+          ]
+        },
+        {
+          "w": "broccoli",
+          "wz": "西兰花",
+          "s": "The broccoli is lightly steamed.",
+          "sz": "西兰花是轻蒸的。",
+          "q": "Any green vegetable?",
+          "a": "We have broccoli, sir.",
+          "qz": "有绿色蔬菜吗？",
+          "az": "有西兰花，先生。",
+          "key": "broccoli",
+          "keyz": "西兰花",
+          "variants": [
+            "Do you have broccoli?",
+            "What greens do you serve?"
+          ],
+          "accept": [
+            [
+              "broccoli"
+            ]
+          ],
+          "samples": [
+            "The broccoli is steamed.",
+            "Broccoli is available, sir."
+          ]
+        },
+        {
+          "w": "spinach",
+          "wz": "菠菜",
+          "s": "The spinach is sauteed with garlic.",
+          "sz": "菠菜是蒜炒的。",
+          "q": "What leaf vegetable do you have?",
+          "a": "We serve spinach, sir.",
+          "qz": "有什么叶菜？",
+          "az": "我们做菠菜，先生。",
+          "key": "spinach",
+          "keyz": "菠菜",
+          "variants": [
+            "Do you have spinach?",
+            "Any leafy greens?"
+          ],
+          "accept": [
+            [
+              "spinach"
+            ]
+          ],
+          "samples": [
+            "The spinach is garlicky.",
+            "Spinach is on the menu, sir."
+          ]
+        },
+        {
+          "w": "carrot",
+          "wz": "胡萝卜",
+          "s": "The carrot is roasted sweet.",
+          "sz": "胡萝卜烤得甜甜的。",
+          "q": "What root vegetable is it?",
+          "a": "It is carrot, sir.",
+          "qz": "是什么根茎菜？",
+          "az": "是胡萝卜，先生。",
+          "key": "carrot",
+          "keyz": "胡萝卜",
+          "variants": [
+            "Do you have carrot?",
+            "Which root vegetable?"
+          ],
+          "accept": [
+            [
+              "carrot"
+            ]
+          ],
+          "samples": [
+            "The carrot is roasted.",
+            "Carrot adds a sweet note, sir."
+          ]
+        },
+        {
+          "w": "avocado",
+          "wz": "牛油果",
+          "s": "The salad has fresh avocado.",
+          "sz": "色拉里有新鲜牛油果。",
+          "q": "Any avocado in the salad?",
+          "a": "Yes, we add avocado, sir.",
+          "qz": "色拉里有牛油果吗？",
+          "az": "有的，我们加牛油果，先生。",
+          "key": "avocado",
+          "keyz": "牛油果",
+          "variants": [
+            "Does it have avocado?",
+            "I'd like avocado."
+          ],
+          "accept": [
+            [
+              "avocado"
+            ]
+          ],
+          "samples": [
+            "The salad has avocado.",
+            "Avocado makes it creamy, sir."
+          ]
+        },
+        {
+          "w": "mushroom",
+          "wz": "蘑菇",
+          "s": "The mushroom is sauteed in butter.",
+          "sz": "蘑菇是黄油煎的。",
+          "q": "What fungus vegetable do you have?",
+          "a": "We serve mushroom, sir.",
+          "qz": "有什么菌菇？",
+          "az": "我们做蘑菇，先生。",
+          "key": "mushroom",
+          "keyz": "蘑菇",
+          "variants": [
+            "Do you have mushroom?",
+            "Any mushroom dish?"
+          ],
+          "accept": [
+            [
+              "mushroom"
+            ]
+          ],
+          "samples": [
+            "The mushroom is buttery.",
+            "Mushroom is available, sir."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fruit",
+      "icon": "🍓",
+      "name": "水果",
+      "desc": "鲜果与浆果",
+      "pairs": [
+        {
+          "w": "apple",
+          "wz": "苹果",
+          "s": "The apple is crisp and sweet.",
+          "sz": "苹果脆甜。",
+          "q": "What fruit do you have?",
+          "a": "We have apple, sir.",
+          "qz": "有什么水果？",
+          "az": "有苹果，先生。",
+          "key": "apple",
+          "keyz": "苹果",
+          "variants": [
+            "Do you have apple?",
+            "Which fruit is fresh?"
+          ],
+          "accept": [
+            [
+              "apple"
+            ]
+          ],
+          "samples": [
+            "The apple is from the farm.",
+            "Apple is available, sir."
+          ]
+        },
+        {
+          "w": "banana",
+          "wz": "香蕉",
+          "s": "The banana is ripe and soft.",
+          "sz": "香蕉熟软。",
+          "q": "Any banana?",
+          "a": "Yes, we have banana, sir.",
+          "qz": "有香蕉吗？",
+          "az": "有香蕉，先生。",
+          "key": "banana",
+          "keyz": "香蕉",
+          "variants": [
+            "Do you have banana?",
+            "Can I get a banana?"
+          ],
+          "accept": [
+            [
+              "banana"
+            ]
+          ],
+          "samples": [
+            "The banana is ripe.",
+            "Banana is on the fruit plate, sir."
+          ]
+        },
+        {
+          "w": "grape",
+          "wz": "葡萄",
+          "s": "The grape is seedless and sweet.",
+          "sz": "葡萄无籽清甜。",
+          "q": "What fruit is sweet?",
+          "a": "We serve grape, sir.",
+          "qz": "什么水果甜？",
+          "az": "我们供葡萄，先生。",
+          "key": "grape",
+          "keyz": "葡萄",
+          "variants": [
+            "Do you have grapes?",
+            "Any sweet fruit?"
+          ],
+          "accept": [
+            [
+              "grape",
+              "grapes"
+            ]
+          ],
+          "samples": [
+            "The grapes are seedless.",
+            "Grape is available, sir."
+          ]
+        },
+        {
+          "w": "strawberry",
+          "wz": "草莓",
+          "s": "The strawberry is fresh in season.",
+          "sz": "草莓当季新鲜。",
+          "q": "Do you have berries?",
+          "a": "We have strawberry, sir.",
+          "qz": "有浆果吗？",
+          "az": "有草莓，先生。",
+          "key": "strawberry",
+          "keyz": "草莓",
+          "variants": [
+            "Do you have strawberry?",
+            "Any strawberries?"
+          ],
+          "accept": [
+            [
+              "strawberry",
+              "strawberries"
+            ]
+          ],
+          "samples": [
+            "The strawberry is fresh.",
+            "Strawberry is in season, sir."
+          ]
+        },
+        {
+          "w": "mango",
+          "wz": "芒果",
+          "s": "The mango is ripe and juicy.",
+          "sz": "芒果熟透多汁。",
+          "q": "Any tropical fruit?",
+          "a": "We serve mango, sir.",
+          "qz": "有热带水果吗？",
+          "az": "我们供芒果，先生。",
+          "key": "mango",
+          "keyz": "芒果",
+          "variants": [
+            "Do you have mango?",
+            "Which tropical fruit?"
+          ],
+          "accept": [
+            [
+              "mango"
+            ]
+          ],
+          "samples": [
+            "The mango is juicy.",
+            "Mango is available, sir."
+          ]
+        },
+        {
+          "w": "melon",
+          "wz": "蜜瓜",
+          "s": "The melon is sweet and chilled.",
+          "sz": "蜜瓜清甜冰镇。",
+          "q": "What fruit is refreshing?",
+          "a": "We have melon, sir.",
+          "qz": "什么水果清爽？",
+          "az": "有蜜瓜，先生。",
+          "key": "melon",
+          "keyz": "蜜瓜",
+          "variants": [
+            "Do you have melon?",
+            "Any chilled fruit?"
+          ],
+          "accept": [
+            [
+              "melon"
+            ]
+          ],
+          "samples": [
+            "The melon is chilled.",
+            "Melon is refreshing, sir."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cabinitem",
+      "icon": "🧦",
+      "name": "客舱用品",
+      "desc": "机上备品与设施",
+      "pairs": [
+        {
+          "w": "pajama",
+          "wz": "睡衣",
+          "s": "Here is your pajama for the flight.",
+          "sz": "这是您航程用的睡衣。",
+          "q": "May I have sleepwear?",
+          "a": "Certainly, here is your pajama.",
+          "qz": "能给我睡衣吗？",
+          "az": "当然，这是您的睡衣。",
+          "key": "pajama",
+          "keyz": "睡衣",
+          "variants": [
+            "Can I get the pajama?",
+            "Do you have sleepwear?"
+          ],
+          "accept": [
+            [
+              "pajama",
+              "pyjama"
+            ]
+          ],
+          "samples": [
+            "Here is the pajama, sir.",
+            "Pajama is in the amenity kit."
+          ]
+        },
+        {
+          "w": "amenity kit",
+          "wz": "洗漱包",
+          "s": "The amenity kit has essentials.",
+          "sz": "洗漱包里有必备品。",
+          "q": "Where is my amenity kit?",
+          "a": "Here is your amenity kit, sir.",
+          "qz": "我的洗漱包在哪？",
+          "az": "这是您的洗漱包，先生。",
+          "key": "amenity kit",
+          "keyz": "洗漱包",
+          "variants": [
+            "Do you have an amenity kit?",
+            "Can I get the kit?"
+          ],
+          "accept": [
+            [
+              "amenity kit",
+              "amenity"
+            ]
+          ],
+          "samples": [
+            "Here is the amenity kit.",
+            "The kit has toothbrush and cream."
+          ]
+        },
+        {
+          "w": "slipper",
+          "wz": "拖鞋",
+          "s": "Would you like a pair of slippers?",
+          "sz": "您要一双拖鞋吗？",
+          "q": "Can I have slippers?",
+          "a": "Certainly, here are your slippers.",
+          "qz": "能给我拖鞋吗？",
+          "az": "当然，这是您的拖鞋。",
+          "key": "slipper",
+          "keyz": "拖鞋",
+          "variants": [
+            "Do you have slippers?",
+            "May I get slippers?"
+          ],
+          "accept": [
+            [
+              "slipper",
+              "slippers"
+            ]
+          ],
+          "samples": [
+            "Here are your slippers, sir.",
+            "Slippers are by your seat."
+          ]
+        },
+        {
+          "w": "earphone",
+          "wz": "耳机",
+          "s": "Here are your earphones for the movie.",
+          "sz": "这是您看电影用的耳机。",
+          "q": "Can I get earphones?",
+          "a": "Yes, here are your earphones.",
+          "qz": "能给我耳机吗？",
+          "az": "可以，这是您的耳机。",
+          "key": "earphone",
+          "keyz": "耳机",
+          "variants": [
+            "Do you have earphones?",
+            "I need headphones."
+          ],
+          "accept": [
+            [
+              "earphone",
+              "earphones",
+              "headphone",
+              "headphones"
+            ]
+          ],
+          "samples": [
+            "Here are the earphones, sir.",
+            "Earphones for the entertainment system."
+          ]
+        },
+        {
+          "w": "call button",
+          "wz": "呼唤铃",
+          "s": "Please press the call button for service.",
+          "sz": "需要服务请按呼唤铃。",
+          "q": "How do I call the crew?",
+          "a": "Just press the call button, sir.",
+          "qz": "怎么呼叫乘务员？",
+          "az": "按呼唤铃就好，先生。",
+          "key": "call button",
+          "keyz": "呼唤铃",
+          "variants": [
+            "How can I reach you?",
+            "Where is the call button?"
+          ],
+          "accept": [
+            [
+              "call button",
+              "attendant call",
+              "call bell"
+            ]
+          ],
+          "samples": [
+            "Press the call button above you.",
+            "The call button is on the panel."
+          ]
+        },
+        {
+          "w": "reading light",
+          "wz": "阅读灯",
+          "s": "You can turn on the reading light.",
+          "sz": "您可以打开阅读灯。",
+          "q": "How do I turn on the light?",
+          "a": "Use the reading light, sir.",
+          "qz": "怎么开灯？",
+          "az": "用阅读灯，先生。",
+          "key": "reading light",
+          "keyz": "阅读灯",
+          "variants": [
+            "Where is the reading light?",
+            "Can I have more light?"
+          ],
+          "accept": [
+            [
+              "reading light",
+              "lamp"
+            ]
+          ],
+          "samples": [
+            "The reading light is above you.",
+            "Adjust the reading light as you like."
           ]
         }
       ]
