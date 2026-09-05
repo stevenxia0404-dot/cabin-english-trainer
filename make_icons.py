@@ -21,9 +21,11 @@ from PIL import Image, ImageChops
 TARGET_BG = (7, 11, 22)      # #070B16，与应用 --bg 一致
 BG_THR = 35                  # 背景判定阈值：像素与参考背景的「最大通道差」小于此值即视为背景
 
-# 前景在最终图标里的占比
-FILL_NORMAL = 0.80           # 普通图标内容占画布 80%
-FILL_MASKABLE = 0.64         # maskable 安全区要求：内容缩到中心 80% 区域内
+# 前景在最终图标里的占比（已先裁掉黑边留白并按视觉质心居中，故话筒图形本身即填满该比例）
+# 注意：fill 不是越大越好。圆角/异形图标需要四周留边距（iOS 圆角会切边），
+# 内容占比约 84%，已接近圆角安全区上限，让话筒最大化占满图标。
+FILL_NORMAL = 0.84           # 普通图标：话筒占画布 84%，极限饱满
+FILL_MASKABLE = 0.78         # maskable：内容占 78%，在安卓 80% 安全区内
 
 
 def extract_foreground(src_path):
@@ -50,7 +52,53 @@ def extract_foreground(src_path):
     mask = mx.point(lambda x: 0 if x < BG_THR else 255)
 
     bg_canvas = Image.new("RGB", (w, h), TARGET_BG)
-    return Image.composite(src, bg_canvas, mask)
+    fg = Image.composite(src, bg_canvas, mask)
+    return fg, mask
+
+
+def crop_to_visual_center(fg, mask):
+    """按前景金色像素的视觉质心（centroid）裁剪成正方形。
+
+    话筒+云的图形重心通常不在几何 bbox 中心（顶部云弧线重、底部支架轻），
+    直接用 bbox 居中会导致图标视觉上偏上。这里以所有金色像素的平均位置
+    作为视觉中心，裁剪出以该中心为中心、且能完整包含前景的最小正方形。
+    """
+    w, h = fg.size
+    bbox = mask.getbbox()
+    if not bbox:
+        return fg
+    left, top, right, bottom = bbox
+    sub_w = right - left
+    sub_h = bottom - top
+
+    # 在 bbox 内计算前景像素的质心（用 tobytes 避免 Pillow 14 移除 getdata）
+    sub_mask = mask.crop(bbox)
+    data = sub_mask.tobytes()
+    total = 0
+    sx = sy = 0
+    for i in range(len(data)):
+        if data[i]:
+            sx += i % sub_w
+            sy += i // sub_w
+            total += 1
+    if total == 0:
+        return fg.crop(bbox)
+    cx = left + sx / total
+    cy = top + sy / total
+
+    # 以质心为中心，覆盖整个前景的最小正方形半边长
+    half = int(max(cx - left, right - cx, cy - top, bottom - cy))
+    new_left = max(0, int(round(cx - half)))
+    new_top = max(0, int(round(cy - half)))
+    new_right = min(w, int(round(cx + half)))
+    new_bottom = min(h, int(round(cy + half)))
+
+    # 若因越界导致中心不对称，尽量保持中心位置（通常不会越界）
+    if new_right - new_left != new_bottom - new_top:
+        side = max(new_right - new_left, new_bottom - new_top)
+        new_right = new_left + side
+        new_bottom = new_top + side
+    return fg.crop((new_left, new_top, new_right, new_bottom))
 
 
 def render_icon(fg, size, fill):
@@ -73,7 +121,10 @@ def main():
     os.makedirs(out, exist_ok=True)
 
     print("正在从 assets/logo.png 提取前景并替换背景...")
-    fg = extract_foreground(src)
+    fg, mask = extract_foreground(src)
+    # 先按视觉质心裁剪，让话筒在云形轮廓里真正居中（避免 bbox 几何居中导致视觉上偏上）
+    fg = crop_to_visual_center(fg, mask)
+    print("  前景裁切后尺寸:", fg.size)
 
     jobs = [
         ("icon-192.png", 192, FILL_NORMAL),

@@ -751,7 +751,7 @@
 "use strict";
 
 /* 版本号：每次部署改这里即可（首页徽标与底部导航会自动同步） */
-const APP_VERSION = "v1.27";
+const APP_VERSION = "v1.28";
 const APP_DATE = "2026-09-05";
 
 /* ================================================================
@@ -1755,6 +1755,7 @@ const CHANGELOG = {
   version: APP_VERSION,
   date: APP_DATE,
   items: [
+    "桌面应用图标话筒放大、更大气",
     "首页标题加入品牌 logo",
     "应用图标背景统一为应用深底 #070B16"
   ]
@@ -1780,7 +1781,7 @@ else wireInfo();
  * SW_CACHE 必须与 sw.js 中的常量一致。
  * 无感：无按钮、无打扰，打开 app 即在后台把音频写进缓存，断网也能听。
  */
-const SW_CACHE = 'speakeasy-sw-v5'; // 与 sw.js 一致
+const SW_CACHE = 'speakeasy-sw-v6'; // 与 sw.js 一致
 
 // 从内联 AUDIO_MANIFEST 抽取全部音频 URL，第一关单词(w_) 排最前
 function allAudioUrls(){

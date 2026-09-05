@@ -12,7 +12,7 @@
  *  - 不自动 skipWaiting：新版本由页面弹「点此刷新」，用户确认后才接管，
  *    避免学员练到一半被静默换版。
  */
-const SW_CACHE = 'speakeasy-sw-v5';
+const SW_CACHE = 'speakeasy-sw-v6';
 const SHELL = [
   './',
   './index.html',
