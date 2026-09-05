@@ -746,7 +746,7 @@
 "use strict";
 
 /* 版本号：每次部署改这里即可（首页徽标与底部导航会自动同步） */
-const APP_VERSION = "v1.25";
+const APP_VERSION = "v1.26";
 const APP_DATE = "2026-09-05";
 
 /* ================================================================
@@ -1750,9 +1750,9 @@ const CHANGELOG = {
   version: APP_VERSION,
   date: APP_DATE,
   items: [
+    "应用图标更换为正式 logo（深底金色麦克风）",
     "生词本支持手动移除与一键清空",
-    "信息面板关闭按钮已修复",
-    "题库扩充：新增鸡尾酒/烹饪/海鲜/蔬果/水果/客舱用品"
+    "信息面板关闭按钮已修复"
   ]
 };
 function renderInfo(){
@@ -1776,7 +1776,7 @@ else wireInfo();
  * SW_CACHE 必须与 sw.js 中的常量一致。
  * 无感：无按钮、无打扰，打开 app 即在后台把音频写进缓存，断网也能听。
  */
-const SW_CACHE = 'speakeasy-sw-v3'; // 与 sw.js 一致
+const SW_CACHE = 'speakeasy-sw-v4'; // 与 sw.js 一致
 
 // 从内联 AUDIO_MANIFEST 抽取全部音频 URL，第一关单词(w_) 排最前
 function allAudioUrls(){
