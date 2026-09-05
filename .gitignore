@@ -13,5 +13,14 @@
 # 开发过程产物（截图、demo、spec、补丁脚本）
 _*
 
+# 沙箱预览目录（本地部署用，不入库）
+deploy_preview/
+
+# 备份与临时文件
+*.bak*
+*.draft
+清洗结果*.html
+assets/*_white.png
+
 # wrangler 本地缓存（含账号信息，绝不入库）
 .wrangler/

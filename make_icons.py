@@ -2,8 +2,8 @@
 """从 assets/logo.png 生成 PWA 应用图标。
 
 处理流程：
-1. 读取 logo 源图（当前为 2048×2048 米白底金色图形）。
-2. 用 HSV 饱和度+亮度把米白背景替换为 App 主背景色 #070B16。
+1. 读取 logo 源图（2048×2048，金色图形，背景可为米白或深色）。
+2. 采样四角估计背景色，用颜色距离把背景统一替换为 App 主背景色 #070B16。
 3. 按平台规范出 4 个图标文件：
    - icon-192.png             Android 桌面
    - icon-512.png             启动画面 / 安装弹窗
@@ -19,8 +19,7 @@ from PIL import Image, ImageChops
 
 # 品牌/应用色
 TARGET_BG = (7, 11, 22)      # #070B16，与应用 --bg 一致
-SAT_THR = 20                 # HSV 饱和度阈值：区分金色前景与米白背景
-VAL_THR = 245                # HSV 亮度阈值：金色比背景稍暗
+BG_THR = 35                  # 背景判定阈值：像素与参考背景的「最大通道差」小于此值即视为背景
 
 # 前景在最终图标里的占比
 FILL_NORMAL = 0.80           # 普通图标内容占画布 80%
@@ -28,17 +27,30 @@ FILL_MASKABLE = 0.64         # maskable 安全区要求：内容缩到中心 80%
 
 
 def extract_foreground(src_path):
-    """把 logo 的米白背景替换为 #070B16，返回 RGB 前景图。"""
+    """把 logo 背景统一替换为 App 主背景色 #070B16，返回 RGB 前景图。
+
+    自适应背景：采样四角估计背景色，再用「各通道最大差值」阈值把背景像素
+    替换为目标色。这样无论米白底还是深色底 logo 都能干净统一——避免 HSV
+    阈值在深底色下把整张黑底误判为前景、或边缘出现斑驳。
+    """
     src = Image.open(src_path).convert("RGB")
     w, h = src.size
-    bg = Image.new("RGB", (w, h), TARGET_BG)
 
-    h, s, v = src.convert("HSV").split()
-    mask_s = s.point(lambda x: 255 if x > SAT_THR else 0, mode="L")
-    mask_v = v.point(lambda x: 255 if x < VAL_THR else 0, mode="L")
-    mask = ImageChops.multiply(mask_s, mask_v)
+    # 采样四角估计背景色（源图四角通常为纯背景）
+    corners = [src.getpixel((0, 0)), src.getpixel((w - 1, 0)),
+               src.getpixel((0, h - 1)), src.getpixel((w - 1, h - 1))]
+    bg_ref = tuple(sum(c[i] for c in corners) // 4 for i in range(3))
 
-    return Image.composite(src, bg, mask)
+    # 每个像素与参考背景的「各通道最大差值」，背景像素差值接近 0
+    diff = ImageChops.difference(src, Image.new("RGB", (w, h), bg_ref))
+    r, g, b = diff.split()
+    # lighter 逐通道取最大值，连用得到三通道最大差；转 L 后做阈值
+    mx = ImageChops.lighter(r, ImageChops.lighter(g, b)).convert("L")
+    # 差值 < BG_THR 视为背景 -> 替换为 TARGET_BG；否则保留原像素
+    mask = mx.point(lambda x: 0 if x < BG_THR else 255)
+
+    bg_canvas = Image.new("RGB", (w, h), TARGET_BG)
+    return Image.composite(src, bg_canvas, mask)
 
 
 def render_icon(fg, size, fill):

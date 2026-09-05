@@ -84,6 +84,8 @@
   }
   .brand { margin-bottom: 12px; }
   .brand-cn { font-size: 1.5rem; font-weight: 900; letter-spacing: .02em; line-height: 1.25; }
+  .brand-cn-row { display: flex; align-items: center; gap: 4px; }
+  .brand-logo { height: 64px; width: auto; display: block; }
   .brand-en { margin-top: 5px; font-size: .8rem; font-weight: 700; letter-spacing: .1em; color: var(--muted); }
   .hero .ver-line { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; font-size: .74rem; font-weight: 800; color: var(--warn); background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.32); padding: 5px 12px; border-radius: 999px; width: fit-content; }
   .hero .ver-line .upd { color: var(--muted); font-weight: 600; }
@@ -564,7 +566,10 @@
   <div class="wrap">
     <div class="hero">
       <div class="brand">
-        <div class="brand-cn">公务舱英语陪练</div>
+        <div class="brand-cn-row">
+          <img class="brand-logo" src="assets/brand-logo.png" alt="">
+          <span class="brand-cn">公务舱英语陪练</span>
+        </div>
         <div class="brand-en">Business Class English Trainer</div>
       </div>
       <p class="ver-line" id="ver-line"></p>
@@ -746,7 +751,7 @@
 "use strict";
 
 /* 版本号：每次部署改这里即可（首页徽标与底部导航会自动同步） */
-const APP_VERSION = "v1.26";
+const APP_VERSION = "v1.27";
 const APP_DATE = "2026-09-05";
 
 /* ================================================================
@@ -1750,9 +1755,8 @@ const CHANGELOG = {
   version: APP_VERSION,
   date: APP_DATE,
   items: [
-    "应用图标更换为正式 logo（深底金色麦克风）",
-    "生词本支持手动移除与一键清空",
-    "信息面板关闭按钮已修复"
+    "首页标题加入品牌 logo",
+    "应用图标背景统一为应用深底 #070B16"
   ]
 };
 function renderInfo(){
@@ -1776,7 +1780,7 @@ else wireInfo();
  * SW_CACHE 必须与 sw.js 中的常量一致。
  * 无感：无按钮、无打扰，打开 app 即在后台把音频写进缓存，断网也能听。
  */
-const SW_CACHE = 'speakeasy-sw-v4'; // 与 sw.js 一致
+const SW_CACHE = 'speakeasy-sw-v5'; // 与 sw.js 一致
 
 // 从内联 AUDIO_MANIFEST 抽取全部音频 URL，第一关单词(w_) 排最前
 function allAudioUrls(){
